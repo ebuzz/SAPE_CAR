@@ -23,3 +23,14 @@ Documentation for the entire framework can be found on the [Laravel website](htt
 ### License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+
+### Creditos
+
+ABOUT - CAR V2 - Forkin' it errywhere
+
+### Autores
+Alfredo Alvarez
+Carlos Melo
+Erick Aguayo
+Samuel Macedo
+Pedro Saavedra
