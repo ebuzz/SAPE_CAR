@@ -30,7 +30,7 @@ ABOUT - CAR V2 - Forkin' it errywhere
 
 ### Autores
 Alfredo Alvarez
-Carlos Melo
+Carlos Alberto Melo Camarillo
 Erick Aguayo
 Samuel Macedo
 Pedro Saavedra
