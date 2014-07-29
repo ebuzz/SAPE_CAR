@@ -32,5 +32,5 @@ ABOUT - CAR V2 - Forkin' it errywhere
 Alfredo Alvarez
 Carlos Alberto Melo Camarillo
 Erick Aguayo
-Samuel Macedo
+Samuel Alejandro Macedo Vidrio
 Pedro Saavedra
