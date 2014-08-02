@@ -1,4 +1,4 @@
-## Laravel PHP Framework
+## Sistema de examenes psicologicos del Car
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
 [![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
@@ -30,7 +30,7 @@ ABOUT - CAR V2 - Forkin' it errywhere
 
 ### Autores
 Alfredo Alvarez
-Carlos Melo
+Carlos Alberto Melo Camarillo
 Erick Aguayo
-Samuel Macedo
+Samuel Alejandro Macedo Vidrio
 Pedro Saavedra
