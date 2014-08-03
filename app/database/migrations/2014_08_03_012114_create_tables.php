@@ -187,6 +187,7 @@ class CreateTables extends Migration
             $table->integer('idUser')->unsigned();
             $table->integer('idTest')->unsigned();
             $table->integer('idProfileAtMoment')->unsigned();
+            $table->timestamps();
 
             //Foreign Key Constraints
             $table->foreign('idUser')->references('idUser')->on('Users');
