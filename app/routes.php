@@ -13,6 +13,8 @@
 
 Route::get('/', 'HomeController@showHome');
 
+Route::get('test/{testName}', 'TestController@showTest');
+
 Route::get('/test',function(){
 	return "Hola";
 });
