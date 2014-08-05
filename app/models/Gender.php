@@ -1,8 +1,5 @@
 <?php
-
-class Gender extends Eloquent
-{
+class Gender extends Eloquent{
 	protected $table = 'genders';
-    
 	public $timestamps = false;
 }
