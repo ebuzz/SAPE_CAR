@@ -20,7 +20,12 @@
                             <p>
                                 {{ $errors->first('email') }}
                                 {{ $errors->first('password') }}
-                                {{{ $data or 'Default' }}}
+
+                                @if (Session::get('message'))
+                                <div class="notice marker-on-bottom bg-amber fg-white">
+                                    {{ Session::get('message') }}
+                                </div>
+                                @endif
                             </p>
                             	<fieldset>
                                 	{{ Form::label('email','Correo') }}
