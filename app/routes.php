@@ -12,3 +12,13 @@
 */
 
 Route::get('/', 'HomeController@showHome');
+
+Route::get('/test',function(){
+	return "Hola";
+});
+
+Route::get('login','LoginController@showLogin');
+
+Route::post('login','LoginController@doLogin');
+
+Route::get('logout','LoginController@doLougout');

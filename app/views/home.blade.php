@@ -19,6 +19,9 @@
                 <a href="#" class="place-left button bg-darkRed bg-hover-red fg-white fg-hover-white bd-orange" style="margin-top: 10px;">
                     <h3 style="margin: 10px 40px">Regístrate <span class="icon-accessibility on-right"></span></h3>
                 </a>
+                <a href="login" class="place-left button bg-darkRed bg-hover-red fg-white fg-hover-white bd-orange" style="margin-top: 10px;">
+                    <h3 style="margin: 10px 40px">Iniciar sesion <span class="icon-accessibility on-right"></span></h3>
+                </a>
             </div>
         </div>
 

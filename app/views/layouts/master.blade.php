@@ -23,7 +23,7 @@
         
         @yield('dependencies')
         
-        <title>{{{ $title }}}</title>
+        <title>Sistema de evaluacion psicologica de atletas - {{{ $title }}}</title>
     </head>
     <body class="metro">
         
@@ -31,7 +31,7 @@
         <header class="bg-dark" data-load="header.html">
             <nav class="navigation-bar bg-darkRed fixed-top">
                 <div class="navigation-bar-content container">   
-                    <a class="element" href="#"><span class="icon-home"></span> INICIO</a>
+                    <a class="element" href="/"><span class="icon-home"></span> INICIO</a>
                     <span class="element-divider"></span>
                     <a class="element1 pull-menu" href="#"></a>
                     <ul class="element-menu" style="display: block;">
@@ -60,7 +60,7 @@
                             </a>
                             <ul class="dropdown-menu place-right" data-role="dropdown">
                                 <li><a href="#">Mi Perfil</a></li>
-                                <li><a href="#">Cerrar Sesión</a></li>
+                                <li><a href="logout">Cerrar Sesión</a></li>
                             </ul>
                         </div>
                         <button class="element image-button image-left place-right">

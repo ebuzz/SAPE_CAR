@@ -17,7 +17,7 @@ class HomeController extends BaseController
 
 	public function showHome()
 	{
-        $data = array('title' => 'Hola');
+        $data = array('title' => 'Inicio');
 
         return View::make('home', $data);
 	}
