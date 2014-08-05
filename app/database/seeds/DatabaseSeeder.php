@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
 *
 ******************************************************************************/
 
-class StatesTableSeeder()
+class StatesTableSeeder extends Seeder
 {
     public function run()
     {
@@ -40,12 +40,12 @@ class StatesTableSeeder()
 
         State::create(array
         (
-            'description' -> 'Baja California'
+            'description' => 'Baja California'
         ));
     }
 }
 
-class CitiesTableSeeder()
+class CitiesTableSeeder extends Seeder
 {
     public function run()
     {
@@ -53,13 +53,13 @@ class CitiesTableSeeder()
 
         City::create(array
         (
-            'description' -> 'Baja California',
-            'idState' -> '1'
+            'description' => 'Tijuana',
+            'idState'     => '1'
         ));
     }
 }
 
-class SportsTableSeeder()
+class SportsTableSeeder extends Seeder
 {
     public function run()
     {
@@ -72,7 +72,7 @@ class SportsTableSeeder()
     }
 }
 
-class SportsCitiesTableSeeder()
+class SportsCitiesTableSeeder extends Seeder
 {
     public function run()
     {
@@ -86,7 +86,7 @@ class SportsCitiesTableSeeder()
     }
 }
 
-class RolesTableSeeder()
+class RolesTableSeeder extends Seeder
 {
     public function run()
     {
@@ -94,12 +94,12 @@ class RolesTableSeeder()
 
         Role::create(array
         (
-            'description' -> 'deportista'
+            'description' => 'deportista'
         ));
     }
 }
 
-class ProfilesTableSeeder()
+class ProfilesTableSeeder extends Seeder
 {
     public function run()
     {
@@ -119,7 +119,7 @@ class ProfilesTableSeeder()
 *
 ******************************************************************************/
 
-class GendersTableSeeder()
+class GendersTableSeeder extends Seeder
 {
     public function run()
     {
@@ -137,7 +137,7 @@ class GendersTableSeeder()
     }
 }
 
-class UserTypesTableSeeder()
+class UserTypesTableSeeder extends Seeder
 {
     public function run()
     {
@@ -155,7 +155,7 @@ class UserTypesTableSeeder()
     }
 }
 
-class UsersTableSeeder()
+class UsersTableSeeder extends Seeder
 {
     public function run()
     {
