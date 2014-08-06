@@ -35,14 +35,14 @@ class LoginController extends BaseController
 			// attempt to do the login
 			if (Auth::attempt($userdata)) {
 
-				Redirect::intended('/');
+				return Redirect::intended('/');
 				//echo 'SUCCESS!';
 				// Session variables send to / 
 
 			} else {	 	
 
 				// validation not successful, send back to form	
-				return Redirect::to('login')->with(array('message' => 'Login Failed'));
+				return Redirect::to('login')->with(array('message' => 'Error al iniciar sesion, verifique su correo y/o contraseña.'));
 			}
 
 		}
