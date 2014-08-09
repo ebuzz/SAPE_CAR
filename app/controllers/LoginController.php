@@ -33,9 +33,8 @@ class LoginController extends BaseController
 			);
 
 			// attempt to do the login
-			if (Auth::attempt($userdata)) {
-
-				return Redirect::intended('/');
+			if (Auth::attempt($userdata,true)) {
+				return Redirect::to('/');
 				//echo 'SUCCESS!';
 				// Session variables send to / 
 

@@ -41,6 +41,7 @@
                                 	{{ Form::password('password',array('autofocus'=>'autofocus','required'=>'required')) }}
                                     <button class="btn-reveal" tabindex="-1" type="button"></button>
                                 	</div>
+                                    <!--
                             	    <div class="input-control checkbox" data-role="input-control">
                                         <label>
                                         {{ Form::checkbox('remember', 'value') }}
@@ -48,6 +49,7 @@
                                         Recuerdame(gansito)
                                         </label>
                                     </div>
+                                    -->
                                 </br>
                                 	{{ Form::submit('Enviar',array('class' => 'btn-clear')) }}
                                     
