@@ -28,7 +28,9 @@
     <body class="metro">
         
         <!-- Barra de navegación -->
+        @if(Auth::check())
         <header class="bg-dark" data-load="header.html">
+            
             <nav class="navigation-bar bg-darkRed fixed-top">
                 <div class="navigation-bar-content container">   
                     <a class="element" href="/"><span class="icon-home"></span> INICIO</a>
@@ -54,19 +56,22 @@
                         <a class="element" href="#"><span class="icon-help"></span> Documentación</a>
                         <span class="element-divider"></span>
                         <a class="element" href="#"><span class="icon-yelp"></span> Créditos</a>
+                        
                         <div class="element place-right">
                             <a class="dropdown-toggle" href="#">
                                 <span class="icon-cog"></span>
                             </a>
+                            
                             <ul class="dropdown-menu place-right" data-role="dropdown">
                                 <li><a href="#">Mi Perfil</a></li>
                                 <li><a href="logout">Cerrar Sesión</a></li>
                             </ul>
+                        
                         </div>
                         <button class="element image-button image-left place-right">
-                            Alfredo Alvarez
-                            <img src="img/profile_pic.jpg"/>
+                                {{  Auth::user()->name . " " . Auth::user()->firstSurname }}
                         </button>
+        @endif
                     </ul>
                 </div>
             </nav>
