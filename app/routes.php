@@ -23,4 +23,16 @@ Route::get('login','LoginController@showLogin');
 
 Route::post('login','LoginController@doLogin');
 
-Route::get('logout','LoginController@doLougout');
+Route::get('logout','LoginController@doLogout');
+
+//This routes cannot be accessed without log in first, all routes from tests must be included here
+Route::group(array('before' => 'auth'), function()
+{
+	Route::get('testexamplecar',function(){
+		return "Solo logeados " . Auth::user()->correo;
+	});
+	Route::get('test1','LoginController@doLougout');
+	Route::get('test1','LoginController@doLougout');
+	Route::get('test1','LoginController@doLougout');
+
+});
