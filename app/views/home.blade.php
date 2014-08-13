@@ -19,7 +19,7 @@
                 @if(Auth::check())
                 
                 @else
-                <a href="#" class="place-left button bg-darkRed bg-hover-red fg-white fg-hover-white bd-orange" style="margin-top: 10px;">
+                <a href="register" class="place-left button bg-darkRed bg-hover-red fg-white fg-hover-white bd-orange" style="margin-top: 10px;">
                     <h3 style="margin: 10px 40px">Regístrate <span class="icon-accessibility on-right"></span></h3>
                 </a>
                 <a href="login" class="place-left button bg-darkRed bg-hover-red fg-white fg-hover-white bd-orange" style="margin-top: 10px;">
@@ -137,9 +137,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container tertiary-text bg-dark fg-white" style="padding: 10px">
-            2012-2013, Metro UI CSS © by  <a href="mailto:sergey@pimenov.com.ua" class="fg-yellow">Sergey Pimenov</a>
         </div>
     </div>
 @stop
