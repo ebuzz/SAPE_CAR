@@ -69,19 +69,21 @@ class CreateTables extends Migration
 			$table->integer('idSportField')->unsigned();
 
 			$table->foreign('idSportField')
-			->references('idSportField')->on('SportFields');
+                ->references('idSportField')->on('SportFields');
 
 		});
 
 		Schema::create('FieldChildValues', function($table)
         {
-			$table->integer('idChildField')->unsigned();
-			$table->integer('idParentField')->unsigned();
+			$table->integer('idChildValue')->unsigned();
+			$table->integer('idParentValue')->unsigned();
 
-			$table->foreign('idChildField')
-			->references('idFieldValue')->on('FieldValues');
-			$table->foreign('idParentField')
-			->references('idFieldValue')->on('FieldValues');
+			$table->foreign('idChildValue')
+                ->references('idFieldValue')->on('FieldValues');
+			$table->foreign('idParentValue')
+                ->references('idFieldValue')->on('FieldValues');
+            
+            $table->primary('idChildValue');
 		});
         
         Schema::create('Roles', function($table)
@@ -95,25 +97,28 @@ class CreateTables extends Migration
 			$table->increments('idProfile');
 			$table->integer('idSport')->unsigned();
 			$table->integer('idRole')->unsigned();
+            $table->integer('idCity')->unsigned();
 			$table->timestamps();
 
-			$table->foreign('idSport')
-			->references('idSport')->on('Sports');
-			$table->foreign('idRole')
-			->references('idRole')->on('Roles');
+			$table->foreign('idSport')->references('idSport')->on('Sports');
+			$table->foreign('idRole')->references('idRole')->on('Roles');
+            $table->foreign('idCity')->references('idCity')->on('Cities');
 		});
 
 		Schema::create('ProfileValues', function($table)
         {
-			$table->increments('idProfile');
+			$table->integer('idProfile')->unsigned();
 			$table->integer('idFieldValue')->unsigned();
 			$table->integer('idSportField')->unsigned();
-
-			$table->foreign('idFieldValue')
-			->references('idFieldValue')->on('FieldValues');
-			$table->foreign('idSportField')
-			->references('idSportField')->on('SportFields');
-			
+            
+            $table->foreign('idProfile')->references('idProfile')
+                ->on('Profiles');
+			$table->foreign('idFieldValue')->references('idFieldValue')
+                ->on('FieldValues');
+			$table->foreign('idSportField')->references('idSportField')
+                ->on('SportFields');
+            
+            $table->primary(array('idProfile', 'idFieldValue', 'idSportField'));
 		});
         
         /**********************************************************************
@@ -139,7 +144,7 @@ class CreateTables extends Migration
             $table->string('name', 30);
             $table->string('firstSurname', 30);
             $table->string('secondSurname', 30);
-            $table->string('email', 30);
+            $table->string('email', 100);
             $table->string('password', 60);
             $table->date('birthday');
             $table->integer('idGender')->unsigned();
