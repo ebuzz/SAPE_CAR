@@ -1,3 +1,9 @@
+/******************************************************************************
+*
+* Carga de datos asíncrona de información de perfil
+*
+******************************************************************************/
+
 $(document).ready(function()
 {
     $('#state').change(loadCities);
@@ -150,4 +156,63 @@ function getIndex(select)
     var to = select.id.length;
     
     return parseInt(select.id.substring(from, to));
+}
+
+/******************************************************************************
+*
+* Guardado de perfil
+*
+******************************************************************************/
+
+function saveProfile(callback)
+{
+    var data = {};
+    var savedFields = [];
+    var field;
+    
+    data.role = $('#role').val();
+    data.city = $('#city').val();
+    data.sport = $('#sport').val();
+    data.values = [];
+    
+    $("select[id^='valueOf-']").each(function (index, select)
+    {
+        field = getPrefix(select);
+        
+        if (savedFields.indexOf(field) == -1)
+        {
+            savedFields.push(field);
+            data.values.push($(getLowerLevelSelect(field)).val());
+        }
+    });
+    
+    $.post('profile/saveProfile', data)
+        .done(callback);
+}
+
+function getLowerLevelSelect(prefix)
+{
+    var lowerSelect = null;
+    var lowerIndex;
+    var currentIndex;
+    
+    $("select[id^='" + prefix + "']").each(function (index, select)
+    {
+        if (lowerSelect == null)
+        {
+            lowerSelect = select;
+        }
+        else
+        {
+            lowerIndex = getIndex(lowerSelect);
+            currentIndex = getIndex(select);
+            
+            if (currentIndex > lowerIndex)
+            {
+                lowerSelect = select;
+            }
+        }
+    });
+    
+    return lowerSelect;
 }

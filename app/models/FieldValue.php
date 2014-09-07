@@ -39,4 +39,9 @@ class FieldValue extends Eloquent
         
         return $count;
     }
+    
+    public function field()
+    {
+        return $this->belongsTo('SportField', 'idSportField', 'idSportField');
+    }
 }

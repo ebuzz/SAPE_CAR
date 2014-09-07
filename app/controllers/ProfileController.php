@@ -49,6 +49,38 @@ class ProfileController extends BaseController
     {
         if (Request::ajax())
         {
+            $data = Input::all();
+            $user = Auth::user();
+            
+            if ($user->lastProfile->hasTest())
+            {
+            }
+            else
+            {
+            }
+            
+            // Nuevo Perfil
+            $profile = new Profile;
+            $profile->idSport = Input::get('sport');
+            $profile->idRole = Input::get('role');
+            $profile->idCity = Input::get('city');
+            $profile->save();
+            
+            // Nuevos valores de Perfil
+            foreach(Input::get('values') as $value)
+            {
+                $fieldValue = FieldValue::find($value);
+                $fieldValue->load('field');
+                
+                $profileValue = new ProfileValue;
+                $profileValue->idFieldValue = $fieldValue->idFieldValue;
+                $profileValue->idSportField = $fieldValue->field->idSportField;
+                $profile->profileValues()->save($profileValue);
+            }
+            
+            // Attach del nuevo Perfil
+            $user->idLastProfile = $profile->idProfile;
+            $user->save();
         }
     }
 }

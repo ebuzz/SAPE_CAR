@@ -18,4 +18,9 @@ class ProfileValue extends Eloquent
     {
         return $this->hasOne('FieldValue', 'idFieldValue', 'idFieldValue');
     }
+    
+    public function profile()
+    {
+        return $this->belongsTo('Profile', 'idProfile', 'idProfile');
+    }
 }

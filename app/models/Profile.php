@@ -4,6 +4,8 @@ class Profile extends Eloquent
 {
 	protected $table = 'profiles';
     
+    public $primaryKey = 'idProfile';
+    
     /**************************************************************************
     *                              Relaciones
     **************************************************************************/
@@ -25,5 +27,15 @@ class Profile extends Eloquent
     public function profileValues()
     {
         return $this->hasMany('ProfileValue', 'idProfile', 'idProfile');
+    }
+    
+    public function userAnsweredTest()
+    {
+        return $this->hasOne('UserAnsweredTest', 'idProfileAtMoment', 'idProfile');
+    }
+    
+    public function hasTest()
+    {
+        return $this->userAnsweredTest != null;
     }
 }

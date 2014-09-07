@@ -71,3 +71,4 @@ Route::get('test/profile/getcities/{idState}', 'ProfileController@getCities');
 Route::get('test/profile/getsports/{idCity}', 'ProfileController@getSports');
 Route::get('test/profile/getfields/{idSport}', 'ProfileController@getFields');
 Route::get('test/profile/getchildvalues/{idParentValue}', 'ProfileController@getChildValues');
+Route::post('test/profile/saveProfile', 'ProfileController@saveProfile');
