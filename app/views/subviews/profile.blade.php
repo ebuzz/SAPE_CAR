@@ -37,17 +37,10 @@
                     @if ($field['isTopLevel'] == true)
                         <label>{{{ $field['name'] }}}</label>
                     @endif
-                    @if ($field['skipSubmit'] == true)
-                        <div class="input-control select">
-                            {{ Form::select('', $field['values'], $field['selected'], 
-                                            array('class' => 'input-control select')) }}
-                        </div>
-                    @else
-                        <div class="input-control select">
-                            {{ Form::select($field['name'], $field['values'], $field['selected'], 
-                                            array('class' => 'input-control select')) }}
-                        </div>
-                    @endif
+                    <div class="input-control select">
+                        {{ Form::select('', $field['values'], $field['selected'], 
+                                        array('id' => $field['id'], 'class' => 'input-control select')) }}
+                    </div>
                 @endforeach
             </div>
         </fieldset>

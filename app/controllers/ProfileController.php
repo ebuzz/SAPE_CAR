@@ -31,9 +31,17 @@ class ProfileController extends BaseController
         if (Request::ajax())
         {
             $fields = Sport::find($idSport)->fields;
-            $fields->load('values.childs');
+            $fields->load('values.parent');
             
             return $fields;
+        }
+    }
+    
+    public function getChildValues($idParentValue)
+    {
+        if (Request::ajax())
+        {
+            return FieldValue::find($idParentValue)->childs;
         }
     }
     
