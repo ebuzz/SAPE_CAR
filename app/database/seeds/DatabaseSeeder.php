@@ -27,6 +27,11 @@ class DatabaseSeeder extends Seeder
         $this->call('GendersTableSeeder');
         $this->call('UserTypesTableSeeder');
         $this->call('UsersTableSeeder');
+        
+        // Módulo de Tests
+        $this->call('TestTypesTableSeeder');
+        $this->call('TestsTableSeeder');
+        $this->call('UserAnsweredTestsTableSeeder');
 	}
 }
 
@@ -168,28 +173,6 @@ class RolesTableSeeder extends Seeder
     }
 }
 
-class ProfilesTableSeeder extends Seeder
-{
-    public function run()
-    {
-        DB::table('profiles')->delete();
-
-        Profile::create(array
-        (
-            'idSport' => '2',
-            'idRole'  => '1',
-            'idCity'  => '4'
-        ));
-        
-        Profile::create(array
-        (
-            'idSport' => '3',
-            'idRole'  => '1',
-            'idCity'  => '1'
-        ));
-    }
-}
-
 class SportsFieldsTableSeeder extends Seeder
 {
     public function run()
@@ -305,6 +288,28 @@ class FieldChildValuesTableSeeder extends Seeder
     }
 }
 
+class ProfilesTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('profiles')->delete();
+
+        Profile::create(array
+        (
+            'idSport' => '2',
+            'idRole'  => '1',
+            'idCity'  => '4'
+        ));
+        
+        Profile::create(array
+        (
+            'idSport' => '3',
+            'idRole'  => '1',
+            'idCity'  => '1'
+        ));
+    }
+}
+
 class ProfileValuesTableSeeder extends Seeder
 {
     public function run()
@@ -409,6 +414,54 @@ class UsersTableSeeder extends Seeder
             'idGender'      => '1',
             'idUserType'    => '2',
             'idLastProfile' => '2'
+        ));
+    }
+}
+
+/******************************************************************************
+*
+* Módulo de Tests
+*
+******************************************************************************/
+
+class TestTypesTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('testtypes')->delete();
+
+        TestType::create(array
+        (
+            'description' => 'Evaluación Mental',
+        ));
+    }
+}
+
+class TestsTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('tests')->delete();
+
+        Test::create(array
+        (
+            'name'       => 'IPRD',
+            'idTestType' => '1'
+        ));
+    }
+}
+
+class UserAnsweredTestsTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('usersansweredtests')->delete();
+
+        UserAnsweredTest::create(array
+        (
+            'idUser'            => '1',
+            'idTest'            => '1',
+            'idProfileAtMoment' => '2'
         ));
     }
 }

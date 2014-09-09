@@ -5,6 +5,7 @@
     
     {{ HTML::script('js/jquery/jquery.mousewheel.js') }}
     {{ HTML::script('js/local/profiles.js') }}
+    {{ HTML::script('js/local/tests.js') }}
     {{ HTML::script('js/local/sidepanel.js') }}
 
 @stop

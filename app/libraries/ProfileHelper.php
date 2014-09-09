@@ -42,7 +42,7 @@ class ProfileHelper
             
             self::solveParentValue($fields, $profileValue->field, $parent);
             self::addField($fields, $profileValue->field, $profileValue->value, 
-                           $parent, false);
+                           $parent);
         }
         
         $data = array
@@ -77,7 +77,7 @@ class ProfileHelper
                 self::solveParentValue($array, $field, $newParent);
             }
             
-            self::addField($array, $field, $parent, $newParent, true);
+            self::addField($array, $field, $parent, $newParent);
         }
     }
     
@@ -88,17 +88,18 @@ class ProfileHelper
     * @param SportField $field Instancia de la pregunta o campo actual
     * @param FieldValue $selected Instancia del valor seleccionado en el <select>
     * @param FieldValue $parentOfSelected Instancia padre del valor seleccionado
-    * @param bool $skipSubmit Indica si el campo se omitirá al haver submit de la <form>
     */
-    static function addField(&$array, $field, $selected, $parentOfSelected, $skipSubmit)
+    static function addField(&$array, $field, $selected, $parentOfSelected)
     {
+        $level = $selected->level();
+        
         $array[] = array
         (
             'name'       => $field->name,
+            'id'         => 'valueOf-' . $field->idSportField . '-' . $level, 
             'selected'   => $selected->idFieldValue, 
             'values'     => $field->getValuesFromSameLevel($parentOfSelected)
                                 ->lists('description', 'idFieldValue'),
-            'skipSubmit' => $skipSubmit,
             'isTopLevel' => $parentOfSelected == null
         );
     }
