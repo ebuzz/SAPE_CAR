@@ -2,6 +2,16 @@
 
 class ProfileController extends BaseController
 {
+    
+    public function showProfile()
+    {
+        $data = ProfileHelper::getUserLastProfileData(Auth::user());
+        $data['user']= User::find(Auth::id());
+
+        $data['title'] = 'Editar mi perfil';
+        return View::make('userProfile', $data);
+    }
+
     public function getStates()
     {
         if (Request::ajax())

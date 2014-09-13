@@ -52,6 +52,13 @@ App::error(function(Exception $exception, $code)
 	Log::error($exception);
 });
 
+App::error(function(Illuminate\Database\QueryException $exception, $code)
+{
+	Log::error($exception);
+
+	return $exception->getCode();;
+});
+
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler

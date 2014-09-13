@@ -121,7 +121,7 @@
                 "Do", "Lu", "Mar", "Mié", "Jue", "Vi", "Sáb"
             ],
             buttons: [
-               "Hoy", "Limpiar", "Cancel", "Help", "Prior", "Next", "Finish"
+               "Hoy", "Limpiar", "Cancel", "Ayuda", "Anterior", "Siguiente", "Finalizar"
             ]
         }
     };

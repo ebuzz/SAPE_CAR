@@ -19,11 +19,11 @@
                 @if(Auth::check())
                 
                 @else
-                <a href="register" class="place-left button bg-darkRed bg-hover-red fg-white fg-hover-white bd-orange" style="margin-top: 10px;">
+                <a href="signup" class="place-left button bg-darkRed bg-hover-red fg-white fg-hover-white bd-orange" style="margin-top: 10px;">
                     <h3 style="margin: 10px 40px">Regístrate <span class="icon-accessibility on-right"></span></h3>
                 </a>
                 <a href="login" class="place-left button bg-darkRed bg-hover-red fg-white fg-hover-white bd-orange" style="margin-top: 10px;">
-                    <h3 style="margin: 10px 40px">Iniciar sesion <span class="icon-accessibility on-right"></span></h3>
+                    <h3 style="margin: 10px 40px">Iniciar sesion <span class="icon-user on-right"></span></h3>
                 </a>
                 @endif
             </div>
@@ -116,11 +116,12 @@
                         <p class="fg-white">¡Hola! Somos un grupo de jovenes estudiantes que aman la tecnologia.</p>
                     </div>
                     <div class="span3 padding10">
-                        <a class="button danger " style="width: 100%; margin-bottom: 5px" href="#">Erick Aguayo</a>
-                        <a class="button success " style="width: 100%; margin-bottom: 5px" href="#">Carlos Camarillo</a>
-                        <a class="button info " style="width: 100%; margin-bottom: 5px" href="#">Samuel Macedo</a>
-                        <a class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Alfredo Alvarez</a>
-                        <a class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Pedro Saavedra</a>
+                        <a class="button danger " style="width: 100%; margin-bottom: 5px" href="#">Erick Aguayo Velázquez</a>
+                        <a class="button purple " style="width: 100%; margin-bottom: 5px;" href="#">Alfredo Alvarez Hernández</a>
+                        <a class="button success " style="width: 100%; margin-bottom: 5px" href="#">Carlos Melo Camarillo</a>
+                        <a class="button info " style="width: 100%; margin-bottom: 5px" href="#">Samuel Macedo Vidrio</a>
+                        
+                        <a class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Pedro Saavedra Solís</a>
                     </div>
                     <div class="span3 padding10">
                         <h3 class="fg-white">Personas que contribuyeron a este proyecto</h3>

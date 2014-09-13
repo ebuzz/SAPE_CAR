@@ -64,7 +64,7 @@
                             </a>
                             
                             <ul class="dropdown-menu place-right" data-role="dropdown">
-                                <li>{{ HTML::link('profile','Mi perfil', ['id'=>'myLink']); }}</li>
+                                <li>{{ HTML::link('userProfile','Mi perfil', ['id'=>'myLink']); }}</li>
                                 <li>{{ HTML::link('logout','Cerrar sesion', ['id'=>'myLink']); }}</li>
                             </ul>
                         
