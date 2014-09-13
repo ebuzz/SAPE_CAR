@@ -65,7 +65,7 @@
                             </div>
                             <div class="panel-content">
                                 <ul>
-                                <li>El acceso solo es a usuarios registrados, si aun no tienes tu cuenta da click <a href="register">aqui</a>.</li>
+                                <li>El acceso solo es a usuarios registrados, si aun no tienes tu cuenta da click <a href="signup">aqui</a>.</li>
                                 <li>Si tienes problemas para accesar u olvidaste tu contraseña da click <a href="forgot">aqui</a>.</li>
                             </ul>
                             </div>

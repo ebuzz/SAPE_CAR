@@ -1699,6 +1699,10 @@ a {
   background-color: #9a1616 !important;
   color: #ffffff !important;
 }
+.metro .button.purple {
+  background-color: #800080 !important;
+  color: #ffffff !important;
+}
 .metro .button.inverse {
   background-color: #1d1d1d !important;
   color: #ffffff !important;
@@ -8439,7 +8443,7 @@ a {
 }
 .metro .example:before {
   position: absolute;
-  content: "example";
+  content: "";
   left: -21px;
   top: 30px;
   color: #999999 !important;
