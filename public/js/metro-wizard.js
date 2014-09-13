@@ -1,11 +1,11 @@
 (function( $ ) {
-    $.widget("metro.wizard", {
+    $.widget(".wizard", {
 
         version: "1.0.0",
 
         options: {
             stepper: true,
-            stepperType: 'default',
+            stepperType: 'rounded',
             locale: $.Metro.currentLocale,
             finishStep: 'default',
             buttons: {
@@ -22,7 +22,6 @@
             onFinish: function(page, wiz){},
             onPage: function(page, wiz){}
         },
-
         _stepper: undefined,
         _currentStep: 0,
         _steps: undefined,
@@ -37,6 +36,7 @@
 
             if (o.stepper) {
                 this._stepper = this._createStepper(steps.length).insertBefore(element.find('.steps'));
+                this._stepper.stepper();
             }
 
             if (element.data('locale') != undefined) o.locale = element.data('locale');
@@ -68,27 +68,27 @@
                 var group_right = $("<div/>").addClass("group-right").appendTo(actions);
 
                 if (o.buttons.cancel) {
-                    $("<button type='button'/>").addClass("btn-cancel").html($.Metro.Locale[o.locale].buttons[2]).appendTo(group_left).on('click', function(){
+                    $("<button type='button'/>").addClass("btn-cancel").html("Cancelar"/*$.Metro.Locale[o.locale].buttons[2]*/).appendTo(group_left).on('click', function(){
                         o.onCancel(that._currentStep+1, element);
                     });
                 }
                 if (o.buttons.help) {
-                    $("<button type='button'/>").addClass("btn-help").html($.Metro.Locale[o.locale].buttons[3]).appendTo(group_right).on('click', function(){
+                    $("<button type='button'/>").addClass("btn-help").html("Soy Psicologo"/*$.Metro.Locale[o.locale].buttons[3]*/).appendTo(group_right).on('click', function(){
                         o.onHelp(that._currentStep+1, element);
                     });
                 }
                 if (o.buttons.prior) {
-                    $("<button type='button'/>").addClass("btn-prior").html($.Metro.Locale[o.locale].buttons[4]).appendTo(group_right).on('click', function(){
+                    $("<button type='button'/>").addClass("btn-prior").html("Anterior"/*$.Metro.Locale[o.locale].buttons[4]*/).appendTo(group_right).on('click', function(){
                         if (o.onPrior(that._currentStep+1, element)) that.prior();
                     });
                 }
                 if (o.buttons.next) {
-                    $("<button type='button'/>").addClass("btn-next").html($.Metro.Locale[o.locale].buttons[5]).appendTo(group_right).on('click', function(){
+                    $("<button type='button'/>").addClass("btn-next").html("Siguiente"/*$.Metro.Locale[o.locale].buttons[5]*/).appendTo(group_right).on('click', function(){
                         if (o.onNext(that._currentStep+1, element)) that.next();
                     });
                 }
                 if (o.buttons.finish) {
-                    $("<button type='button' disabled/>").addClass("btn-finish").html($.Metro.Locale[o.locale].buttons[6]).appendTo(group_right).on('click', function(){
+                    $("<button type='button' disabled/>").addClass("btn-finish").html("Finalizar"/*$.Metro.Locale[o.locale].buttons[6]*/).appendTo(group_right).on('click', function(){
                         o.onFinish(that._currentStep+1, element);
                     });
                 }
@@ -96,6 +96,7 @@
         },
 
         next: function(){
+
             var new_step = this._currentStep + 1;
 
             if (new_step == this._steps.length) return false;

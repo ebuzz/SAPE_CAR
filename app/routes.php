@@ -23,9 +23,9 @@ Route::get('credits',function(){
 	return "Hola";
 });
 
-Route::get('register',function(){
-	return "Hola";
-});
+Route::get('signup', 'SignupController@showSignup');
+
+Route::post('register', 'SignupController@register');
 
 Route::get('results',function(){
 	return "Hola";
@@ -64,9 +64,18 @@ Route::group(array('before' => 'auth'), function()
 		return "Solo logeados " . Auth::user()->email;
 	});
 
+	Route::get('userProfile', 'ProfileController@showProfile');
+
 });
 
 // Rutas AJAX
+Route::get('profile/getcities/{idState}', 'ProfileController@getCities');
+Route::get('profile/getcities/{idState}', 'ProfileController@getCities');
+Route::get('profile/getsports/{idCity}', 'ProfileController@getSports');
+Route::get('profile/getfields/{idSport}', 'ProfileController@getFields');
+Route::get('profile/getchildvalues/{idParentValue}', 'ProfileController@getChildValues');
+Route::post('profile/saveProfile', 'ProfileController@saveProfile');
+
 Route::get('test/profile/getcities/{idState}', 'ProfileController@getCities');
 Route::get('test/profile/getsports/{idCity}', 'ProfileController@getSports');
 Route::get('test/profile/getfields/{idSport}', 'ProfileController@getFields');
