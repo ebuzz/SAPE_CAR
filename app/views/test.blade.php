@@ -13,6 +13,7 @@
 @section('content')
     <div class="container">
         <div class="grid">
+
             <div class="row">
                 <div class="span3 no-tablet-portrait">
                     <div id="panel" class="panel" data-role="panel" style="position:relative; top: 95px; width:200px;">
@@ -32,8 +33,34 @@
                     </div>
                 </div>
                 <div class="span9">
+                    @if(Auth::user()->isAdmin())
+                    <h1>Hacer test a deportista</h1>
+                    <p>Hola {{  Auth::user()->name  }} si desea hacer el test de un atleta, introduzca el correo que el este se  registro en el sistema,
+                        si es la primera vez que se hara el test para este atleta puedes registrarlo {{ HTML::link('/register','aqui'); }}. </p>
+                        <div class="example">
+                            
+                            <legend>Datos requeridos</legend>
+                            @if (Session::get('message'))
+                                <div class="notice marker-on-bottom bg-amber fg-white">
+                                    {{ Session::get('message') }}
+                                </div>
+                            @endif
+                            {{ Form::open(array('url' => 'searchAthlete/' . $title)) }}
+                            
+                                <fieldset>
+                                    {{ Form::label('email','Correo') }}
+                                        <div class="input-control text" data-role="input-control">
+                                        <!-- '' o  Input::old('email') -->
+                                        {{ Form::email('email',Input::old('email'),array('placeholder' => 'juanitobanana@gmail.com','autofocus'=>'autofocus','required'=>'required')) }}
+
+                                </fieldset>
+                                {{ Form::submit('Buscar',array('class' => 'btn-clear')) }}
+                            {{ Form::close() }}
+                        </div>
+                    @endif
                     <h1><i class="icon-pencil on-left"></i>{{{ $title }}}</h1>
                     <div class="row">
+
                         <div class="span9">
                             @include('subviews.profile', array
                             (
@@ -132,6 +159,7 @@
                                     <br>
                                     <br>
                                     <br>
+                                    {{ Form::hidden('_email', $email) }}
                                     <button class="button success large"><i class="icon-checkmark on-left"></i>Enviar</button>
                                 </fieldset>
                             </form>

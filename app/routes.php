@@ -15,6 +15,8 @@ Route::get('/', 'HomeController@showHome');
 
 Route::get('test/{testName}', 'TestController@showTest');
 
+Route::post('searchAthlete/{testName}','TestController@doSearch');
+
 Route::get('test',function(){
 	return "Hola";
 });
