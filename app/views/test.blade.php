@@ -5,8 +5,8 @@
     
     {{ HTML::script('js/jquery/jquery.mousewheel.js') }}
     {{ HTML::script('js/local/profiles.js') }}
-    {{ HTML::script('js/local/tests.js') }}
     {{ HTML::script('js/local/sidepanel.js') }}
+    {{ HTML::script('js/local/tests.js') }}
     {{ HTML::script('js/local/notifier.js') }}
 
 @stop
@@ -17,7 +17,7 @@
 
             <div class="row">
                 <div class="span3 no-tablet-portrait">
-                    <div id="panel" class="panel" data-role="panel" style="position:relative; top: 95px; width:200px;">
+                    <div id="panel" class="panel" data-role="panel" style="display:none; position:relative; top: 95px; width:200px;">
                         <div class="panel-header">
                             Indicaciones
                         </div>
@@ -38,8 +38,8 @@
                     <hr>
                     @if(Auth::user()->isAdmin())
                         <h1>Hacer test a deportista</h1>
-                        <p>Hola {{  Auth::user()->name  }} si desea hacer el test de un atleta, introduzca el correo que el este se  registro en el sistema,
-                            si es la primera vez que se hara el test para este atleta puedes registrarlo {{ HTML::link('signup','aqui'); }}. </p>
+                        <p>Hola {{  Auth::user()->name  }}, si desea hacer el test de un atleta, introduzca el correo con el que este se registró en el sistema,
+                            si es la primera vez que se hará el test para este atleta puedes registrarlo {{ HTML::link('signup','aquí'); }}. </p>
                         <div class="example">                
                             <legend>Datos requeridos</legend>
                             @if (Session::get('message'))
@@ -58,8 +58,7 @@
                                 {{ Form::submit('Buscar',array('class' => 'btn-clear')) }}
                             {{ Form::close() }}
                         </div>
-                    @endif  
-                    
+                    @endif
                     <div class="row">
                         <div class="span9">
                             @if (isset($profileData))
@@ -69,12 +68,12 @@
                     </div>
                     <div class="row">
                         <div class="span9">
-                            @if (isset($questions))               
-                                <div id="questions">
+                            @if (isset($questions))             
+                                <div id="questions" style="display:none;">
                                     <p class="description bg-grayLighter padding20">Por favor lea cada pregunta y responda de manera correcta.</p>
                                     <br>
                                     <br>
-                                    {{ Form::open(array('url' => 'foo/bar')) }}            
+                                    {{ Form::open(array('url' => 'sendTest')) }}            
                                         @foreach ($questions as $question)
                                             <div id="{{ 'question-container-' . $question['number'] }}">
                                                 <legend>{{ $question['number'] . '. ' . $question['description'] }}</legend>
