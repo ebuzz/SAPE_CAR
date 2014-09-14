@@ -15,10 +15,6 @@ Route::get('/', 'HomeController@showHome');
 
 Route::get('test/{testName}', 'TestController@showTest');
 
-Route::post('searchAthlete/{testName}','TestController@doSearch');
-
-Route::post("sendTest",'TestController@submitTest');
-
 Route::get('test',function(){
 	return "Hola";
 });
@@ -27,13 +23,9 @@ Route::get('credits',function(){
 	return "Hola";
 });
 
-Route::get('signup', 'SignupController@showSignup');
+Route::get('signup', 'ProfileController@showSignup');
 
-Route::post('register', 'SignupController@register');
-
-Route::get('results',function(){
-	return "Hola";
-});
+Route::get('results','ResultsController@showResults');
 
 Route::get('login','LoginController@showLogin');
 
@@ -69,20 +61,25 @@ Route::group(array('before' => 'auth'), function()
 	});
 
 	Route::get('userProfile', 'ProfileController@showProfile');
+	Route::post('saveUserProfile/{id?}', 'ProfileController@saveUserProfile');
+	Route::post('changePassword', 'ProfileController@changePassword');
+
+	Route::get('test/profile/getcities/{idState}', 'ProfileController@getCities');
+	Route::get('test/profile/getsports/{idCity}', 'ProfileController@getSports');
+	Route::get('test/profile/getfields/{idSport}', 'ProfileController@getFields');
+	Route::get('test/profile/getchildvalues/{idParentValue}', 'ProfileController@getChildValues');
+	Route::post('test/profile/saveProfile', 'ProfileController@saveProfile');
 
 });
 
 // Rutas AJAX
+
+Route::post('results/getResults', 'ResultsController@getResults');
+
+
 Route::get('profile/getcities/{idState}', 'ProfileController@getCities');
 Route::get('profile/getcities/{idState}', 'ProfileController@getCities');
 Route::get('profile/getsports/{idCity}', 'ProfileController@getSports');
 Route::get('profile/getfields/{idSport}', 'ProfileController@getFields');
 Route::get('profile/getchildvalues/{idParentValue}', 'ProfileController@getChildValues');
 Route::post('profile/saveProfile', 'ProfileController@saveProfile');
-
-Route::get('test/profile/getcities/{idState}', 'ProfileController@getCities');
-Route::get('test/profile/getsports/{idCity}', 'ProfileController@getSports');
-Route::get('test/profile/getfields/{idSport}', 'ProfileController@getFields');
-Route::get('test/profile/getchildvalues/{idParentValue}', 'ProfileController@getChildValues');
-Route::post('test/profile/saveProfile', 'ProfileController@saveProfile');
-
