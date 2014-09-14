@@ -4,7 +4,6 @@ $(document).ready(function()
 {
     $("#save").hide();
     $("#cancel").hide();
-    $("#questions").hide();
     
     notifier = new Notifier();
     
@@ -34,6 +33,7 @@ function initializeSaveCallback()
                 notifier.showInfo("Aviso", "Se han guardado exitosamente tus cambios en el perfil!");
             });
               
+            $("#panel").fadeIn(800);
             $("html, body").animate({ scrollTop: 0 }, 800);
         });
     };
@@ -54,6 +54,7 @@ function initializeContinueCancelCallbacks()
         $("#profile" ).fadeOut(800, function() 
         {
             $("#questions").fadeIn(800);
+            $("#panel").fadeIn(800);
             $("html, body").animate({ scrollTop: 0 }, 800); 
         });
     };
