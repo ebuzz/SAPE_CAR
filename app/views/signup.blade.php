@@ -55,7 +55,7 @@
                     	{{ Form::label('birthday','Fecha de Nacimiento') }}
                         <div class="input-control text" data-role="datepicker" data-format="yyyy-mm-dd">
                             {{ Form::text('birthday', '', array('id' => 'birthday'))}}
-                            <button class="btn-date"></button>
+                            <!--button class="btn-date"></button-->
                         </div>
                     	{{ Form::label('gender','Genero') }}
                         <div  class="input-control select">

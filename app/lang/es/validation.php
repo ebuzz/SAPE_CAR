@@ -16,7 +16,7 @@ return array(
 	"accepted"             => "The :attribute must be accepted.",
 	"active_url"           => "The :attribute is not a valid URL.",
 	"after"                => "The :attribute must be a date after :date.",
-	"alpha"                => "The :attribute may only contain letters.",
+	"alpha"                => "El :attribute solo puede contener letras",
 	"alpha_dash"           => "The :attribute may only contain letters, numbers, and dashes.",
 	"alpha_num"            => "El :attribute debe contener solo letras y numeros.",
 	"array"                => "The :attribute must be an array.",
@@ -33,7 +33,7 @@ return array(
 	"different"            => "The :attribute and :other must be different.",
 	"digits"               => "The :attribute must be :digits digits.",
 	"digits_between"       => "The :attribute must be between :min and :max digits.",
-	"email"                => "The :attribute debe ser una direccion de correo valida.",
+	"email"                => "El :attribute debe ser una direccion de correo valida.",
 	"exists"               => "The selected :attribute is invalid.",
 	"image"                => "The :attribute must be an image.",
 	"in"                   => "The selected :attribute is invalid.",
@@ -49,13 +49,13 @@ return array(
 	"min"                  => array(
 		"numeric" => "The :attribute must be at least :min.",
 		"file"    => "The :attribute must be at least :min kilobytes.",
-		"string"  => "The :attribute must be at least :min characters.",
+		"string"  => "El campo de :attribute debe ser al menos de :min caracteres.",
 		"array"   => "The :attribute must have at least :min items.",
 	),
 	"not_in"               => "The selected :attribute is invalid.",
 	"numeric"              => "The :attribute debe ser un numero.",
 	"regex"                => "The :attribute format is invalid.",
-	"required"             => "El :attribute es obligatorio.",
+	"required"             => "El campo de :attribute es obligatorio.",
 	"required_if"          => "The :attribute field is required when :other is :value.",
 	"required_with"        => "The :attribute field is required when :values is present.",
 	"required_with_all"    => "The :attribute field is required when :values is present.",
@@ -99,6 +99,12 @@ return array(
 	|
 	*/
 
-	'attributes' => array(),
+	'attributes' => array(
+		'name' => 'nombre',
+		'email' => 'correo electrónico',
+		'firstSurname' => 'apellido paterno',
+		'secondSurname' => 'apellido materno',
+		'newPass' 		=> 'contraseña'
+		),
 
 );
