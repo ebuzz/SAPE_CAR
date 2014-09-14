@@ -2,10 +2,13 @@
 
 class ProfileController extends BaseController
 {
-    
     public function showProfile()
     {
-        $data = ProfileHelper::getUserLastProfileData(Auth::user());
+        if (!Auth::user()->isAdmin())
+        {
+            $data = ProfileHelper::getUserLastProfileData(Auth::user());
+        }
+        
         $data['user']= User::find(Auth::id());
 
         $data['title'] = 'Editar mi perfil';
@@ -14,12 +17,12 @@ class ProfileController extends BaseController
 
     public function showSignup()
     {
-        //Check if the user has logged in.
-        if (Auth::check())
-        {
-            // The user is logged in...
-            return Redirect::to('/')->with(array('message' => 'Error, no se puede acceder a esta pagina mientras esta una sesion iniciada.'));
-        }
+//        //Check if the user has logged in.
+//        if (Auth::check())
+//        {
+//            // The user is logged in...
+//            return Redirect::to('/')->with(array('message' => 'Error, no se puede acceder a esta pagina mientras esta una sesion iniciada.'));
+//        }
 
         $data['title'] = 'Registro';
         $states         = State::all();
@@ -155,14 +158,20 @@ class ProfileController extends BaseController
         $user->firstSurname = Input::get('firstSurname');
         $user->secondSurname = Input::get('secondSurname');
         
-        
         $user->birthday = Input::get('birthday');
         $user->idGender =  Input::get('gender');
       
-
-        if(!Auth::user()->isAdmin())
+        if ($id == -1 || !Auth::user()->isAdmin())
         {
-            $createNew = $user->lastProfile->hasTests();
+            if($id = -1)
+            {
+                $createNew = true;
+            }
+            else
+            {
+                $createNew = $user->lastProfile->hasTests();
+            }
+            
             $profile = new stdClass();
 
             // Crear nuevo registro de perfil para mantener el actual como historial
@@ -255,7 +264,10 @@ class ProfileController extends BaseController
     {
         if (Request::ajax())
         {
-            return City::find($idCity)->sports;
+            $sports = City::find($idCity)->sports;
+            $sports->add(Sport::where("description", "=", "Otro")->first());
+            
+            return $sports;
         }
     }
     
@@ -283,37 +295,81 @@ class ProfileController extends BaseController
         if (Request::ajax())
         {
             $data = Input::all();
-            $user = Auth::user();
+            $user = null;
             
-            if ($user->lastProfile->hasTest())
+            if (Session::has('athleteEmail'))
             {
+                $userEmail = Session::get('athleteEmail');
+                $user = User::where("email", "=", $userEmail)->first();
             }
             else
             {
+                $user = Auth::user();
             }
             
-            // Nuevo Perfil
-            $profile = new Profile;
-            $profile->idSport = Input::get('sport');
-            $profile->idRole = Input::get('role');
-            $profile->idCity = Input::get('city');
-            $profile->save();
-            
-            // Nuevos valores de Perfil
-            foreach(Input::get('values') as $value)
+            if ($user != null)
             {
-                $fieldValue = FieldValue::find($value);
-                $fieldValue->load('field');
+                $createNew = $user->lastProfile->hasTests();
                 
-                $profileValue = new ProfileValue;
-                $profileValue->idFieldValue = $fieldValue->idFieldValue;
-                $profileValue->idSportField = $fieldValue->field->idSportField;
-                $profile->profileValues()->save($profileValue);
+                // Crear nuevo registro de perfil para mantener el actual como historial
+                if ($createNew)
+                {
+                    // Nuevo Perfil
+                    $profile = new Profile;
+                    $profile->idSport = Input::get('sport');
+                    $profile->idRole = Role::where("description", "=", "Deportista")->first()->idRole;
+                    $profile->idCity = Input::get('city');
+                    $profile->save();
+
+                    if (Input::has("values"))
+                    {
+                        // Nuevos valores de Perfil
+                        foreach(Input::get('values') as $value)
+                        {
+                            $fieldValue = FieldValue::find($value);
+                            $fieldValue->load('field');
+
+                            $profileValue = new ProfileValue;
+                            $profileValue->idFieldValue = $fieldValue->idFieldValue;
+                            $profileValue->idSportField = $fieldValue->field->idSportField;
+                            $profile->profileValues()->save($profileValue);
+                        }
+                    }
+
+                    // Attach del nuevo Perfil
+                    $user->idLastProfile = $profile->idProfile;
+                    $user->save();
+                }
+                // Actualización del perfil actual
+                else
+                {
+                    // Actualización de datos
+                    $profile = $user->lastProfile;
+                    $profile->idSport = Input::get('sport');
+                    $profile->idRole = Role::where("description", "=", "Deportista")->first()->idRole;
+                    $profile->idCity = Input::get('city');
+                    $profile->save();
+                    
+                    // Elminación de ProfileValues
+                    $profile->profileValues()->delete();
+                    
+                    // Inserción de nuevos values
+                    if (Input::has("values"))
+                    {
+                        // Nuevos valores de Perfil
+                        foreach(Input::get('values') as $value)
+                        {
+                            $fieldValue = FieldValue::find($value);
+                            $fieldValue->load('field');
+
+                            $profileValue = new ProfileValue;
+                            $profileValue->idFieldValue = $fieldValue->idFieldValue;
+                            $profileValue->idSportField = $fieldValue->field->idSportField;
+                            $profile->profileValues()->save($profileValue);
+                        }
+                    }
+                }
             }
-            
-            // Attach del nuevo Perfil
-            $user->idLastProfile = $profile->idProfile;
-            $user->save();
         }
     }
 }

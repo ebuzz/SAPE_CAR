@@ -29,13 +29,13 @@ class Profile extends Eloquent
         return $this->hasMany('ProfileValue', 'idProfile', 'idProfile');
     }
     
-    public function userAnsweredTest()
+    public function userAnsweredTests()
     {
-        return $this->hasOne('UserAnsweredTest', 'idProfileAtMoment', 'idProfile');
+        return $this->hasMany('UserAnsweredTest', 'idProfileAtMoment', 'idProfile');
     }
     
-    public function hasTest()
+    public function hasTests()
     {
-        return $this->userAnsweredTest != null;
+        return $this->userAnsweredTests->count() > 0;
     }
 }

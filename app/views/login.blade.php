@@ -9,7 +9,7 @@
             
         <!-- Tiles de colores -->
         <div class="container">
-            <h1 id="_default"><i class="icon-accessibility on-left"></i>Inicia sesion</h1>
+            <h1 id="_default"><i class="icon-accessibility on-left"></i>Inicia sesión</h1>
             <div class="grid fluid">
                 <div class="row">
                     <div class="span7">
@@ -31,7 +31,7 @@
                                 	{{ Form::label('email','Correo') }}
                                 	<div class="input-control text" data-role="input-control">
                                     <!-- '' o  Input::old('email') -->
-                                	{{ Form::email('email',Input::old('email'),array('placeholder' => 'juanitobanana@gmail.com','autofocus'=>'autofocus','required'=>'required')) }}
+                                	{{ Form::email('email',Input::old('email'),array('placeholder' => 'ejemplo@ejemplo.com','autofocus'=>'autofocus','required'=>'required')) }}
                                     
                                     <button class="btn-clear" tabindex="-1" type="button"></button>
                                 	</div>

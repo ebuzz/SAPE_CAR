@@ -7,12 +7,14 @@
     {{ HTML::script('js/local/profiles.js') }}
     {{ HTML::script('js/local/tests.js') }}
     {{ HTML::script('js/local/sidepanel.js') }}
+    {{ HTML::script('js/local/notifier.js') }}
 
 @stop
 
 @section('content')
     <div class="container">
         <div class="grid">
+
             <div class="row">
                 <div class="span3 no-tablet-portrait">
                     <div id="panel" class="panel" data-role="panel" style="position:relative; top: 95px; width:200px;">
@@ -26,115 +28,79 @@
                             specimen book.
                             <br>
                             <br>
-                            <b>10/30</b>
-                            <div id="progress" class="progress-bar large"></div>
+                            <b id="progress-data">0/0</b>
+                            <div id="progress-bar" class="progress-bar large"></div>
                         </div>
                     </div>
                 </div>
                 <div class="span9">
                     <h1><i class="icon-pencil on-left"></i>{{{ $title }}}</h1>
+                    <hr>
+                    @if(Auth::user()->isAdmin())
+                        <h1>Hacer test a deportista</h1>
+                        <p>Hola {{  Auth::user()->name  }} si desea hacer el test de un atleta, introduzca el correo que el este se  registro en el sistema,
+                            si es la primera vez que se hara el test para este atleta puedes registrarlo {{ HTML::link('signup','aqui'); }}. </p>
+                        <div class="example">                
+                            <legend>Datos requeridos</legend>
+                            @if (Session::get('message'))
+                                <div class="notice marker-on-bottom bg-amber fg-white">
+                                    {{ Session::get('message') }}
+                                </div>
+                            @endif
+                            {{ Form::open(array('url' => 'test/' . $title)) }}
+                                <fieldset>
+                                    {{ Form::label('email','Correo') }}
+                                    <div class="input-control text" data-role="input-control">
+                                        <!-- '' o  Input::old('email') -->
+                                        {{ Form::email('email',Input::old('email'),array('placeholder' => 'ejemplo@ejemplo.com','autofocus'=>'autofocus','required'=>'required')) }}
+                                    </div>
+                                </fieldset>
+                                {{ Form::submit('Buscar',array('class' => 'btn-clear')) }}
+                            {{ Form::close() }}
+                        </div>
+                    @endif  
+                    
                     <div class="row">
                         <div class="span9">
-                            @include('subviews.profile', array
-                            (
-                                'roles'   => $roles, 
-                                'states'  => $states,
-                                'cities'  => $cities,
-                                'sports'  => $sports,
-                                'fields'  => $fields,
-                                'profile' => $profile
-                            ))
+                            @if (isset($profileData))
+                                @include('subviews.profile', $profileData)
+                            @endif
                         </div>
                     </div>
                     <div class="row">
                         <div class="span9">
-                            <p class="description bg-grayLighter padding20">Por favor lea cada pregunta y responda de manera correcta.</p>
-                            <br>
-                            <br>
-                            <form>
-                                <fieldset>
-                                    <legend>1. Siento que estoy logrando muchas cosas que valen la pena en mi deporte.</legend>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Casi nunca
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Pocas veces
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Algunas veces
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            A menudo
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Casi siempre
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
+                            @if (isset($questions))               
+                                <div id="questions">
+                                    <p class="description bg-grayLighter padding20">Por favor lea cada pregunta y responda de manera correcta.</p>
                                     <br>
                                     <br>
-                                    <br>
-                                    <br>
-                                    <legend>2. Me siento tan cansado de mis entrenamientos que tengo problemas al encontrar energía para hacer otras cosas</legend>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Casi nunca
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Pocas veces
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Algunas veces
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            A menudo
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Casi siempre
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <button class="button success large"><i class="icon-checkmark on-left"></i>Enviar</button>
-                                </fieldset>
-                            </form>
+                                    {{ Form::open(array('url' => 'foo/bar')) }}            
+                                        @foreach ($questions as $question)
+                                            <div id="{{ 'question-container-' . $question['number'] }}">
+                                                <legend>{{ $question['number'] . '. ' . $question['description'] }}</legend>
+                                                @foreach ($question['answers'] as $answer)
+                                                <div class="input-control radio default-style margin10" data-role="input-control">
+                                                    <label>
+                                                        {{ $answer['description'] }}
+                                                        {{ Form::radio('question-' . $question['number'], $answer['idTestAnswer'], false, 
+                                                                       array
+                                                                       (
+                                                                           'id'       => 'question-' . $question['number'],
+                                                                           'required' => ''
+                                                                       )) }}
+                                                        <span class="check"></span>
+                                                    </label>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                        <br>
+                                        <br>
+                                        @endforeach
+                                        <br>
+                                        <button class="button success large"><i class="icon-checkmark on-left"></i>Enviar</button>
+                                    {{ Form::close() }} 
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

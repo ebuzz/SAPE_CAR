@@ -149,7 +149,7 @@ class CreateTables extends Migration
             $table->date('birthday');
             $table->integer('idGender')->unsigned();
             $table->integer('idUserType')->unsigned();
-            $table->integer('idLastProfile')->unsigned();
+            $table->integer('idLastProfile')->unsigned()->nullable();
             
             $table->rememberToken();
             $table->timestamps();
@@ -199,7 +199,18 @@ class CreateTables extends Migration
             $table->foreign('idTest')->references('idTest')->on('Tests');
             $table->foreign('idProfileAtMoment')->references('idProfile')->on('Profiles');
         });
+        
+        Schema::create('Scales', function($table)
+        {
+            //Fields
+            $table->increments('idScale');
+            $table->integer('idTest')->unsigned();
+            $table->string('description', 40);
 
+            //Foreign Key Constraints
+            $table->foreign('idTest')->references('idTest')->on('Tests');
+        });
+        
         Schema::create('Ranges', function($table)
         {
             //Fields
@@ -208,24 +219,24 @@ class CreateTables extends Migration
             $table->float('min');
             $table->float('max');
         });
+        
+        Schema::create('ScalesRanges', function($table)
+        {
+            //Fields
+			$table->integer('idScale')->unsigned();
+			$table->integer('idRange')->unsigned();
+
+            //Foreign Key Constraints
+			$table->foreign('idScale')
+			->references('idScale')->on('Scales');
+			$table->foreign('idRange')
+			->references('idRange')->on('Ranges');
+        });
 
         Schema::create('Groups', function($table)
         {
             //Fields
             $table->increments('idGroup');
-        });
-
-        Schema::create('Scales', function($table)
-        {
-            //Fields
-            $table->increments('idScale');
-            $table->integer('idRange')->unsigned();
-            $table->integer('idTest')->unsigned();
-            $table->string('description', 40);
-
-            //Foreign Key Constraints
-            $table->foreign('idRange')->references('idRange')->on('Ranges');
-            $table->foreign('idTest')->references('idTest')->on('Tests');
         });
 
         Schema::create('Questions', function($table)
@@ -267,6 +278,8 @@ class CreateTables extends Migration
             $table->foreign('idTestAnswer')->references('idTestAnswer')->on('TestAnswers');
             $table->foreign('idQuestion')->references('idQuestion')->on('Questions');
             $table->foreign('idUserAnsweredTest')->references('idUserAnsweredTest')->on('UsersAnsweredTests');
+            
+             $table->primary(array('idTestAnswer', 'idQuestion', 'idUserAnsweredTest'));
         });
 	}
 

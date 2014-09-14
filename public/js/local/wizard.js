@@ -83,7 +83,7 @@ $(document).ready(function()
                             {
                                 note.showSuccess(data.caption, data.content, function()
                                 {
-                                    window.location="{{URL::to('login')}}";
+                                    window.location.href ="/";
                                 })
                             }
                         }

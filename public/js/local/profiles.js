@@ -170,7 +170,6 @@ function saveProfile(callback)
     var savedFields = [];
     var field;
     
-    data.role = $('#role').val();
     data.city = $('#city').val();
     data.sport = $('#sport').val();
     data.values = [];
@@ -198,7 +197,7 @@ function getLowerLevelSelect(prefix)
     
     $("select[id^='" + prefix + "']").each(function (index, select)
     {
-        if (lowerSelect == null)
+        if (lowerSelect === null)
         {
             lowerSelect = select;
         }

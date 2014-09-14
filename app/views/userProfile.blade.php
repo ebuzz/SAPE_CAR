@@ -68,48 +68,48 @@
    				</div>
    			</div>
    			@if(!Auth::user()->isAdmin())
-   			<div class="row">
-   				<div class="span6">
-   					<div class="example">
-	   					<legend>Información de Locación</legend>
-				        {{ Form::label('stateDiv','Estado') }}
-				        <div id="stateDiv" class="input-control select">
-				        {{ Form::select('', $states, $profile->city->state->idState, 
-                            array('id' => 'state', 'class' => 'input-control select')) }}
-				        </div>
-				          <!-- Ciudad -->
-				        {{ Form::label('cityDiv','Ciudad') }}                        
-				        <div id="cityDiv" class="input-control select">
-				            {{ Form::select('', $cities, $profile->city->idCity, 
-				                            array('id' => 'city', 'class' => 'input-control select')) }}
-				        </div>
-				        <!-- Deporte -->
-				        {{ Form::label('sportDiv','Deporte') }}
-				        <div id="sportDiv" class="input-control select">
-				            {{ Form::select('', $sports, $profile->idSport, 
-				                            array('id' => 'sport', 'class' => 'input-control select')) }}
-				        </div>
-			        </div>
-   				</div>
-   				<div class="span6">
-   					<div class="example">
-       					<legend>Información Deportiva</legend>
-				        <div id="fields">
-				        <!-- Campos específicos al deporte -->
-				        @foreach ($fields as $field)
-				            @if ($field['isTopLevel'] == true)
-				                <label>{{{ $field['name'] }}}</label>
-				            @endif
-				            <div class="input-control select">
-				                {{ Form::select('', $field['values'], $field['selected'], 
-				                                array('id' => $field['id'], 'class' => 'input-control select')) }}
-				            </div>
-				        @endforeach
-				    	</div>
-				    </br>
-			    	</div>
-   				</div>
-   			</div>
+                <div class="row">
+                    <div class="span6">
+                        <div class="example">
+                            <legend>Información de Locación</legend>
+                            {{ Form::label('stateDiv','Estado') }}
+                            <div id="stateDiv" class="input-control select">
+                            {{ Form::select('', $states, $profile->city->state->idState, 
+                                array('id' => 'state', 'class' => 'input-control select')) }}
+                            </div>
+                              <!-- Ciudad -->
+                            {{ Form::label('cityDiv','Ciudad') }}                        
+                            <div id="cityDiv" class="input-control select">
+                                {{ Form::select('', $cities, $profile->city->idCity, 
+                                                array('id' => 'city', 'class' => 'input-control select')) }}
+                            </div>
+                            <!-- Deporte -->
+                            {{ Form::label('sportDiv','Deporte') }}
+                            <div id="sportDiv" class="input-control select">
+                                {{ Form::select('', $sports, $profile->idSport, 
+                                                array('id' => 'sport', 'class' => 'input-control select')) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <div class="example">
+                            <legend>Información Deportiva</legend>
+                            <div id="fields">
+                            <!-- Campos específicos al deporte -->
+                            @foreach ($fields as $field)
+                                @if ($field['isTopLevel'] == true)
+                                    <label>{{{ $field['name'] }}}</label>
+                                @endif
+                                <div class="input-control select">
+                                    {{ Form::select('', $field['values'], $field['selected'], 
+                                                    array('id' => $field['id'], 'class' => 'input-control select')) }}
+                                </div>
+                            @endforeach
+                            </div>
+                        </br>
+                        </div>
+                    </div>
+                </div>
    			@endif
        		</fieldset>
        		<div class="row">
@@ -180,7 +180,10 @@
 	                	}
 	                	else
 	                	{
-	                		note.showSuccess(data.caption, data.content);
+	                		note.showSuccess(data.caption, data.content, function()
+                            {
+                                window.location = "{{ URL::to('userProfile') }}";
+                            });
 	                	}
                 	}
 
@@ -269,7 +272,7 @@
 	            			$.Dialog.close();
 	            			note.showSuccess(data.caption, data.content, function()
 	            				{
-	            					window.location="{{URL::to('logout')}}";
+//	            					window.location="{{URL::to('logout')}}";
 	            				});
 	            		}
 	            		
