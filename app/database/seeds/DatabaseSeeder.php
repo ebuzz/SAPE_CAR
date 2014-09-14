@@ -17,11 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call('SportsTableSeeder');
         $this->call('SportsCitiesTableSeeder');
         $this->call('RolesTableSeeder');
-        $this->call('ProfilesTableSeeder');
         $this->call('SportsFieldsTableSeeder');
         $this->call('FieldValuesTableSeeder');
         $this->call('FieldChildValuesTableSeeder');
-        $this->call('ProfileValuesTableSeeder');
         
         // Módulo de Usuarios
         $this->call('GendersTableSeeder');
@@ -99,6 +97,7 @@ class SportsTableSeeder extends Seeder
         Sport::create(array('description' => 'Voleibol'));
         Sport::create(array('description' => 'Clavados'));
         Sport::create(array('description' => 'Ciclismo'));
+        Sport::create(array('description' => 'Otro'));
     }
 }
 
@@ -107,7 +106,7 @@ class SportsCitiesTableSeeder extends Seeder
     public function run()
     {
         DB::table('sportscities')->delete();
-
+        
         // Tijuana - Voleibol
         SportCity::create(array
         (
@@ -287,73 +286,6 @@ class FieldChildValuesTableSeeder extends Seeder
     }
 }
 
-class ProfilesTableSeeder extends Seeder
-{
-    public function run()
-    {
-        DB::table('profiles')->delete();
-
-        Profile::create(array
-        (
-            'idSport' => '2',
-            'idRole'  => '1',
-            'idCity'  => '4'
-        ));
-        
-        Profile::create(array
-        (
-            'idSport' => '3',
-            'idRole'  => '1',
-            'idCity'  => '1'
-        ));
-    }
-}
-
-class ProfileValuesTableSeeder extends Seeder
-{
-    public function run()
-    {
-        DB::table('profilevalues')->delete();
-
-        // Valores prueba perfil 1 - Clavados
-        ProfileValue::create(array
-        (
-            'idProfile'    => '1',
-            'idSportField' => '5',
-            'idFieldValue' => '17'
-        ));
-        
-        ProfileValue::create(array
-        (
-            'idProfile'    => '1',
-            'idSportField' => '6',
-            'idFieldValue' => '20'
-        ));
-        
-        ProfileValue::create(array
-        (
-            'idProfile'    => '1',
-            'idSportField' => '7',
-            'idFieldValue' => '24'
-        ));
-        
-        // Valores prueba perfil 2 - Ciclismo
-        ProfileValue::create(array
-        (
-            'idProfile'    => '2',
-            'idSportField' => '8',
-            'idFieldValue' => '27'
-        ));
-        
-        ProfileValue::create(array
-        (
-            'idProfile'    => '2',
-            'idSportField' => '9',
-            'idFieldValue' => '41'
-        ));
-    }
-}
-
 /******************************************************************************
 *
 * Módulo de Usuarios
@@ -412,7 +344,7 @@ class UsersTableSeeder extends Seeder
             'birthday'      => '2003-12-31',
             'idGender'      => '1',
             'idUserType'    => '2',
-            'idLastProfile' => '2'
+            'idLastProfile' => null
         ));
     }
 }
@@ -1000,31 +932,6 @@ class IPRDSeeder extends Seeder
             'number'      => '42',
             'description' => 'Yo puedo convertir una crisis en una oportunidad.',
             'idGroup'     => $grupoInverso
-        ));
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-class UserAnsweredTestsTableSeeder extends Seeder
-{
-    public function run()
-    {
-        DB::table('usersansweredtests')->delete();
-
-        UserAnsweredTest::create(array
-        (
-            'idUser'            => '1',
-            'idTest'            => '1',
-            'idProfileAtMoment' => '2'
         ));
     }
 }

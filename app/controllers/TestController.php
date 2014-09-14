@@ -2,32 +2,55 @@
 
 class TestController extends BaseController
 {
+    
     public function showTest($testName)
     {
-        $data = ProfileHelper::getUserLastProfileData(Auth::user());
         $data['title'] = $testName;
-        $data['questions'] = $this->getQuestions($testName);
-        $data['email'] = "";
+        
+        if (!Auth::user()->isAdmin())
+        {
+            $data['profileData'] = ProfileHelper::getUserLastProfileData(Auth::user());
+            $data['profileData']['user'] = Auth::user();
+            $data['questions'] = $this->getQuestions($testName);
+        }
+        
+        if (Session::has('athleteEmail'))
+        {
+            Session::forget('athleteEmail');
+        }
         
         return View::make('test', $data);
     }
 
     public function doSearch($testName)
     {
-    	$userEmail = array('email' 	=> Input::get('email'));
-    	$user = User::where("email","=",$userEmail)->first();
+    	$userEmail = Input::get('email');
+    	$user = User::where("email", "=", $userEmail)->first();
 
         if($user != null)
         {
-        	$data = ProfileHelper::getUserLastProfileData($user);
-        	$data['title'] = $testName;
+            if (!$user->isAdmin())
+            {
+                $data['title'] = $testName;
+                Session::put('athleteEmail', $user->email);
 
-        	$data['email'] = Hash::make($user["email"]);
-        	return View::make('test', $data);
+                $data['profileData'] = ProfileHelper::getUserLastProfileData($user);
+                $data['profileData']['user'] = $user;
+                $data['questions'] = $this->getQuestions($testName);
+
+                return View::make('test', $data);
+            }
+            else
+            {
+                $data['title'] = $testName;
+            
+        	   return Redirect::to('test/'. $testName)->with(array('message' => 'Debes de ingresar el correo de un deportista.'));
+            }
         }
         else
         {	
             $data['title'] = $testName;
+            
         	return Redirect::to('test/'. $testName)->with(array('message' => 'El correo que ingresó no existe.'));
         }
     }
@@ -71,6 +94,7 @@ class TestController extends BaseController
     {
         //si se busca como psicologo un mail, no carga el arreglo questions
         $userAnsweredTest = new UserAnsweredTest;
+        
         if($_POST['_email'] == "")
         {
             $userAnsweredTest->idUser = Auth::user()->idUser;
@@ -90,7 +114,5 @@ class TestController extends BaseController
                 $userAnsweredTest->save();
             }
         }
-
     }
-  
 }

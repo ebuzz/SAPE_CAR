@@ -149,7 +149,7 @@ class CreateTables extends Migration
             $table->date('birthday');
             $table->integer('idGender')->unsigned();
             $table->integer('idUserType')->unsigned();
-            $table->integer('idLastProfile')->unsigned();
+            $table->integer('idLastProfile')->unsigned()->nullable();
             
             $table->rememberToken();
             $table->timestamps();

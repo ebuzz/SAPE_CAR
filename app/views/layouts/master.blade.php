@@ -33,26 +33,28 @@
             
             <nav class="navigation-bar bg-darkRed fixed-top">
                 <div class="navigation-bar-content container">   
-                    <a class="element" href="/"><span class="icon-home"></span> INICIO</a>
+                    <a class="element" href="{{ URL::to('/') }}"><span class="icon-home"></span> INICIO</a>
                     <span class="element-divider"></span>
                     <a class="element1 pull-menu" href="#"></a>
                     <ul class="element-menu" style="display: block;">
                         <li>
                             <a class="dropdown-toggle bg-hover-red" href="#"><span class="icon-pencil"></span> Cuestionarios</a>
                             <ul class="dropdown-menu" data-role="dropdown">
+<!--
                                 <li class="menu-title">Ansiedad</li>
                                 <li>{{ HTML::link('test/scat','SCAT'); }}</li>
                                 <li>{{ HTML::link('test/scat','CSAI-12'); }}</li>
                                 <li class="divider"></li>
-                                <li>{{ HTML::link('test/scat','BURNOUT'); }}</li>
+                                <li>{{ HTML::link('test/scat', 'BURNOUT'); }}</li>
+-->
                                 <li class="menu-title">Evaluacion Mental</li>
-                                <li>{{ HTML::link('test/scat','IPRD'); }}</li>
-                                <li>{{ HTML::link('test/scat','IPRD Combate'); }}</li>
+                                <li>{{ HTML::link('test/IPRD','IPRD'); }}</li>
+<!--                                <li>{{ HTML::link('test/scat','IPRD Combate'); }}</li>-->
                             </ul>
                         </li>
                         <span class="element-divider"></span>
                         @if(Auth::user()->isAdmin())
-                        <a class="element" href="results"><span class="icon-copy"></span> Resultados</a>
+                        <a class="element" href="{{ URL::to('results/') }}"><span class="icon-copy"></span> Resultados</a>
                         @endif
                         <!--<span class="element-divider"></span>
                         <!<a class="element" href="#"><span class="icon-help"></span> Documentación</a> -->
