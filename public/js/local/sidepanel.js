@@ -1,11 +1,37 @@
+var progressInfo;
+var progressBar;
+
+var totalQuestions;
+var answeredQuestions;
+
 $(document).ready(function()
 {
-    var pb = $("#progress").progressbar();
-    pb.progressbar('color', '#A3A3A3');
-    pb.progressbar('value', 33);
+    progressInfo = $("#progress-data");
+    progressBar = $("#progress-bar").progressbar();
+    progressBar.progressbar('color', '#A3A3A3'); 
+    
+    initializeSideMenu();
+    totalQuestions = $("div[id^='question-container-']").size();
+    showProgress();
+    
+    $("input[id^='question-']").click(function()
+    {
+        showProgress();
+    });
 });
 
-$(function() 
+function showProgress()
+{
+     answeredQuestions = $("input[type='radio']:checked").size();
+    
+     var info = answeredQuestions.toString() + "/" + totalQuestions.toString();
+     var progress = (answeredQuestions / totalQuestions) * 100;
+    
+     $(progressInfo).html(info);
+     progressBar.progressbar('value', progress);
+}
+
+function initializeSideMenu() 
 {
     var side_menu = $('#panel');
 
@@ -23,4 +49,4 @@ $(function()
             side_menu.css({'position': 'relative', 'top':'95px'});
         }
     });
-});
+}

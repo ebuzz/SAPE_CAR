@@ -62,7 +62,7 @@ class ProfileController extends BaseController
             $data = Input::all();
             $user = Auth::user();
             
-            if ($user->lastProfile->hasTest())
+            if ($user->lastProfile->hasTests())
             {
             }
             else
