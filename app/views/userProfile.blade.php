@@ -36,7 +36,7 @@
 				            {{ Form::password('passconfirm',array('id' => 'passconfirm','autofocus'=>'autofocus','required'=>'required')) }}
 				            <button class="btn-reveal" tabindex="-1" type="button"></button>
 				        </div-->
-				    </br></br></br></br></br></br></br></br>
+				    </br></br></br></br></br></br></br></br></br></br>
 			        </div>
    				</div>
    				<div class="span6">
@@ -67,6 +67,7 @@
    					</div>
    				</div>
    			</div>
+   			@if(!Auth::user()->isAdmin())
    			<div class="row">
    				<div class="span6">
    					<div class="example">
@@ -105,9 +106,11 @@
 				            </div>
 				        @endforeach
 				    	</div>
+				    </br>
 			    	</div>
    				</div>
    			</div>
+   			@endif
        		</fieldset>
        		<div class="row">
        			<button class="primary large success" id="saveChanges"><i class="icon-checkmark on-left big"></i>Guardar cambios</button>
@@ -120,7 +123,69 @@
 
 	$("#saveChanges").click(function(event) {
 		/* Act on the event */
-		note.showSuccess('Exito!', 'Tus cambios han sido actualizados correctamente.');
+		var data = {};
+        var savedFields = [];
+        var field;
+
+        data.email = $("#email").val();
+        data.password = $("#password").val();
+        data.passconfirm = $("#passconfirm").val();
+        
+        data.name = $("#name").val();
+        data.firstSurname = $("#firstSurname").val();
+        data.secondSurname = $("#secondSurname").val();
+        data.birthday = $("#birthday").val();
+        data.gender = $("#gender").val();
+
+        data.city = $('#city').val();
+        data.sport = $('#sport').val();
+
+        data.values = [];
+
+        $("select[id^='valueOf-']").each(function (index, select)
+        {
+            field = getPrefix(select);
+            
+            if (savedFields.indexOf(field) == -1)
+            {
+                savedFields.push(field);
+                data.values.push($(getLowerLevelSelect(field)).val());
+            }
+        });
+
+
+
+        $.post('saveUserProfile', data, function(data)
+                {
+                	if(data == 23000)
+                	{
+                		note.showAlert("Atención", "Ese correo electronico no esta disponible, por favor selecciona otro")
+                	}
+                	else
+                	{
+                		if(data.type == "error")
+	                	{
+	                		note.showError(data.caption, data.content);
+	                	}
+	                	else if (data.type == "alert")
+	                	{
+	                		note.showAlert(data.caption, data.content);
+	                	}
+	                	else if(data.type == "validation")
+	                	{
+	                		$.each(data.content, function(index, val) {
+	                			 /* iterate through array or object */
+	                			 note.showError(data.caption, val);
+	                		});
+	                	}
+	                	else
+	                	{
+	                		note.showSuccess(data.caption, data.content);
+	                	}
+                	}
+
+                });
+		
 	});
 	$("#changepass").click(function(event) {
 		/* Act on the event */
@@ -142,7 +207,7 @@
         	$(lbl_currPass).html("Introduce tu contraseña actual");
 
         	var inputDiv_currPass = $('<div class="input-control text"></div>');
-        	var input_currPass = $('<input type="text" class="input-control"/>');
+        	var input_currPass = $('<input type="password" name="currPassword" class="input-control"/>');
         	$(inputDiv_currPass).append(input_currPass);
 
         	/*--------------------------------------------------------------*/
@@ -150,7 +215,7 @@
         	$(lbl_newPass).html("Introduce la nueva contraseña");
 
         	var inputDiv_newPass = $('<div class="input-control text"></div>');
-        	var input_newPass = $('<input type="text" class="input-control"/>');
+        	var input_newPass = $('<input type="password" name="newPassword" class="input-control"/>');
         	$(inputDiv_newPass).append(input_newPass);
 
         	/*--------------------------------------------------------------*/
@@ -159,7 +224,7 @@
         	$(lbl_newPassConfirm).html("Confirma la nueva contraseña");
 
         	var inputDiv_newPassConfirm = $('<div class="input-control text"></div>');
-        	var input_newPassConfirm = $('<input type="text" class="input-control"/>');
+        	var input_newPassConfirm = $('<input type="password" name="newPasswordConfirm" class="input-control"/>');
         	$(inputDiv_newPassConfirm).append(input_newPassConfirm);
 
         	/*--------------------------------------------------------------*/
@@ -172,8 +237,48 @@
 
             $(btn_change).click(function(event) {
             	/* Act on the event */
-            	$.Dialog.close();
-            	note.showSuccess('Exito!', 'Tu contraseña ha sido actualizada correctamente.');
+            	//$.Dialog.close();
+
+            	var data = {};
+
+            	data.currPass = $(input_currPass).val();
+            	data.newPass = $(input_newPass).val();
+
+            	if($(input_newPass).val() == $(input_newPassConfirm).val())
+            	{
+            		$.post('changePassword', data, function(data)
+	            	{
+	            		
+	            		if(data.type == 'alert')
+	            		{
+	            			note.showAlert(data.caption, data.content);
+	            		}
+	            		else if(data.type == "validation")
+	                	{
+	                		$.each(data.content, function(index, val) {
+	                			 /* iterate through array or object */
+	                			 note.showError(data.caption, val);
+	                		});
+	                	}
+	            		else if(data.type == 'error')
+	            		{
+	            			note.showError(data.caption, data.content);
+	            		}
+	            		else
+	            		{
+	            			$.Dialog.close();
+	            			note.showSuccess(data.caption, data.content, function()
+	            				{
+	            					window.location="{{URL::to('logout')}}";
+	            				});
+	            		}
+	            		
+	            	});
+            	}
+            	else
+            	{
+            		note.showAlert('Error!', 'La confirmación de la nueva contraseña no coincide');
+            	}
             });
             //$.Metro.initInputs();
         }

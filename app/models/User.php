@@ -37,6 +37,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface
         return $this->belongsTo('UserType','idUserType','idUserType');
     }
 
+    public function gender()
+    {
+    	return $this->belongsTo('Gender', 'idGender', 'idGender');
+    }
+
 	public function isAdmin()
 	{
 		$usertype = $this->userType->description;
