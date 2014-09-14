@@ -17,6 +17,8 @@ Route::get('test/{testName}', 'TestController@showTest');
 
 Route::post('searchAthlete/{testName}','TestController@doSearch');
 
+Route::post("sendTest",'TestController@submitTest');
+
 Route::get('test',function(){
 	return "Hola";
 });
@@ -83,3 +85,4 @@ Route::get('test/profile/getsports/{idCity}', 'ProfileController@getSports');
 Route::get('test/profile/getfields/{idSport}', 'ProfileController@getFields');
 Route::get('test/profile/getchildvalues/{idParentValue}', 'ProfileController@getChildValues');
 Route::post('test/profile/saveProfile', 'ProfileController@saveProfile');
+

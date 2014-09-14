@@ -78,7 +78,7 @@
                             <p class="description bg-grayLighter padding20">Por favor lea cada pregunta y responda de manera correcta.</p>
                             <br>
                             <br>
-                            {{ Form::open(array('url' => 'foo/bar')) }}            
+                            {{ Form::open(array('url' => 'sendTest')) }}            
                                 @foreach ($questions as $question)
                                     <div id="{{ 'question-container-' . $question['number'] }}">
                                         <legend>{{ $question['number'] . '. ' . $question['description'] }}</legend>

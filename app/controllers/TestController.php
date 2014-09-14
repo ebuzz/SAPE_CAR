@@ -66,4 +66,31 @@ class TestController extends BaseController
         
         return $questions;
     }
+
+    public function submitTest()
+    {
+        //si se busca como psicologo un mail, no carga el arreglo questions
+        $userAnsweredTest = new UserAnsweredTest;
+        if($_POST['_email'] == "")
+        {
+            $userAnsweredTest->idUser = Auth::user()->idUser;
+            $userAnsweredTest->idTest = 1;
+            $userAnsweredTest->idProfileAtMoment = Auth::user()->lastProfile;
+            //$userAnsweredTest->save();
+            return "exito";
+        }
+        else
+        {
+            $user = User::where("email","=",$_POST['_email'])->first();
+            if ($user != null)
+            {
+                $userAnsweredTest->idUser = user()->idUser;
+                $userAnsweredTest->idTest = 1;
+                $userAnsweredTest->idProfileAtMoment = user()->lastProfile;
+                $userAnsweredTest->save();
+            }
+        }
+
+    }
+  
 }
