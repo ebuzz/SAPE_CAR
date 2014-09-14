@@ -27,8 +27,8 @@
                             specimen book.
                             <br>
                             <br>
-                            <b>10/30</b>
-                            <div id="progress" class="progress-bar large"></div>
+                            <b id="progress-data">0/0</b>
+                            <div id="progress-bar" class="progress-bar large"></div>
                         </div>
                     </div>
                 </div>
@@ -78,91 +78,32 @@
                             <p class="description bg-grayLighter padding20">Por favor lea cada pregunta y responda de manera correcta.</p>
                             <br>
                             <br>
-                            <form>
-                                <fieldset>
-                                    <legend>1. Siento que estoy logrando muchas cosas que valen la pena en mi deporte.</legend>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Casi nunca
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
+                            {{ Form::open(array('url' => 'foo/bar')) }}            
+                                @foreach ($questions as $question)
+                                    <div id="{{ 'question-container-' . $question['number'] }}">
+                                        <legend>{{ $question['number'] . '. ' . $question['description'] }}</legend>
+                                        @foreach ($question['answers'] as $answer)
+                                        <div class="input-control radio default-style margin10" data-role="input-control">
+                                            <label>
+                                                {{ $answer['description'] }}
+                                                {{ Form::radio('question-' . $question['number'], $answer['idTestAnswer'], false, 
+                                                               array
+                                                               (
+                                                                   'id'       => 'question-' . $question['number'],
+                                                                   'required' => ''
+                                                               )) }}
+                                                <span class="check"></span>
+                                            </label>
+                                        </div>
+                                        @endforeach
                                     </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Pocas veces
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Algunas veces
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            A menudo
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Casi siempre
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <legend>2. Me siento tan cansado de mis entrenamientos que tengo problemas al encontrar energía para hacer otras cosas</legend>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Casi nunca
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Pocas veces
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Algunas veces
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            A menudo
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <div class="input-control radio default-style margin10" data-role="input-control">
-                                        <label>
-                                            Casi siempre
-                                            <input type="radio" name="r3" checked="">
-                                            <span class="check"></span>
-                                        </label>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    {{ Form::hidden('_email', $email) }}
-                                    <button class="button success large"><i class="icon-checkmark on-left"></i>Enviar</button>
-                                </fieldset>
-                            </form>
+                                <br>
+                                <br>
+                                @endforeach
+                                <br>
+                                <button class="button success large"><i class="icon-checkmark on-left"></i>Enviar</button>
+                                {{ Form::hidden('_email', $email) }}
+                            {{ Form::close() }} 
                         </div>
                     </div>
                 </div>

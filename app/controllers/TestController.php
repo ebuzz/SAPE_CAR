@@ -6,7 +6,9 @@ class TestController extends BaseController
     {
         $data = ProfileHelper::getUserLastProfileData(Auth::user());
         $data['title'] = $testName;
+        $data['questions'] = $this->getQuestions($testName);
         $data['email'] = "";
+        
         return View::make('test', $data);
     }
 
@@ -24,8 +26,44 @@ class TestController extends BaseController
         	return View::make('test', $data);
         }
         else
-        {	$data['title'] = $testName;
+        {	
+            $data['title'] = $testName;
         	return Redirect::to('test/'. $testName)->with(array('message' => 'El correo que ingresó no existe.'));
         }
+    }
+    
+    private function getQuestions($testName)
+    {
+        $questions = array();
+        $test = Test::where('name', '=', $testName)->first();
+        
+        if ($test != null)
+        {
+            $test->load('questions.group.testAnswers');
+            $testQuestions = $test->questions->sortBy('number');
+            
+            foreach($testQuestions as $question)
+            {
+                $answers = array();
+                
+                foreach($question->group->testAnswers as $answer)
+                {
+                    $answers[] = array
+                    (
+                        'idTestAnswer' => $answer->idTestAnswer,
+                        'description'  => $answer->description
+                    );
+                }
+                      
+                $questions[] = array
+                (
+                    'number'      => $question->number,
+                    'description' => $question->description,   
+                    'answers'     => $answers
+                );
+            }
+        }
+        
+        return $questions;
     }
 }
