@@ -36,6 +36,15 @@
                 <div class="span9">
                     <h1><i class="icon-pencil on-left"></i>{{{ $title }}}</h1>
                     <hr>
+                    @if (Session::get('testSuccessMessage'))
+                        <div class="notice marker-on-top bg-green fg-white">
+                            {{ Session::get('testSuccessMessage') }}
+                        </div>
+                    @elseif (Session::get('testErrorMessage'))
+                        <div class="notice marker-on-top bg-red fg-white">
+                            {{ Session::get('testErrorMessage') }}
+                        </div>
+                    @endif
                     @if(Auth::user()->isAdmin())
                         <h1>Hacer test a deportista</h1>
                         <p>Hola {{  Auth::user()->name  }}, si desea hacer el test de un atleta, introduzca el correo con el que este se registró en el sistema,
@@ -73,7 +82,7 @@
                                     <p class="description bg-grayLighter padding20">Por favor lea cada pregunta y responda de manera correcta.</p>
                                     <br>
                                     <br>
-                                    {{ Form::open(array('url' => 'sendTest')) }}            
+                                    {{ Form::open(array('url' => 'sendTest/' . $title)) }}            
                                         @foreach ($questions as $question)
                                             <div id="{{ 'question-container-' . $question['number'] }}">
                                                 <legend>{{ $question['number'] . '. ' . $question['description'] }}</legend>

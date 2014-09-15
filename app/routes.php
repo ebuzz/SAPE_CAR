@@ -35,7 +35,7 @@ Route::group(array('before' => 'auth'), function()
     
     Route::get('test/{testName}', 'TestController@showTest');
     Route::post('test/{testName}', 'TestController@doSearch');
-    Route::post("sendTest",'TestController@submitTest');
+    Route::post("sendTest/{testName}",'TestController@submitTest');
 
 	Route::get('userProfile', 'ProfileController@showProfile');
 	Route::post('changePassword', 'ProfileController@changePassword');
