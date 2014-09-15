@@ -22,11 +22,13 @@
                             Indicaciones
                         </div>
                         <div class="panel-content">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                            when an unknown printer took a galley of type and scrambled it to make a type 
-                            specimen book.
-                            <br>
+                            <ul>
+                                <li>Por favor, debe contestar cada pregunta para poder registrar el cuestionario.</li>
+                                <br>
+                                <li>Al terminar de contestar haga click en el botón enviar.</li>
+                                <br>
+                                <li>Aquí podrá ver su progreso mientras contesta el cuestionario.</li>
+                            </ul>         
                             <br>
                             <b id="progress-data">0/0</b>
                             <div id="progress-bar" class="progress-bar large"></div>
@@ -47,8 +49,11 @@
                     @endif
                     @if(Auth::user()->isAdmin())
                         <h1>Hacer test a deportista</h1>
-                        <p>Hola {{  Auth::user()->name  }}, si desea hacer el test de un atleta, introduzca el correo con el que este se registró en el sistema,
-                            si es la primera vez que se hará el test para este atleta puedes registrarlo {{ HTML::link('signup','aquí'); }}. </p>
+                        <p>
+                            Hola {{  Auth::user()->name  }}, si desea hacer el cuestionario de un deportista, 
+                            introduzca el correo electrónico con el que éste se registró en el sistema,
+                            si aún no se ha registrado el deportista puede hacerlo {{ HTML::link('signup','aquí'); }}. 
+                        </p>
                         <div class="example">                
                             <legend>Datos requeridos</legend>
                             @if (Session::get('message'))
@@ -61,7 +66,8 @@
                                     {{ Form::label('email','Correo') }}
                                     <div class="input-control text" data-role="input-control">
                                         <!-- '' o  Input::old('email') -->
-                                        {{ Form::email('email',Input::old('email'),array('placeholder' => 'ejemplo@ejemplo.com','autofocus'=>'autofocus','required'=>'required')) }}
+                                        {{ Form::email('email',Input::old('email'), 
+                                               array('placeholder' => 'ejemplo@ejemplo.com','autofocus'=>'autofocus','required'=>'required')) }}
                                     </div>
                                 </fieldset>
                                 {{ Form::submit('Buscar',array('class' => 'btn-clear')) }}

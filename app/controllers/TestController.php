@@ -1,11 +1,21 @@
 <?php
 
 class TestController extends BaseController
-{
-    
+{ 
     public function showTest($testName)
     {
+        $data = array('name' => $testName);
+        $rules = array('name' => 'exists:tests,name');
+
+        $validator = Validator::make($data, $rules);
+
+        $data['validator'] = "Bien";
         $data['title'] = $testName;
+
+        if($validator->fails())
+        {
+            return Redirect::to('/');
+        }
         
         if (!Auth::user()->isAdmin())
         {
