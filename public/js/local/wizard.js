@@ -83,7 +83,8 @@ $(document).ready(function()
                             {
                                 note.showSuccess(data.caption, data.content, function()
                                 {
-                                    window.location.href ="/";
+                                    
+                                    window.location = data.url;
                                 })
                             }
                         }

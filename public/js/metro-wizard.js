@@ -68,7 +68,7 @@
                 var group_right = $("<div/>").addClass("group-right").appendTo(actions);
 
                 if (o.buttons.cancel) {
-                    $("<button type='button'/>").addClass("btn-cancel").html("Cancelar"/*$.Metro.Locale[o.locale].buttons[2]*/).appendTo(group_left).on('click', function(){
+                    $("<button type='button'/>").addClass("btn-cancel").addClass("large danger").html("Cancelar"/*$.Metro.Locale[o.locale].buttons[2]*/).appendTo(group_left).on('click', function(){
                         o.onCancel(that._currentStep+1, element);
                     });
                 }
@@ -78,17 +78,17 @@
                     });
                 }
                 if (o.buttons.prior) {
-                    $("<button type='button'/>").addClass("btn-prior").html("Anterior"/*$.Metro.Locale[o.locale].buttons[4]*/).appendTo(group_right).on('click', function(){
+                    $("<button type='button'/>").addClass("btn-prior").addClass("large primary").html("Anterior"/*$.Metro.Locale[o.locale].buttons[4]*/).appendTo(group_right).on('click', function(){
                         if (o.onPrior(that._currentStep+1, element)) that.prior();
                     });
                 }
                 if (o.buttons.next) {
-                    $("<button type='button'/>").addClass("btn-next").html("Siguiente"/*$.Metro.Locale[o.locale].buttons[5]*/).appendTo(group_right).on('click', function(){
+                    $("<button type='button'/>").addClass("btn-next").addClass("large primary").html("Siguiente"/*$.Metro.Locale[o.locale].buttons[5]*/).appendTo(group_right).on('click', function(){
                         if (o.onNext(that._currentStep+1, element)) that.next();
                     });
                 }
                 if (o.buttons.finish) {
-                    $("<button type='button' disabled/>").addClass("btn-finish").html("Finalizar"/*$.Metro.Locale[o.locale].buttons[6]*/).appendTo(group_right).on('click', function(){
+                    $("<button type='button' disabled/>").addClass("btn-finish").addClass("large").html("Finalizar"/*$.Metro.Locale[o.locale].buttons[6]*/).appendTo(group_right).on('click', function(){
                         o.onFinish(that._currentStep+1, element);
                     });
                 }

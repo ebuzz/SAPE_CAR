@@ -243,6 +243,16 @@ class ProfileController extends BaseController
 
         $message['type'] = "success";
         $message['caption'] = "Exito!";
+
+        if (Auth::check())
+        {
+            $message['url'] = URL::to('/');
+        }
+        else
+        {
+            $message['url'] = URL::to('login');
+        }
+        
         $message['content'] = $user->name.", tus datos han sido actualizado exitosamente.";
 
         return $message;
