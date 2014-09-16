@@ -136,6 +136,62 @@ class SportsCitiesTableSeeder extends Seeder
             'idCity'  => '1'
         ));
         
+        // Tijuana - Tiro con arco
+        SportCity::create(array
+        (
+            'idSport' => '4',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Esgrima
+        SportCity::create(array
+        (
+            'idSport' => '5',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Canotaje
+        SportCity::create(array
+        (
+            'idSport' => '6',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Tiro Deportivo
+        SportCity::create(array
+        (
+            'idSport' => '7',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Bádminton
+        SportCity::create(array
+        (
+            'idSport' => '8',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Natación
+        SportCity::create(array
+        (
+            'idSport' => '9',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Tae Kwon Do
+        SportCity::create(array
+        (
+            'idSport' => '10',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Judo
+        SportCity::create(array
+        (
+            'idSport' => '11',
+            'idCity'  => '1'
+        ));
+        
         // Rosarito - Voleibol
         SportCity::create(array
         (
@@ -199,6 +255,41 @@ class SportsFieldsTableSeeder extends Seeder
         // Campos de Ciclismo
         SportField::create(array('name' => 'Escolaridad','idSport' => '3'));
         SportField::create(array('name' => 'Competencias o pruebas','idSport' => '3'));
+        SportField::create(array('name' => 'Categoría','idSport' => '3'));
+        
+        //Campos de Tiro con Arco
+        SportField::create(array('name' => 'Categoría','idSport' => '4'));
+        SportField::create(array('name' => 'Prueba','idSport' => '4'));
+
+        //Campos de Esgrima
+        SportField::create(array('name' => 'Categoría','idSport' => '5'));
+        SportField::create(array('name' => 'Prueba','idSport' => '5'));
+
+        //Campos de Canotaje
+        SportField::create(array('name' => 'Categoría','idSport' => '6'));
+        SportField::create(array('name' => 'Prueba','idSport' => '6'));
+        
+        // Campos de Tiro Deportivo
+        SportField::create(array('name' => 'Escolaridad','idSport' => '7'));
+        SportField::create(array('name' => 'Categoría','idSport' => '7'));
+        SportField::create(array('name' => 'Competencias o pruebas','idSport' => '7'));
+        
+        // Bádminton
+        SportField::create(array('name' => 'Escolaridad','idSport' => '8'));
+        SportField::create(array('name' => 'Categoría','idSport' => '8'));
+        SportField::create(array('name' => 'Competencias o pruebas','idSport' => '8'));
+        
+        // Campos de Natación
+        SportField::create(array('name' => 'Categorías','idSport' => '9'));
+        SportField::create(array('name' => 'Estilo principal','idSport' => '9'));
+        SportField::create(array('name' => 'Tipo de pruebas','idSport' => '9'));
+        
+        // Tae Kwon Do
+        SportField::create(array('name' => 'Modalidad','idSport' => '10'));
+        SportField::create(array('name' => 'Categoría','idSport' => '10'));
+        
+        // Judo
+        SportField::create(array('name' => 'Categoría','idSport' => '11'));
     }
 }
 
@@ -323,9 +414,9 @@ class FieldValuesTableSeeder extends Seeder
         FieldValue::create(array('idSportField' => '18', 'description' => 'Juvenil B'));
 
         // Tiro deportivo - Prueba
-        FieldValue::create(array('idSportField' => '19', 'description' => 'Tiro olimpico rifle match'));
-        FieldValue::create(array('idSportField' => '19', 'description' => 'Tiro olimpico pistola'));
-        FieldValue::create(array('idSportField' => '19', 'description' => 'Tiro olimpico rifle de quebrar'));
+        FieldValue::create(array('idSportField' => '19', 'description' => 'Tiro olímpico rifle match'));
+        FieldValue::create(array('idSportField' => '19', 'description' => 'Tiro olímpico pistola'));
+        FieldValue::create(array('idSportField' => '19', 'description' => 'Tiro olímpico rifle de quebrar'));
 
         // Badminton - Escolaridad
         FieldValue::create(array('idSportField' => '20', 'description' => 'Primaria'));
@@ -458,7 +549,7 @@ class UsersTableSeeder extends Seeder
             'firstSurname'  => 'Aguayo',
             'secondSurname' => 'Velazquez',
             'email'         => 'erick.aguayo@tectijuana.edu.mx',
-            'password'      => Hash::make('chingon'),
+            'password'      => Hash::make('demostracion'),
             'birthday'      => '2003-12-31',
             'idGender'      => '1',
             'idUserType'    => '2',
@@ -671,8 +762,8 @@ class IPRDSeeder extends Seeder
 		$controlAfrontamientoPositivo = '6';
 		$controlAutoestima            = '7';
         
-        $grupoNormal  = '1';
-        $grupoInverso = '2';
+        $grupoNormal  = '2';
+        $grupoInverso = '1';
         
         Question::create(array
         (

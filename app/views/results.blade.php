@@ -68,7 +68,7 @@
                                     <div class="tab-group-content">
                                         {{ Form::label('gender','Genero') }}
 								        <div  class="input-control select">
-								            {{ Form::select('',array('1' => 'Hombre', '2' => 'Mujer'),  '', 
+								            {{ Form::select('', array('-1' => 'Sin especificar', '1' => 'Hombre', '2' => 'Mujer'),  '', 
 								                array('id' => 'gender', 'class' => 'input-control select')) }}
 								        </div>
                                     </div>
@@ -112,26 +112,8 @@
 			                <th>Autoestima</th>
 			            </tr>
 			        </thead>
-			 
-			        <tfoot>
-			            <tr>
-			                <th>Nombre</th>
-			                <th>Apellido Paterno</th>
-			                <th>Apellido Materno</th>
-			                <th>Genero</th>
-			                <th>Fecha de Nacimiento</th>
-			                <th>Autoconfianza</th>
-			                <th>Afrontamiento Negativo</th>
-			                <th>Atencional</th>
-			                <th>Visual Imaginativo</th>
-			                <th>Nivel Motivacion</th>
-			                <th>Afrontamiento Positivo</th>
-			                <th>Autoestima</th>
-			            </tr>
-			        </tfoot>
 			    </table>
             </div>
-            <button id="button"> Click</button>
 		</div>
 	</div>
 	<script>
@@ -155,51 +137,54 @@
 			        position: "bottom", // top or bottom,
 			        locale: 'es', // 'ru' or 'en', default is $.Metro.currentLocale
 			    });
+        
+        // Opción de "Sin especificar" a Deporte
+        var sportSelect = $("#sport");
+        sportSelect.prepend(new Option("Sin especificar", -1));
+        $(sportSelect).val(-1);
 		
-
-    	$("#search").click(function(event) {
-    		
+    	$("#search").click(function(event) 
+        {
     		var filter = {};
 
-
-    		filter.test = $("#test").val();
-    		filter.fechainicial = $("#fechaInicial").val();
-    		filter.fechafinal = $("#fechaFinal").val();
-    		filter.deporte = $("#sport").val();
-    		filter.genero = $("#gender").val();
-		
+    		filter.testName = $("#test").val();
+    		filter.startDate = $("#fechaInicial").val();
+    		filter.endDate = $("#fechaFinal").val();
+    		filter.sport = $("#sport").val();
+    		filter.gender = $("#gender").val();
 
 			$.post('results/getResults', filter, function(data)
 	            {
 	            	var test = {};
+                    var table;
 
-	            	test.data = JSON.parse(data)
+	            	test.data = JSON.parse(data);
 
-	            	if ( $.fn.dataTable.isDataTable( '#table' ) ) {
-					    table = $('#example').DataTable();
+	            	if  ($.fn.dataTable.isDataTable('#table'))  
+                    {
+					    table = $('#table').DataTable();
+                        table.destroy();
 					}
-					else
-					{
-						var table = $('#table').dataTable( {
-		            		"dom": 'T<"clear">lfrtip',
-					        "data": test.data,
-					        "scrollX": true,
-					        "columns": [
-					            { "data": "name" },
-					            { "data": "firstSurname" },
-					            { "data": "secondSurname" },
-					            { "data": "genero" },
-					            { "data": "birthday", "class": "center" },
-					            { "data": "aconfianza", "class": "center" },
-					            { "data": "anegativo", "class": "center" },
-					            { "data": "atencional", "class": "center" },
-					            { "data": "vimaginativo", "class": "center" },
-					            { "data": "nmotivacion", "class": "center" },
-					            { "data": "apositivo", "class": "center" },
-					            { "data": "autestima", "class": "center"}
-					        ]
-					    } );
-					}
+
+                    table = $('#table').dataTable( {
+                        "dom": 'T<"clear">lfrtip',
+                        "data": test.data,
+                        "scrollX": true,
+                        "columns": [
+                            { "data": "name" },
+                            { "data": "firstSurname" },
+                            { "data": "secondSurname" },
+                            { "data": "genero" },
+                            { "data": "birthday", "class": "center" },
+                            { "data": "Auto Confianza", "class": "center" },
+                            { "data": "Control Afrontamiento Negativo", "class": "center" },
+                            { "data": "Control Atencional", "class": "center" },
+                            { "data": "Control Visual Imaginativo", "class": "center" },
+                            { "data": "Nivel Motivación", "class": "center" },
+                            { "data": "Control Afrontamiento Positivo", "class": "center" },
+                            { "data": "Control Autoestima", "class": "center"}
+                        ]
+                    } );
 
 				    $('#table tbody').on('click', 'tr', function () {
 				        var name = $('td', this).eq(0).text();
@@ -207,8 +192,6 @@
 				    } );
 	            }
 	            );
-
-
 	    	});
 	});
 		

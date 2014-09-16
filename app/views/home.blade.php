@@ -112,7 +112,7 @@
                     </div>
                     <div class="span3 padding10">
                         <h3 class="fg-white">Acerca de los desarrolladores</h3>
-                        <p class="fg-white">¡Hola! Somos un grupo de jovenes estudiantes que aman la tecnologia.</p>
+                        <p class="fg-white">¡Hola! Somos un grupo de jóvenes estudiantes que aman la tecnología.</p>
                     </div>
                     <div class="span3 padding10">
                         <div class="button danger " style="width: 100%; margin-bottom: 5px" href="#">Erick Aguayo Velázquez</div>

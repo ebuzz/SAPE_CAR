@@ -70,7 +70,7 @@
                                                array('placeholder' => 'ejemplo@ejemplo.com','autofocus'=>'autofocus','required'=>'required')) }}
                                     </div>
                                 </fieldset>
-                                {{ Form::submit('Buscar',array('class' => 'btn-clear')) }}
+                            <button class="button primary large"><i class="icon-search on-left"></i>Buscar</button>
                             {{ Form::close() }}
                         </div>
                     @endif
