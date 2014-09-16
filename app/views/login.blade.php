@@ -51,7 +51,7 @@
                                     </div>
                                     -->
                                 </br>
-                                	{{ Form::submit('Enviar',array('class' => 'btn-clear')) }}
+                                	{{ Form::submit('Enviar',array('class' => 'btn-clear primary large')) }}
                                     
                                     </fieldset>
                             {{ Form::close() }}
