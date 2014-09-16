@@ -72,7 +72,16 @@ App::error(function(Illuminate\Database\QueryException $exception, $code)
 
 App::down(function()
 {
-	return Response::make("Be right back!", 503);
+	return Response::view('errors', array('title'=> "Sitio en mantenimiento",
+					'message' => 'Este sitio esta en mantenimiento :)',
+					 'image_url' => 'http://images.clipartpanda.com/mickey-mouse-clip-art-MICKEYD-600x600.jpg', 'type' => '503'), 503);;
+});
+
+App::missing(function($exception)
+{
+    return Response::view('errors', array('title'=> "Pagina no encontrada",
+    				 'message' => 'No logramos encontrar la pagina que estabas buscando :(',
+    				  'image_url' => 'http://blogs.20minutos.es/london-bloggin-2012/files/2012/08/mulleraok.jpg', 'type' => '404'), 404);
 });
 
 /*

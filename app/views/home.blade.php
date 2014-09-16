@@ -34,14 +34,15 @@
                 <div class="row">
                     <div class="span4 bg-amber padding20 text-center">
                         <h2 class="fg-white">Instituto Tecnológico de Tijuana</h2>
-                        <img src="./img/itt1.jpg" alt="Insituto Tecnologico de Tijuana"  width="220" height="220">
+                        <img src="./img/itt1.jpg" alt="Insituto Tecnologico de Tijuana">
                     </div>
                     <div class="span4 bg-darkBlue padding20 text-center">
                         <h2 class="fg-white">Centro de Alto Rendimiento</h2>
                         <img src="./img/CAR.jpg" alt="CAR"  width="220" height="220">
                     </div>
                     <div class="span4 bg-green padding20 text-center">
-                        <h2 class="fg-white">El Team</h2>
+                        <h2 class="fg-white">Instituto Tecnológico de Tijuana</h2>
+                        <img src="./img/itt1.jpg" alt="Insituto Tecnologico de Tijuana" >
                     </div>
                 </div>
             </div>
@@ -107,7 +108,7 @@
             <div class="grid no-margin">
                 <div class="row no-margin">
                     <div class="span3 padding10">
-                        <img src="http://cdn01.cdn.justjared.com/wp-content/uploads/headlines/2013/07/avengers-2-titled-age-of-ultron-title-art-revealed.jpg" alt="" class="polaroid">
+                        <img src="http://alechequer.files.wordpress.com/2012/02/logo-itt-20051.png" alt="" class="polaroid">
                     </div>
                     <div class="span3 padding10">
                         <h3 class="fg-white">Acerca de los desarrolladores</h3>
@@ -123,7 +124,7 @@
                     </div>
                     <div class="span3 padding10">
                         <h3 class="fg-white">Personas que contribuyeron a este proyecto</h3>
-                        <p class="fg-white">Con su apoyo y conocimiento en el campo lograron establecer bla bla.</p>
+                        <p class="fg-white">Con su apoyo y conocimiento en el campo hicieron este sistema posible.</p>
                     </div>
                     <div class="span2 padding10">
                         <a class="button danger " style="width: 100%; margin-bottom: 5px" href="#">Dr. Arnulfo Alanis Garza </a>
