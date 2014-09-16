@@ -10,7 +10,7 @@
     <div class="content">
             
         <!-- Encabezado -->
-        <div style="background: url(https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xfa1/t1.0-9/10568883_10202755992957689_8379187208994330924_n.jpg) top left no-repeat; background-size: cover; height: 300px;">
+        <div style="background: url(./img/imagen_lp_car.jpg) top left no-repeat; background-size: cover; height: 300px;">
             <div class="container" style="padding: 50px 20px">
                 <h1 class="fg-white">Sistema de evaluación psicológica de atletas</h1>
                 <h2 class="fg-white">
@@ -65,7 +65,7 @@
 
                 <div class="slide" style="left: 0px; display: block;">
                     <div class="place-right padding20 ntp nrp nbp">
-                        <img src="http://www.phpconference.co.nz/wp-content/themes/phpnz/ViewPoint/images/laravel.png" alt="" class="span3" width="220" height="220">
+                        <img src="./img/laravel.png" alt="" class="span3" width="220" height="220">
                     </div>
                     <h2 class="fg-white ntm">Desarrollado con las Últimas Tecnologias Web</h2>
                     <p class="fg-white">Con una atractiva e intuitiva interfaz se maximiza la experiencia de usuario.</p>
@@ -75,7 +75,7 @@
 
                 <div class="slide" style="left: 0px; display: none;">
                     <div class="place-right">
-                        <img src="http://img.vitonica.com/thumbnails/11209_200.jpg" alt="" class="span3" width="220" height="220">
+                        <img src="./img/nadador.jpg" alt="" class="span3" width="220" height="220">
                     </div>
                     <h2 class="fg-white ntm">Test Psicológicos Estandarizados</h2>
                     <p class="fg-white">Permite obtener un perfil de los diferentes aspectos mentales de los atletas.</p>
@@ -115,25 +115,25 @@
                         <p class="fg-white">¡Hola! Somos un grupo de jovenes estudiantes que aman la tecnologia.</p>
                     </div>
                     <div class="span3 padding10">
-                        <a class="button danger " style="width: 100%; margin-bottom: 5px" href="#">Erick Aguayo Velázquez</a>
-                        <a class="button purple " style="width: 100%; margin-bottom: 5px;" href="#">Alfredo Alvarez Hernández</a>
-                        <a class="button success " style="width: 100%; margin-bottom: 5px" href="#">Carlos Melo Camarillo</a>
-                        <a class="button info " style="width: 100%; margin-bottom: 5px" href="#">Samuel Macedo Vidrio</a>
+                        <div class="button danger " style="width: 100%; margin-bottom: 5px" href="#">Erick Aguayo Velázquez</div>
+                        <div class="button purple " style="width: 100%; margin-bottom: 5px;" href="#">Alfredo Alvarez Hernández</div>
+                        <div class="button success " style="width: 100%; margin-bottom: 5px" href="#">Carlos Melo Camarillo</div>
+                        <div class="button info " style="width: 100%; margin-bottom: 5px" href="#">Samuel Macedo Vidrio</div>
                         
-                        <a class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Pedro Saavedra Solís</a>
+                        <div class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Pedro Saavedra Solís</div>
                     </div>
                     <div class="span3 padding10">
                         <h3 class="fg-white">Personas que contribuyeron a este proyecto</h3>
                         <p class="fg-white">Con su apoyo y conocimiento en el campo hicieron este sistema posible.</p>
                     </div>
                     <div class="span2 padding10">
-                        <a class="button danger " style="width: 100%; margin-bottom: 5px" href="#">Dr. Arnulfo Alanis Garza </a>
-                        <a class="button success " style="width: 100%; margin-bottom: 5px" href="#">Dr. Miguel Ángel Lopez</a>
-                        <a class="button info " style="width: 100%; margin-bottom: 5px" href="#">Dr. Bogart Yail Máquez Lobato</a>
-                        <a class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Dra. Natalia Gilvaja Martinez </a>
-                        <a class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Psic. Alejandra Ávila Flores</a>
-                        <a class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Psic. Adam J. Flores Barba </a>
-                        <a class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Psic. René García Aréizaga</a>
+                        <div class="button danger " style="width: 100%; margin-bottom: 5px">Dr. Arnulfo Alanis Garza </div>
+                        <div class="button success " style="width: 100%; margin-bottom: 5px" href="#">Dr. Miguel Ángel Lopez</div>
+                        <div class="button info " style="width: 100%; margin-bottom: 5px" href="#">Dr. Bogart Yail Máquez Lobato</div>
+                        <div class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Dra. Valdez Chapotin</div>
+                        <div class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Psic. Alejandra Ávila Flores</div>
+                        <div class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Psic. Adam J. Flores Barba </div>
+                        <div class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Psic. René García Aréizaga</div>
                     </div>
                 </div>
             </div>
