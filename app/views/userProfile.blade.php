@@ -159,7 +159,7 @@
                 {
                 	if(data == 23000)
                 	{
-                		note.showAlert("Atención", "Ese correo electronico no esta disponible, por favor selecciona otro")
+                		note.showAlert("Atención", "Ese correo electrónico no está disponible, por favor selecciona otro")
                 	}
                 	else
                 	{

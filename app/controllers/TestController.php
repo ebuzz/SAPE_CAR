@@ -1,11 +1,21 @@
 <?php
 
 class TestController extends BaseController
-{
-    
+{ 
     public function showTest($testName)
     {
+        $data = array('name' => $testName);
+        $rules = array('name' => 'exists:tests,name');
+
+        $validator = Validator::make($data, $rules);
+
+        $data['validator'] = "Bien";
         $data['title'] = $testName;
+
+        if($validator->fails())
+        {
+            return Redirect::to('/');
+        }
         
         if (!Auth::user()->isAdmin())
         {
@@ -90,29 +100,57 @@ class TestController extends BaseController
         return $questions;
     }
 
-    public function submitTest()
+    public function submitTest($testName)
     {
-        //si se busca como psicologo un mail, no carga el arreglo questions
-        $userAnsweredTest = new UserAnsweredTest;
+        $test = Test::where("name", "=", $testName)->first();
+        $user = null;
         
-        if($_POST['_email'] == "")
+        if (Session::has('athleteEmail'))
         {
-            $userAnsweredTest->idUser = Auth::user()->idUser;
-            $userAnsweredTest->idTest = 1;
-            $userAnsweredTest->idProfileAtMoment = Auth::user()->lastProfile;
-            //$userAnsweredTest->save();
-            return "exito";
+            $email = Session::get('athleteEmail');
+            Session::forget('athleteEmail');
+            
+            $user = User::where("email", "=", $email)->first();
         }
         else
         {
-            $user = User::where("email","=",$_POST['_email'])->first();
-            if ($user != null)
+            $user = Auth::user();
+        }
+        
+        if ($user != null && $test != null)
+        {
+            $userAnsweredTest = new UserAnsweredTest;
+            $userAnsweredTest->idUser = $user->idUser;
+            $userAnsweredTest->idTest = $test->idTest;
+            $userAnsweredTest->idProfileAtMoment = $user->idLastProfile;
+            $userAnsweredTest->save();
+            
+            $questions = $test->questions->sortBy("number");
+            
+            // Respuestas
+            foreach(Input::except('_token') as $input => $answer)
             {
-                $userAnsweredTest->idUser = user()->idUser;
-                $userAnsweredTest->idTest = 1;
-                $userAnsweredTest->idProfileAtMoment = user()->lastProfile;
-                $userAnsweredTest->save();
+                $splited = explode("-", $input);
+                $questionNumber = end($splited);
+                
+//                echo $questionNumber;
+                
+                $question = $questions->filter(function($value) use($questionNumber)
+                {
+                    return $value->number == $questionNumber;
+                })->first();
+                
+                $userAnswer = new UserAnswer;
+                $userAnswer->idQuestion = $question->idQuestion;
+                $userAnswer->idTestAnswer = $answer;
+                $userAnsweredTest->userAnswers()->save($userAnswer);
             }
+
+            return Redirect::to('test/'. $testName)->with(array('testSuccessMessage' => 'Gracias, el cuestionario se ha registrado exitosamente!'));
+        }
+        else
+        {
+            return Redirect::to('test/'. $testName)->with(array('testErrorMessage' => 'Lo sentimos, ha ocurrido un error al registrar el cuestionario.'));
         }
     }
 }

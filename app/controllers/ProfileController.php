@@ -128,14 +128,18 @@ class ProfileController extends BaseController
         /*--------Input------------*/
         $validaciones = array(
                         'name' => array(
-                            'alpha',
+                            "regex: /^([a-zA-Z ñáéíóú]{2,30})$/",
                             'required'),
                         'firstSurname' => array(
-                            'alpha',
+                            "regex: /^([a-zA-Z ñáéíóú]{2,30})$/",
                             'required'
                             ),
+                        'secondSurname' => array(
+                            "regex: /^([a-zA-Z ñáéíóú]{2,30})$/"
+                            ),
                         'email' => array(
-                            'email'
+                            'email', 
+                            'required'
                             )
                     );
 

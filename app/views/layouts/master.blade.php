@@ -59,7 +59,6 @@
                         <!--<span class="element-divider"></span>
                         <!<a class="element" href="#"><span class="icon-help"></span> Documentación</a> -->
                         <span class="element-divider"></span>
-                        <a class="element" href="credits"><span class="icon-yelp"></span> Créditos</a>
                         <div class="element place-right">
                             <a class="dropdown-toggle" href="#">
                                 <span class="icon-cog"></span>
@@ -71,9 +70,9 @@
                             </ul>
                         
                         </div>
-                        <button class="element image-button image-left place-right">
+                        <li class="element  place-right">
                                 {{  Auth::user()->name . " " . Auth::user()->firstSurname }}
-                        </button>
+                        </li>
         @endif
                     </ul>
                 </div>
