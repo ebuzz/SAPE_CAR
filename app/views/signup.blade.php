@@ -14,7 +14,7 @@
 
 <div class="container" >
         <h1>
-            <a href="/"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+            <a href=""><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
             Registrarse
         </h1>
 
@@ -52,11 +52,11 @@
                                 {{ Form::text('secondSurname', '', array('id' => 'secondSurname')) }}
                             </div>
                             {{ Form::label('birthday','Fecha de Nacimiento') }}
-                            <div class="input-control text" data-role="datepicker" data-format="yyyy-mm-dd">
+                            <div class="input-control text" data-role="datepicker" data-date='2003-01-01' data-format="yyyy-mm-dd">
                                 {{ Form::text('birthday', '', array('id' => 'birthday'))}}
-                                <!--button class="btn-date"></button-->
+                                <button class="btn-date"></button>
                             </div>
-                            {{ Form::label('gender','Genero') }}
+                            {{ Form::label('gender','Género') }}
                             <div  class="input-control select">
                                 {{ Form::select('', array('1' => 'Hombre', '2' => 'Mujer'), '', 
                                     array('id' => 'gender', 'class' => 'input-control select')) }}

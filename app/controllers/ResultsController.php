@@ -22,7 +22,7 @@ class ResultsController extends BaseController
 		$users = User::all();
 		$users->load('gender');
 		
-		for ($i=0; $i < count($users); $i++) { 
+		for ($i=0; $i < count($users)-1; $i++) { 
 			
 			$temp['name'] = $users[$i]['name'];
 			$temp['firstSurname'] = $users[$i]['firstSurname'];
