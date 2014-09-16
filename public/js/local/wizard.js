@@ -1,5 +1,6 @@
 $(document).ready(function()
 {
+    var note = new Notifier();
 	$('#wizard').wizard({
                 locale: 'es',
                 onCancel: function(){
@@ -55,27 +56,44 @@ $(document).ready(function()
                         }
                     });
                     
-                    $.post('register', data, function(data, status)
+                    $.post('saveUserProfile/-1', data, function(data, status)
+                    {
+                        if(data == 23000)
+                        {
+                            note.showAlert("Atención", "Ese correo electronico no esta disponible, por favor selecciona otro")
+                        }
+                        else
+                        {
+                            if(data.type == "error")
                             {
-                                if(data == "23000")
+                                note.showError(data.caption, data.content);
+                            }
+                            else if (data.type == "alert")
+                            {
+                                note.showAlert(data.caption, data.content);
+                            }
+                            else if(data.type == "validation")
+                            {
+                                $.each(data.content, function(index, val) {
+                                     /* iterate through array or object */
+                                     note.showError(data.caption, val);
+                                });
+                            }
+                            else
+                            {
+                                note.showSuccess(data.caption, data.content, function()
                                 {
-                                    var notify = new Notifier();
+                                    window.location.href ="/";
+                                })
+                            }
+                        }
 
-                                    notify.showError("Este correo ya esta registrado.", " Porfavor selecciona otro.");
-
-                                }
-                                else
-                                {
-                                    //show success message and reload after a set timer.
-                                    window.location.href = "/";
-                                }
-                            });
+                    });
                 }
             });
 
             function validatePage(page)
             {
-                var notify = new Notifier();
                 var error = false;
                 var message ="";
 
@@ -139,7 +157,7 @@ $(document).ready(function()
                         caption: "Error!",
                         content: message
                         });*/
-                    notify.showError("Error!", message);
+                    note.showError("Error!", message);
 
                 }
 

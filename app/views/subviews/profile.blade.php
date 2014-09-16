@@ -1,15 +1,15 @@
-<div class="example">
+<div id="profile" class="example">
     <fieldset>
-        <legend>Mi perfil</legend>
-        <!-- Rol-->
-        <label for="roleDiv">Rol</label>
-        <div id="roleDiv" class="input-control select">
-            {{ Form::select('', $roles, $profile->idRole, 
-                            array('id' => 'role', 'class' => 'input-control select')) }}
-        </div>
-        <br>
-        <br>
-        <br>
+        @if (Auth::user() == $user)
+            <legend>Mi perfil</legend>
+        @else
+            <legend>Perfil de {{ $user->name . ' ' . $user->firstSurname }}</legend>
+        @endif
+        <p class="description bg-grayLighter padding20">
+            Por favor antes de comenzar a contestar el cuestionario 
+            verifique que los datos de su perfil se encuentren actualizados y,
+            en caso de requerir algún cambio, hacerlo.
+        </p>
         <!-- Estado -->
         <label for="stateDiv">Estado</label>
         <div id="stateDiv" class="input-control select">
@@ -46,5 +46,6 @@
         <br>
         <button id="continue" class="button info large"><i class="icon-pencil on-left"></i>No hacer cambios y continuar</button>
         <button id="save" class="button success large"><i class="icon-checkmark on-left"></i>Guardar cambios</button>
+        <button id="cancel" class="button danger large"><i class="icon-cancel-2 on-left"></i>Descartar cambios</button>
     </fieldset>
 </div>

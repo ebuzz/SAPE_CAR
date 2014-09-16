@@ -9,3 +9,4 @@ class HomeController extends BaseController
         return View::make('home', $data);
 	}
 }
+?>

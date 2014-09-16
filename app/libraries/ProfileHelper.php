@@ -33,7 +33,14 @@ class ProfileHelper
         $roles  = Role::all()->lists('description', 'idRole');
         $states = State::all()->lists('description', 'idState'); 
         $cities = $profile->city->state->cities->lists('description', 'idCity');
-        $sports = $profile->city->sports->lists('description', 'idSport');
+        $sports = $profile->city->sports->filter(function($sport)
+        {
+            return $sport->description != "Otro";
+        });
+        
+        $sports->add(Sport::where("description", "=", "Otro")->first());
+        $sports = $sports->lists('description', 'idSport');
+        
         $fields = array();
         
         foreach($profile->profileValues as $profileValue)

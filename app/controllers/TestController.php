@@ -1,33 +1,66 @@
 <?php
 
 class TestController extends BaseController
-{
+{ 
     public function showTest($testName)
     {
-        $data = ProfileHelper::getUserLastProfileData(Auth::user());
+        $data = array('name' => $testName);
+        $rules = array('name' => 'exists:tests,name');
+
+        $validator = Validator::make($data, $rules);
+
+        $data['validator'] = "Bien";
         $data['title'] = $testName;
-        $data['questions'] = $this->getQuestions($testName);
-        $data['email'] = "";
+
+        if($validator->fails())
+        {
+            return Redirect::to('/');
+        }
+        
+        if (!Auth::user()->isAdmin())
+        {
+            $data['profileData'] = ProfileHelper::getUserLastProfileData(Auth::user());
+            $data['profileData']['user'] = Auth::user();
+            $data['questions'] = $this->getQuestions($testName);
+        }
+        
+        if (Session::has('athleteEmail'))
+        {
+            Session::forget('athleteEmail');
+        }
         
         return View::make('test', $data);
     }
 
     public function doSearch($testName)
     {
-    	$userEmail = array('email' 	=> Input::get('email'));
-    	$user = User::where("email","=",$userEmail)->first();
+    	$userEmail = Input::get('email');
+    	$user = User::where("email", "=", $userEmail)->first();
 
         if($user != null)
         {
-        	$data = ProfileHelper::getUserLastProfileData($user);
-        	$data['title'] = $testName;
+            if (!$user->isAdmin())
+            {
+                $data['title'] = $testName;
+                Session::put('athleteEmail', $user->email);
 
-        	$data['email'] = Hash::make($user["email"]);
-        	return View::make('test', $data);
+                $data['profileData'] = ProfileHelper::getUserLastProfileData($user);
+                $data['profileData']['user'] = $user;
+                $data['questions'] = $this->getQuestions($testName);
+
+                return View::make('test', $data);
+            }
+            else
+            {
+                $data['title'] = $testName;
+            
+        	   return Redirect::to('test/'. $testName)->with(array('message' => 'Debes de ingresar el correo de un deportista.'));
+            }
         }
         else
         {	
             $data['title'] = $testName;
+            
         	return Redirect::to('test/'. $testName)->with(array('message' => 'El correo que ingresó no existe.'));
         }
     }
@@ -67,30 +100,57 @@ class TestController extends BaseController
         return $questions;
     }
 
-    public function submitTest()
+    public function submitTest($testName)
     {
-        //si se busca como psicologo un mail, no carga el arreglo questions
-        $userAnsweredTest = new UserAnsweredTest;
-        if($_POST['_email'] == "")
+        $test = Test::where("name", "=", $testName)->first();
+        $user = null;
+        
+        if (Session::has('athleteEmail'))
         {
-            $userAnsweredTest->idUser = Auth::user()->idUser;
-            $userAnsweredTest->idTest = 1;
-            $userAnsweredTest->idProfileAtMoment = Auth::user()->lastProfile;
-            //$userAnsweredTest->save();
-            return "exito";
+            $email = Session::get('athleteEmail');
+            Session::forget('athleteEmail');
+            
+            $user = User::where("email", "=", $email)->first();
         }
         else
         {
-            $user = User::where("email","=",$_POST['_email'])->first();
-            if ($user != null)
-            {
-                $userAnsweredTest->idUser = user()->idUser;
-                $userAnsweredTest->idTest = 1;
-                $userAnsweredTest->idProfileAtMoment = user()->lastProfile;
-                $userAnsweredTest->save();
-            }
+            $user = Auth::user();
         }
+        
+        if ($user != null && $test != null)
+        {
+            $userAnsweredTest = new UserAnsweredTest;
+            $userAnsweredTest->idUser = $user->idUser;
+            $userAnsweredTest->idTest = $test->idTest;
+            $userAnsweredTest->idProfileAtMoment = $user->idLastProfile;
+            $userAnsweredTest->save();
+            
+            $questions = $test->questions->sortBy("number");
+            
+            // Respuestas
+            foreach(Input::except('_token') as $input => $answer)
+            {
+                $splited = explode("-", $input);
+                $questionNumber = end($splited);
+                
+//                echo $questionNumber;
+                
+                $question = $questions->filter(function($value) use($questionNumber)
+                {
+                    return $value->number == $questionNumber;
+                })->first();
+                
+                $userAnswer = new UserAnswer;
+                $userAnswer->idQuestion = $question->idQuestion;
+                $userAnswer->idTestAnswer = $answer;
+                $userAnsweredTest->userAnswers()->save($userAnswer);
+            }
 
+            return Redirect::to('test/'. $testName)->with(array('testSuccessMessage' => 'Gracias, el cuestionario se ha registrado exitosamente!'));
+        }
+        else
+        {
+            return Redirect::to('test/'. $testName)->with(array('testErrorMessage' => 'Lo sentimos, ha ocurrido un error al registrar el cuestionario.'));
+        }
     }
-  
 }
