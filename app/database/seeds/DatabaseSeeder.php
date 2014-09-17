@@ -93,10 +93,18 @@ class SportsTableSeeder extends Seeder
     public function run()
     {
         DB::table('sports')->delete();
-
+        
         Sport::create(array('description' => 'Voleibol'));
         Sport::create(array('description' => 'Clavados'));
         Sport::create(array('description' => 'Ciclismo'));
+        Sport::create(array('description' => 'Tiro con arco'));
+        Sport::create(array('description' => 'Esgrima'));
+        Sport::create(array('description' => 'Canotaje'));
+        Sport::create(array('description' => 'Tiro deportivo'));
+        Sport::create(array('description' => 'Bádminton'));
+        Sport::create(array('description' => 'Natación'));
+        Sport::create(array('description' => 'Tae Kwon Do'));
+        Sport::create(array('description' => 'Judo'));
         Sport::create(array('description' => 'Otro'));
     }
 }
@@ -125,6 +133,62 @@ class SportsCitiesTableSeeder extends Seeder
         SportCity::create(array
         (
             'idSport' => '3',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Tiro con arco
+        SportCity::create(array
+        (
+            'idSport' => '4',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Esgrima
+        SportCity::create(array
+        (
+            'idSport' => '5',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Canotaje
+        SportCity::create(array
+        (
+            'idSport' => '6',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Tiro Deportivo
+        SportCity::create(array
+        (
+            'idSport' => '7',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Bádminton
+        SportCity::create(array
+        (
+            'idSport' => '8',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Natación
+        SportCity::create(array
+        (
+            'idSport' => '9',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Tae Kwon Do
+        SportCity::create(array
+        (
+            'idSport' => '10',
+            'idCity'  => '1'
+        ));
+        
+        // Tijuana - Judo
+        SportCity::create(array
+        (
+            'idSport' => '11',
             'idCity'  => '1'
         ));
         
@@ -191,6 +255,41 @@ class SportsFieldsTableSeeder extends Seeder
         // Campos de Ciclismo
         SportField::create(array('name' => 'Escolaridad','idSport' => '3'));
         SportField::create(array('name' => 'Competencias o pruebas','idSport' => '3'));
+        SportField::create(array('name' => 'Categoría','idSport' => '3'));
+        
+        //Campos de Tiro con Arco
+        SportField::create(array('name' => 'Categoría','idSport' => '4'));
+        SportField::create(array('name' => 'Prueba','idSport' => '4'));
+
+        //Campos de Esgrima
+        SportField::create(array('name' => 'Categoría','idSport' => '5'));
+        SportField::create(array('name' => 'Prueba','idSport' => '5'));
+
+        //Campos de Canotaje
+        SportField::create(array('name' => 'Categoría','idSport' => '6'));
+        SportField::create(array('name' => 'Prueba','idSport' => '6'));
+        
+        // Campos de Tiro Deportivo
+        SportField::create(array('name' => 'Escolaridad','idSport' => '7'));
+        SportField::create(array('name' => 'Categoría','idSport' => '7'));
+        SportField::create(array('name' => 'Competencias o pruebas','idSport' => '7'));
+        
+        // Bádminton
+        SportField::create(array('name' => 'Escolaridad','idSport' => '8'));
+        SportField::create(array('name' => 'Categoría','idSport' => '8'));
+        SportField::create(array('name' => 'Competencias o pruebas','idSport' => '8'));
+        
+        // Campos de Natación
+        SportField::create(array('name' => 'Categorías','idSport' => '9'));
+        SportField::create(array('name' => 'Estilo principal','idSport' => '9'));
+        SportField::create(array('name' => 'Tipo de pruebas','idSport' => '9'));
+        
+        // Tae Kwon Do
+        SportField::create(array('name' => 'Modalidad','idSport' => '10'));
+        SportField::create(array('name' => 'Categoría','idSport' => '10'));
+        
+        // Judo
+        SportField::create(array('name' => 'Categoría','idSport' => '11'));
     }
 }
 
@@ -224,16 +323,16 @@ class FieldValuesTableSeeder extends Seeder
         FieldValue::create(array('idSportField' => '4', 'description' => 'Cuatro'));
         
         
-        // Valores de Natación - Rama
+        // Valores de Clavados - Rama
         FieldValue::create(array('idSportField' => '5', 'description' => 'Femenil'));
         FieldValue::create(array('idSportField' => '5', 'description' => 'Varonil'));
         
-        // Valores de Natación - Escolaridad
+        // Valores de Clavados - Escolaridad
         FieldValue::create(array('idSportField' => '6', 'description' => 'Primaria'));
         FieldValue::create(array('idSportField' => '6', 'description' => 'Secundaria'));
         FieldValue::create(array('idSportField' => '6', 'description' => 'Preparatoria'));
         
-        // Valores de Natación - Categoría
+        // Valores de Clavados - Categoría
         FieldValue::create(array('idSportField' => '7', 'description' => 'Grupo D (9-11)'));
         FieldValue::create(array('idSportField' => '7', 'description' => 'Grupo C (12-13)'));
         FieldValue::create(array('idSportField' => '7', 'description' => 'Grupo B (14-15)'));
@@ -262,6 +361,116 @@ class FieldValuesTableSeeder extends Seeder
             FieldValue::create(array('idSportField' => '9', 'description' => 'Ómnium'));
             FieldValue::create(array('idSportField' => '9', 'description' => 'Eliminación'));
             FieldValue::create(array('idSportField' => '9', 'description' => 'Madison'));
+
+        // Valores Ciclismo - Categoria
+        FieldValue::create(array('idSportField' => '10', 'description' => 'Juvenil A'));
+        FieldValue::create(array('idSportField' => '10', 'description' => 'Juvenil B'));
+        FieldValue::create(array('idSportField' => '10', 'description' => 'Juvenil C'));
+        FieldValue::create(array('idSportField' => '10', 'description' => 'Juvenil superior'));
+        
+        // Valores de Tiro con Arco - Categoria
+        FieldValue::create(array('idSportField' => '11', 'description' => 'Infantil'));
+        FieldValue::create(array('idSportField' => '11', 'description' => 'Juvenil menor A'));
+        FieldValue::create(array('idSportField' => '11', 'description' => 'Juvenil menor B'));
+        FieldValue::create(array('idSportField' => '11', 'description' => 'Juvenil superior'));
+        FieldValue::create(array('idSportField' => '11', 'description' => 'Juvenil Mayor'));
+
+        // Valores de Tiro con Arco - Prueba
+        FieldValue::create(array('idSportField' => '12', 'description' => 'Recurvo'));
+        FieldValue::create(array('idSportField' => '12', 'description' => 'Compuesto'));
+
+        // Valores de Esgrima - Categoria
+        FieldValue::create(array('idSportField' => '13', 'description' => 'Infantil'));
+        FieldValue::create(array('idSportField' => '13', 'description' => 'Cadete menor'));
+        FieldValue::create(array('idSportField' => '13', 'description' => 'Cadete mayor'));
+        FieldValue::create(array('idSportField' => '13', 'description' => 'Juvenil Superior'));
+        FieldValue::create(array('idSportField' => '13', 'description' => 'Open'));
+
+        // Valores de Esgrima - Prueba
+        FieldValue::create(array('idSportField' => '14', 'description' => 'Sable'));
+        FieldValue::create(array('idSportField' => '14', 'description' => 'Espada'));
+        FieldValue::create(array('idSportField' => '14', 'description' => 'Florete'));
+
+        // Valores de Canotaje - Categoria
+        FieldValue::create(array('idSportField' => '15', 'description' => 'Infantil mayor sub 15'));
+        FieldValue::create(array('idSportField' => '15', 'description' => 'Infantil mayor sub 17'));
+        FieldValue::create(array('idSportField' => '15', 'description' => 'Infantil mayor sub 19'));
+        FieldValue::create(array('idSportField' => '15', 'description' => 'Juvenil superior'));
+
+        // Valores de Canotaje - Prueba
+        FieldValue::create(array('idSportField' => '16', 'description' => 'Kayak'));
+        FieldValue::create(array('idSportField' => '16', 'description' => 'Canoa'));
+
+        // Tiro deportivo - Escolaridad
+        FieldValue::create(array('idSportField' => '17', 'description' => 'Primaria'));
+        FieldValue::create(array('idSportField' => '17', 'description' => 'Secundaria'));
+        FieldValue::create(array('idSportField' => '17', 'description' => 'Preparatoria'));
+        FieldValue::create(array('idSportField' => '17', 'description' => 'Universidad'));
+
+        // Tiro deportivo - Categoría
+        FieldValue::create(array('idSportField' => '18', 'description' => 'Pre juvenil'));
+        FieldValue::create(array('idSportField' => '18', 'description' => 'Juvenil menor'));
+        FieldValue::create(array('idSportField' => '18', 'description' => 'Juvenil A'));
+        FieldValue::create(array('idSportField' => '18', 'description' => 'Juvenil B'));
+
+        // Tiro deportivo - Prueba
+        FieldValue::create(array('idSportField' => '19', 'description' => 'Tiro olímpico rifle match'));
+        FieldValue::create(array('idSportField' => '19', 'description' => 'Tiro olímpico pistola'));
+        FieldValue::create(array('idSportField' => '19', 'description' => 'Tiro olímpico rifle de quebrar'));
+
+        // Badminton - Escolaridad
+        FieldValue::create(array('idSportField' => '20', 'description' => 'Primaria'));
+        FieldValue::create(array('idSportField' => '20', 'description' => 'Secundaria'));
+        FieldValue::create(array('idSportField' => '20', 'description' => 'Preparatoria'));
+        FieldValue::create(array('idSportField' => '20', 'description' => 'Universidad'));
+
+        // Badminton - Categoria
+        FieldValue::create(array('idSportField' => '21', 'description' => 'Juvenil menor sub 15'));
+        FieldValue::create(array('idSportField' => '21', 'description' => 'Juvenil mayor sub 15'));
+        FieldValue::create(array('idSportField' => '21', 'description' => 'Juvenil menor sub 17'));
+        FieldValue::create(array('idSportField' => '21', 'description' => 'Juvenil mayor sub 17'));
+        FieldValue::create(array('idSportField' => '21', 'description' => 'Juvenil menor sub 19'));
+        FieldValue::create(array('idSportField' => '21', 'description' => 'Juvenil mayor sub 19'));
+
+        // Badminton - Competencias
+        FieldValue::create(array('idSportField' => '22', 'description' => 'Individual'));
+        FieldValue::create(array('idSportField' => '22', 'description' => 'Equipos'));
+
+        // Natacion - Categoria
+        FieldValue::create(array('idSportField' => '23', 'description' => 'Infantil B (11-12)'));
+        FieldValue::create(array('idSportField' => '23', 'description' => 'Juvenil A (13-14)'));
+        FieldValue::create(array('idSportField' => '23', 'description' => 'Juvenil B (15-16)'));
+        FieldValue::create(array('idSportField' => '23', 'description' => 'Primera fuerza (17-18)'));
+
+        // Natacion - Estilo principal
+        FieldValue::create(array('idSportField' => '24', 'description' => 'Libre (Crawl)'));
+        FieldValue::create(array('idSportField' => '24', 'description' => 'Dorso'));
+        FieldValue::create(array('idSportField' => '24', 'description' => 'Pecho'));
+        FieldValue::create(array('idSportField' => '24', 'description' => 'Mariposa'));
+
+        // Natacion - Tipo de pruebas
+        FieldValue::create(array('idSportField' => '25', 'description' => 'Super velocidad'));
+        FieldValue::create(array('idSportField' => '25', 'description' => 'Velocidad'));
+        FieldValue::create(array('idSportField' => '25', 'description' => 'Medio fondo'));
+        FieldValue::create(array('idSportField' => '25', 'description' => 'Fondo'));
+        FieldValue::create(array('idSportField' => '25', 'description' => 'Aguas abiertas'));
+
+        // Tae Kwon Do - Modalidades
+        FieldValue::create(array('idSportField' => '26', 'description' => 'Formas'));
+        FieldValue::create(array('idSportField' => '26', 'description' => 'Combate'));
+
+        // Tae Kwon Do - Categoria
+        FieldValue::create(array('idSportField' => '27', 'description' => 'Infantil menor'));
+        FieldValue::create(array('idSportField' => '27', 'description' => 'Infantil mayor'));
+        FieldValue::create(array('idSportField' => '27', 'description' => 'Juvenil menor'));
+        FieldValue::create(array('idSportField' => '27', 'description' => 'Juvenil mayor'));
+
+        // Judo - Categoria
+        FieldValue::create(array('idSportField' => '28', 'description' => 'Infantil mayor'));
+        FieldValue::create(array('idSportField' => '28', 'description' => 'Juvenil menor'));
+        FieldValue::create(array('idSportField' => '28', 'description' => 'Juvenil mayor'));
+        FieldValue::create(array('idSportField' => '28', 'description' => 'Juvenil superior'));
+
     }
 }
 
@@ -340,7 +549,7 @@ class UsersTableSeeder extends Seeder
             'firstSurname'  => 'Aguayo',
             'secondSurname' => 'Velazquez',
             'email'         => 'erick.aguayo@tectijuana.edu.mx',
-            'password'      => Hash::make('chingon'),
+            'password'      => Hash::make('demostracion'),
             'birthday'      => '2003-12-31',
             'idGender'      => '1',
             'idUserType'    => '2',
@@ -436,7 +645,7 @@ class IPRDSeeder extends Seeder
         Scale::create(array
         (
             'idTest'      => '1',
-            'description' => 'Control Autoestima"'
+            'description' => 'Control Autoestima'
         ));
         
         /******************************************************************************
@@ -553,8 +762,8 @@ class IPRDSeeder extends Seeder
 		$controlAfrontamientoPositivo = '6';
 		$controlAutoestima            = '7';
         
-        $grupoNormal  = '1';
-        $grupoInverso = '2';
+        $grupoNormal  = '2';
+        $grupoInverso = '1';
         
         Question::create(array
         (

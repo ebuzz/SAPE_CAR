@@ -12,36 +12,105 @@ class ResultsController extends BaseController
 
 	public function getResults()
 	{
-		$test 				= Input::get('test');
-		$fechaInicial 		= Input::get('fechainicial');
-		$fechaFinal 		= Input::get('fechafinal');
-		$deporte 			= Input::get("deporte");
-		$sexo 				= Input::get("genero");
+		$testName  = Input::get('testName');
+		$startDate = date('Y-m-d', strtotime(Input::get('startDate')));
+		$endDate   = date('Y-m-d', strtotime(Input::get('endDate') . ' + 1 days'));
+		$sportId   = Input::get("sport");
+		$genderId  = Input::get("gender");
 
 		$data = array();
-		$users = User::all();
-		$users->load('gender');
-		
-		for ($i=0; $i < count($users); $i++) { 
-			
-			$temp['name'] = $users[$i]['name'];
-			$temp['firstSurname'] = $users[$i]['firstSurname'];
-			$temp['secondSurname'] = $users[$i]['secondSurname'];
-			$temp['birthday'] = $users[$i]['birthday'];
-			$temp['genero']  = $users[$i]['gender']['description'];
-			$temp['aconfianza'] = 100;
-			$temp['anegativo'] = 95;
-			$temp['atencional'] = 99;
-			$temp['vimaginativo'] = 98;
-			$temp['nmotivacion'] = 97;
-			$temp['apositivo'] = 96;
-			$temp['autestima'] = 94;
+        
+        // Filtrado (Test)
+        $test = Test::where('name', '=', $testName)->first();   
+        $query = UserAnsweredTest::whereHas('test', function($query) use($test)
+        {          
+            $query->where('idTest', '=', $test->idTest);
+        });
+        
+        // Filtrado (Fecha)
+        $query->whereBetween('created_at', array($startDate, $endDate));
+        
+        // Filtrado (Deporte)
+        if ($sportId != -1)
+        {
+            $query->whereHas('profile', function($query) use($sportId)
+            {          
+                $query->where('idSport', '=', $sportId);
+            });
+        }
+        
+        // Filtrado (Género)
+        if ($genderId != -1)
+        {   
+            $query->whereHas('user', function($query) use($genderId)
+            {
+                $query->where('idGender', '=', $genderId);
+            });
+        }
+        
+        $answeredTests = $query->get();
+        
+        $answeredTests->load('profile');
+        $answeredTests->load('user.gender');
+        $answeredTests->load('test.scales');
+        $answeredTests->load('test.scales.ranges');
+        $answeredTests->load('userAnswers.question.scale');
+        $answeredTests->load('userAnswers.testAnswer');
+        
+        $preparedData = array();
+        
+        foreach($answeredTests as $answeredTest)
+        {
+            $scales = $answeredTest->test->scales;
+            $userAnswers = $answeredTest->userAnswers;
+            
+            $id = $answeredTest->idUserAnsweredTest;
+            $preparedData[$id]['answeredTest'] = $answeredTest;
+            $preparedData[$id]['resultsByScale'] = $this->getResultsByScale($scales, $userAnswers);
+        }
+        
+        foreach($preparedData as $row)
+        {
+            $answeredTest = $row['answeredTest'];
+            $resultsByScale = $row['resultsByScale'];
+            
+            $user = $answeredTest->user;
+            
+            $temp['name']          = $user->name;
+			$temp['firstSurname']  = $user->firstSurname;
+			$temp['secondSurname'] = $user->secondSurname;
+			$temp['birthday']      = $user->birthday;
+			$temp['genero']        = $user->gender->description;
+            
+            foreach($resultsByScale as $resultByScale)
+            {
+                $scale  = $resultByScale['scale'];
+                $result = $resultByScale['result'];
+                    
+                $temp[$scale->description] = $result;
+            }
 			
 			$data[] = $temp;
-		}
+        }
 
-		//return $users;
 		return json_encode($data);
 	}
+    
+    private function getResultsByScale($scales, $userAnswers)
+    {
+        $temp = array();
+        
+        foreach($scales as $scale)
+        {
+            $temp[$scale->idScale]['scale'] = $scale;
+            $temp[$scale->idScale]['result'] = 0;
+        }
+        
+        foreach($userAnswers as $userAnswer)
+        {
+           $temp[$userAnswer->question->scale->idScale]['result'] += $userAnswer->testAnswer->number;
+        }
+        
+        return $temp;
+    }
 }
-?>
