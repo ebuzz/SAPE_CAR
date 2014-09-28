@@ -17,16 +17,6 @@ Route::get('signup', 'ProfileController@showSignup');
 Route::get('login', 'LoginController@showLogin');
 Route::post('login','LoginController@doLogin');
 
-Route::get('forgot',function()
-{
-	return "Hola";
-});
-
-Route::get('credits',function()
-{
-	return "Hola";
-});
-
 //This routes cannot be accessed without log in first, all routes from tests must be included here
 Route::group(array('before' => 'auth'), function()
 {

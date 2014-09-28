@@ -167,7 +167,7 @@ class ProfileController extends BaseController
       
         if ($id == -1 || !Auth::user()->isAdmin())
         {
-            if($id = -1)
+            if($id == -1)
             {
                 $createNew = true;
             }
@@ -197,12 +197,12 @@ class ProfileController extends BaseController
             if($createNew)
             {
                 // Attach del nuevo Perfil
-                $user->idLastProfile = $profile->idProfile; 
+                $user->idLastProfile = $profile->idProfile;
             }
             else
             {
                 // Elminación de ProfileValues
-                 $profile->profileValues()->delete();
+                $profile->profileValues()->delete();
             }
 
             if (Input::has("values"))

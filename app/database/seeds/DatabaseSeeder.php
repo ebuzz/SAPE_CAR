@@ -11,8 +11,13 @@ class DatabaseSeeder extends Seeder
 	{
 		Eloquent::unguard();
 
+        $this->fillDatabase();
+	}
+    
+    private function fillDatabase()
+    {
         // Módulo de Perfiles
-		$this->call('StatesTableSeeder');
+        $this->call('StatesTableSeeder');
         $this->call('CitiesTableSeeder');
         $this->call('SportsTableSeeder');
         $this->call('SportsCitiesTableSeeder');
@@ -20,16 +25,16 @@ class DatabaseSeeder extends Seeder
         $this->call('SportsFieldsTableSeeder');
         $this->call('FieldValuesTableSeeder');
         $this->call('FieldChildValuesTableSeeder');
-        
+
         // Módulo de Usuarios
         $this->call('GendersTableSeeder');
         $this->call('UserTypesTableSeeder');
         $this->call('UsersTableSeeder');
-        
+
         // Módulo de Tests
         $this->call('TestTypesTableSeeder');
         $this->call('IPRDSeeder');
-	}
+    }
 }
 
 /******************************************************************************
@@ -48,11 +53,6 @@ class StatesTableSeeder extends Seeder
         (
             'description' => 'Baja California'
         ));
-        
-        State::create(array
-        (
-            'description' => 'Jalisco'
-        ));
     }
 }
 
@@ -66,24 +66,6 @@ class CitiesTableSeeder extends Seeder
         (
             'description' => 'Tijuana',
             'idState'     => '1'
-        ));
-        
-        City::create(array
-        (
-            'description' => 'Rosarito',
-            'idState'     => '1'
-        ));
-        
-        City::create(array
-        (
-            'description' => 'Guadalajara',
-            'idState'     => '2'
-        ));
-        
-        City::create(array
-        (
-            'description' => 'Zapopan',
-            'idState'     => '2'
         ));
     }
 }
@@ -190,34 +172,6 @@ class SportsCitiesTableSeeder extends Seeder
         (
             'idSport' => '11',
             'idCity'  => '1'
-        ));
-        
-        // Rosarito - Voleibol
-        SportCity::create(array
-        (
-            'idSport' => '1',
-            'idCity'  => '2'
-        ));
-        
-        // Guadalajara - Voleibol
-        SportCity::create(array
-        (
-            'idSport' => '1',
-            'idCity'  => '3'
-        ));
-        
-        // Zapopan - Clavados
-        SportCity::create(array
-        (
-            'idSport' => '2',
-            'idCity'  => '4'
-        ));
-        
-        // Zapopan - Ciclismo
-        SportCity::create(array
-        (
-            'idSport' => '3',
-            'idCity'  => '4'
         ));
     }
 }
@@ -545,13 +499,52 @@ class UsersTableSeeder extends Seeder
 
         User::create(array
         (
-            'name'          => 'Erick',
-            'firstSurname'  => 'Aguayo',
-            'secondSurname' => 'Velazquez',
-            'email'         => 'erick.aguayo@tectijuana.edu.mx',
-            'password'      => Hash::make('demostracion'),
-            'birthday'      => '2003-12-31',
+            'name'          => 'Administrador',
+            'firstSurname'  => 'Administrador',
+            'secondSurname' => 'Administrador',
+            'email'         => 'alvarezhernandez.alfredo@gmail.com',
+            'password'      => Hash::make('carteam5'),
+            'birthday'      => '2000-1-1',
             'idGender'      => '1',
+            'idUserType'    => '2',
+            'idLastProfile' => null
+        ));
+        
+        User::create(array
+        (
+            'name'          => 'Adam Jacob',
+            'firstSurname'  => 'Flores',
+            'secondSurname' => 'Barba',
+            'email'         => 'adamjflores18@gmail.com',
+            'password'      => Hash::make('contra.tijuana18'),
+            'birthday'      => '1983-10-7',
+            'idGender'      => '1',
+            'idUserType'    => '2',
+            'idLastProfile' => null
+        ));
+        
+        User::create(array
+        (
+            'name'          => 'Eva Tatiana',
+            'firstSurname'  => 'Maldonado',
+            'secondSurname' => 'Flores',
+            'email'         => 'psic.tatianamaldonado@gmail.com',
+            'password'      => Hash::make('taty123'),
+            'birthday'      => '1980-5-15',
+            'idGender'      => '2',
+            'idUserType'    => '2',
+            'idLastProfile' => null
+        ));
+        
+        User::create(array
+        (
+            'name'          => 'Alejandra',
+            'firstSurname'  => 'Ávila',
+            'secondSurname' => 'Flores',
+            'email'         => 'sakurandra@gmail.com',
+            'password'      => Hash::make('nicolas.13'),
+            'birthday'      => '1986-4-26',
+            'idGender'      => '2',
             'idUserType'    => '2',
             'idLastProfile' => null
         ));
