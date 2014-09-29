@@ -17,6 +17,16 @@ Route::get('signup', 'ProfileController@showSignup');
 Route::get('login', 'LoginController@showLogin');
 Route::post('login','LoginController@doLogin');
 
+Route::get('forgot',function()
+{
+	return "Hola";
+});
+
+Route::get('credits',function()
+{
+	return "Hola";
+});
+
 //This routes cannot be accessed without log in first, all routes from tests must be included here
 Route::group(array('before' => 'auth'), function()
 {
@@ -28,6 +38,9 @@ Route::group(array('before' => 'auth'), function()
     Route::post("sendTest/{testName}",'TestController@submitTest');
 
 	Route::get('userProfile', 'ProfileController@showProfile');
+	Route::get('users', 'UserController@showUsers');
+	Route::post('resetPassword', 'UserController@resetPassword');
+	Route::post('getUsers', 'UserController@getUsers');
 	Route::post('changePassword', 'ProfileController@changePassword');
 
     // Rutas AJAX
