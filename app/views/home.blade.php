@@ -32,18 +32,20 @@
             <h2>Esta plataforma es posible gracias a: </h2>
             <div class="grid fluid">
                 <div class="row">
-                    <div class="span4 bg-amber padding20 text-center">
+                    <div class="span6 bg-amber padding20 text-center">
                         <h2 class="fg-white">Instituto Tecnológico de Tijuana</h2>
                         <img src="./img/itt1.jpg" alt="Insituto Tecnologico de Tijuana">
                     </div>
-                    <div class="span4 bg-darkBlue padding20 text-center">
+                    <div class="span6 bg-darkBlue padding20 text-center">
                         <h2 class="fg-white">Centro de Alto Rendimiento</h2>
-                        <img src="./img/CAR.jpg" alt="CAR"  width="220" height="220">
+                        <img class="logo-car" src="./img/CAR.jpg" alt="CAR">
                     </div>
+<!--
                     <div class="span4 bg-green padding20 text-center">
                         <h2 class="fg-white">Instituto Tecnológico de Tijuana</h2>
                         <img src="./img/itt1.jpg" alt="Insituto Tecnologico de Tijuana" >
                     </div>
+-->
                 </div>
             </div>
         </div>

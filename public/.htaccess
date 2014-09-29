@@ -13,3 +13,10 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+ErrorDocument 401 <html><head><title>Error&#32;401&#32;-&#32;No&#32;autorizado</title></head><h1>No&#32;ingreso&#32;correctamente&#32;usuario&#32;y&#32;contrase&#164a<br><img&#32src="https://i.imgur.com/NOxs69u.jpg"></html>
+
+AuthType Basic
+AuthName "AREA DE EVALUACION PSICOLOGICA"
+AuthUserFile C:\wamp\www\car\public\.htpasswd
+Require valid-user
