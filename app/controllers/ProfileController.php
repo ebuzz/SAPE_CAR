@@ -128,14 +128,14 @@ class ProfileController extends BaseController
         /*--------Input------------*/
         $validaciones = array(
                         'name' => array(
-                            "regex: /^([a-zA-Z ñáéíóú]{2,30})$/",
+                            "regex: /^([a-zA-Z ñáéíóú]{1,30})$/",
                             'required'),
                         'firstSurname' => array(
-                            "regex: /^([a-zA-Z ñáéíóú]{2,30})$/",
+                            "regex: /^([a-zA-Z ñáéíóú]{1,30})$/",
                             'required'
                             ),
                         'secondSurname' => array(
-                            "regex: /^([a-zA-Z ñáéíóú]{2,30})$/"
+                            "regex: /^([a-zA-Z ñáéíóú]{1,30})$/"
                             ),
                         'email' => array(
                             'email', 
@@ -167,7 +167,7 @@ class ProfileController extends BaseController
       
         if ($id == -1 || !Auth::user()->isAdmin())
         {
-            if($id = -1)
+            if($id == -1)
             {
                 $createNew = true;
             }
@@ -197,12 +197,12 @@ class ProfileController extends BaseController
             if($createNew)
             {
                 // Attach del nuevo Perfil
-                $user->idLastProfile = $profile->idProfile; 
+                $user->idLastProfile = $profile->idProfile;
             }
             else
             {
                 // Elminación de ProfileValues
-                 $profile->profileValues()->delete();
+                $profile->profileValues()->delete();
             }
 
             if (Input::has("values"))

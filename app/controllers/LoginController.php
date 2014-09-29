@@ -12,7 +12,7 @@ class LoginController extends BaseController
 	{
 		$rules = array(
 			'email'    => 'required|email', // make sure the email is an actual email
-			'password' => 'required|alphaNum|min:3' // password can only be alphanumeric and has to be greater than 3 characters
+			'password' => 'required|min:6' // password as to be greater than 6 characters
 		);
 
 		   // run the validation rules on the inputs from the form

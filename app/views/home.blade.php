@@ -112,7 +112,7 @@
                     </div>
                     <div class="span3 padding10">
                         <h3 class="fg-white">Acerca de los desarrolladores</h3>
-                        <p class="fg-white">¡Hola! Somos un grupo de jovenes estudiantes que aman la tecnologia.</p>
+                        <p class="fg-white">¡Hola! Somos un grupo de jóvenes estudiantes que aman la tecnología.</p>
                     </div>
                     <div class="span3 padding10">
                         <div class="button danger " style="width: 100%; margin-bottom: 5px" href="#">Erick Aguayo Velázquez</div>
@@ -128,12 +128,13 @@
                     </div>
                     <div class="span2 padding10">
                         <div class="button danger " style="width: 100%; margin-bottom: 5px">Dr. Arnulfo Alanis Garza </div>
-                        <div class="button success " style="width: 100%; margin-bottom: 5px" href="#">Dr. Miguel Ángel Lopez</div>
+                        <div class="button success " style="width: 100%; margin-bottom: 5px" href="#">Dr. Miguel Ángel Lopez Ramirez</div>
                         <div class="button info " style="width: 100%; margin-bottom: 5px" href="#">Dr. Bogart Yail Máquez Lobato</div>
+                        <div class="button info " style="width: 100%; margin-bottom: 5px" href="#">Lic. Sergio Contreras Hernández</div>
                         <div class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Dra. Valdez Chapotin</div>
                         <div class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Psic. Alejandra Ávila Flores</div>
                         <div class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Psic. Adam J. Flores Barba </div>
-                        <div class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Psic. René García Aréizaga</div>
+                        <div class="button warning " style="width: 100%; margin-bottom: 5px;" href="#">Psic. Eva Tatiana Maldonado Flores</div>
                     </div>
                 </div>
             </div>
