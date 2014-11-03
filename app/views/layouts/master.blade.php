@@ -66,6 +66,9 @@
                             
                             <ul class="dropdown-menu place-right" data-role="dropdown">
                                 <li>{{ HTML::link('userProfile','Mi perfil', ['id'=>'myLink']); }}</li>
+                                @if(Auth::user()->isAdmin())
+                                    <li>{{ HTML::link('users','Usuarios', ['id'=>'myLink']); }}</li>
+                                @endif
                                 <li>{{ HTML::link('logout','Cerrar sesion', ['id'=>'myLink']); }}</li>
                             </ul>
                         

@@ -5,11 +5,31 @@ body
   padding: 0;
 }
 
+/*#alert{
+ 
+}
+#alert:hover{
+	background-color: rgba(255,0,0,0.7);
+}
+*/
+
 .metro .page 
 {
   width: 980px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+.logo-escuela 
+{
+  width: 400px;
+  height: 100px;
+}
+
+.logo-car 
+{
+  width: 300;
+  height: 100px;
 }
 
 header 

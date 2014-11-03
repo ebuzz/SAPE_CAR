@@ -17,12 +17,16 @@
             <a href=""><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
             Registrarse
         </h1>
-
         <div class="example">
             <fieldset>
                 <div class="wizard" id="wizard">
                     <div class="steps">
                         <div class="step"><legend>Información de Acceso</legend>
+                            <div class="balloon top">
+                                <div id="alert" class="padding20">
+                                    VERIFICA que tu <mark>CORREO</mark> y <mark>CONTRASEÑA</mark> estén escritos correctamente. Ya que si los pierdes no podrás acceder al sistema.
+                                </div>
+                            </div>
                             {{ Form::label('email','Correo Electronico') }}
                             <div class="input-control text" data-role="input-control">
                                 {{ Form::email('email',Input::old('email'), array('id' => 'email', 'placeholder' => 'ejemplo@ejemplo.com','autofocus'=>'autofocus','required'=>'required')) }}
