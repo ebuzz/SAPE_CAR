@@ -50,6 +50,11 @@
                                 <li class="menu-title">Evaluacion Mental</li>
                                 <li>{{ HTML::link('test/IPRD','IPRD'); }}</li>
 <!--                                <li>{{ HTML::link('test/scat','IPRD Combate'); }}</li>-->
+                                <li class="menu-title">Ansiedad</li>
+                                <li>{{ HTML::link('test/SCAT','SCAT'); }}</li>
+                                <li>{{ HTML::link('test/CSAI-12','CSAI-12'); }}</li>
+                                <li class="menu-title">Otros</li>
+                                <li>{{ HTML::link('test/BURNOUT','BURNOUT'); }}</li>
                             </ul>
                         </li>
                         <span class="element-divider"></span>

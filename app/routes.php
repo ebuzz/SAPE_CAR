@@ -32,6 +32,7 @@ Route::group(array('before' => 'auth'), function()
 {
     Route::get('logout','LoginController@doLogout');
     Route::get('results','ResultsController@showResults');
+    Route::get('results/chart', 'ResultsController@showChart');
     
     Route::get('test/{testName}', 'TestController@showTest');
     Route::post('test/{testName}', 'TestController@doSearch');
@@ -49,8 +50,8 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('test/profile/getfields/{idSport}', 'ProfileController@getFields');
 	Route::get('test/profile/getchildvalues/{idParentValue}', 'ProfileController@getChildValues');
 	Route::post('test/profile/saveProfile', 'ProfileController@saveProfile');
-    
     Route::post('results/getResults', 'ResultsController@getResults');
+    Route::get('results/getChartData', 'ResultsController@getChartData');  
 });
 
 Route::get('profile/getcities/{idState}', 'ProfileController@getCities');

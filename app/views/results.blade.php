@@ -5,28 +5,27 @@
 	{{ HTML::script('js/metro-fluentmenu.js') }}
     {{ HTML::script('js/metro-calendar.js') }}
     {{ HTML::script('js/metro-datepicker.js') }}
-    {{ HTML::script('js/local/profile.js') }}
+    {{ HTML::script('js/local/notifier.js') }}
     {{ HTML::script('js/jquery/jquery.dataTables.js') }}
+    {{ HTML::script('js/jquery/dataTables.tableTools.js') }}
 @stop
 
 @section('content')
 	<div class="container">
 		<h1><i class="icon-clipboard-2 on-left"></i> Resultados</h1>
 		<div class="example">
-			<div class="fluent-menu" data-role="fluentmenu">
+			<div class="fluent-menu" data-role="fluentmenu" >
                         <ul class="tabs-holder">
-                            <li class="active"><a href="#tab_resultados">Filtrar Resultados</a></li>
-                            <li><a href="#tab_reportes">Reportes</a></li>
-                            <li><a href="#tab_estadisticas">Estadisticas</a></li>
+                            <li class="active"><a href="#tab_results">Filtrar Resultados</a></li>
+                            <li id="reports_tab"><a  href="#tab_reports" >Reportes y Estadisticas</a></li>
                         </ul>
-
-                        <div class="tabs-content">
-                            <div class="tab-panel" id="tab_resultados" style="display: block;">
+                        <div class="tabs-content" >
+                            <div class="tab-panel" id="tab_results" style="display: block;">
                                 <div class="tab-panel-group">
                                     <div class="tab-group-content">
                                     	<label>Seleccionar Test:</label>
                                         <div class="input-control select">
-										    {{ Form::select('',array('iprd' => 'IPRD'),  '', 
+										    {{ Form::select('',$tests,  '', 
 				                				array('id' => 'test')) }}
 										</div>
 
@@ -80,47 +79,74 @@
                                                 <span class="icon-filter"></span>
                                                 <span class="button-label">Buscar</span>
                                         </button>
-                             
                                     </div>
                                     <div class="tab-group-caption">Buscar</div>
                                 </div>
                             </div>
 
-                            <div class="tab-panel" id="tab_reportes" style="display: none;">
-                            </div>
-
-                            <div class="tab-panel" id="tab_estadisticas" style="display: none;">
+                            <div class="tab-panel" id="tab_reports" style="display: none;">
+                                <div id="charts" class="tab-panel-group">
+                                    <button id="btn_chart" class="fluent-big-button">
+                                                <span class="icon-bars"></span>
+                                                <span class="button-label">Gráfica</span>
+                                    </button>
+                                    <div class="tab-group-caption">Ver</div>
+                                </div>
+                                <div id="reports" class="tab-panel-group">
+                                    
+                                </div> 
                             </div>
                         </div>
                     </div>
              </br>
-            <div class="example">            	
-            	<table id="table" class="table striped hovered dataTable bordered" cellspacing="0" width="100%">
-            		<thead>
-			            <tr>
-			                <th>Nombre</th>
-			                <th>Apellido Paterno</th>
-			                <th>Apellido Materno</th>
-			                <th>Genero</th>
-			                <th>Fecha de Nacimiento</th>
-			                <th>Autoconfianza</th>
-			                <th>Afrontamiento Negativo</th>
-			                <th>Atencional</th>
-			                <th>Visual Imaginativo</th>
-			                <th>Nivel Motivacion</th>
-			                <th>Afrontamiento Positivo</th>
-			                <th>Autoestima</th>
-			            </tr>
-			        </thead>
-			    </table>
+            <div class="example" id="resultsTable" style="position:relative">            	
             </div>
 		</div>
 	</div>
 	<script>
+    var note = new Notifier();
+
+    function createTableTools()
+    {
+        
+        var customMessage = "Resultados "+$("#test option:selected").text()+" - Cuestionarios realizados del "+$("#fechaInicial").val()+" al "+$("#fechaFinal").val();
+        
+        //Create table tools              
+        var tableTools = new $.fn.dataTable.TableTools( table, {
+            "sSwfPath":"js/copy_csv_xls_pdf.swf",
+            "aButtons": [{
+                    "sExtends": "pdf",
+                    "sButtonText": "PDF",
+                    "sPdfMessage": customMessage,
+                    "sToolTip": "Save as PDF",
+                    "sPdfOrientation": "landscape",
+                    "sButtonClass": "button fluent-big-button",
+                    "fnInit": function ( nButton, oConfig ) {
+                        $(nButton).prepend('<span class="icon-file-pdf"></span>');
+                    },
+                    "fnComplete": function ( nButton, oConfig, oFlash, sFlash ) {
+                        note.showSuccess('Exito!','La tabla se ha guardado en PDF.' );
+                    }
+                },
+                {
+                    "sExtends": "xls",
+                    "sButtonText": "Excel",
+                    "sButtonClass": "button fluent-big-button",
+                    "fnInit": function ( nButton, oConfig ) {
+                        $(nButton).prepend('<span class="icon-file-excel"></span>');
+                    },
+                    "fnComplete": function ( nButton, oConfig, oFlash, sFlash ) {
+                        note.showSuccess('Exito!','La tabla se ha guardado en CVS.' );
+                    }
+                }]
+        });
+        $( '#reports' ).append(tableTools.fnContainer());
+        $( '#reports' ).append('<div class="tab-group-caption">Descargar</div>');
+    }
 
 	$( document ).ready(function() {
 		
-		var today = new Date();
+        var today = new Date();
 
 		$("#dpFechaInicial").datepicker({
 	        date: today.toString(), // set init date
@@ -131,12 +157,12 @@
 	    });
 
 		$("#dpFechaFinal").datepicker({
-			        date: today.toString(), // set init date
-			        format: "yyyy-mm-dd", // set output format
-			        effect: "fade", // none, slide, fade
-			        position: "bottom", // top or bottom,
-			        locale: 'es', // 'ru' or 'en', default is $.Metro.currentLocale
-			    });
+	        date: today.toString(), // set init date
+	        format: "yyyy-mm-dd", // set output format
+	        effect: "fade", // none, slide, fade
+	        position: "bottom", // top or bottom,
+	        locale: 'es', // 'ru' or 'en', default is $.Metro.currentLocale
+	    });
         
         // Opción de "Sin especificar" a Deporte
         var sportSelect = $("#sport");
@@ -146,54 +172,85 @@
     	$("#search").click(function(event) 
         {
     		var filter = {};
-
     		filter.testName = $("#test").val();
     		filter.startDate = $("#fechaInicial").val();
     		filter.endDate = $("#fechaFinal").val();
     		filter.sport = $("#sport").val();
     		filter.gender = $("#gender").val();
 
-			$.post('results/getResults', filter, function(data)
-	            {
-	            	var test = {};
-                    var table;
+            //call for data
+            $.post('results/getResults', filter, function(data)
+            {
+                var test = {};
+                var table;
+                
+                test = JSON.parse(data);
 
-	            	test.data = JSON.parse(data);
+                if  ($.fn.dataTable.isDataTable('#table'))  
+                {
+                    table = $('#table').DataTable();
+                    table.destroy();
+                    $('#table').remove();
+                }
 
-	            	if  ($.fn.dataTable.isDataTable('#table'))  
+                //create table
+                var html_table = $('<table id="table" class="table striped hovered dataTable bordered" cellspacing="0" width="100%"></table>');
+
+                //append table to div
+                $('#resultsTable').append(html_table);
+
+                //Create data table
+                table = $('#table').dataTable( {
+                    "data": test.data,
+                    "scrollX": true,
+                    "columns": test.columns
+                });
+
+                createTableTools();
+                    //$( tableTools.fnContainer() ).insertAfter('#reportes');
+/*
+                    $('#table tbody').on('click', 'tr', function () {
+                        var name = $('td', this).eq(0).text();
+                        //alert( 'You clicked on '+name+'\'s row' );
+                    } );*/
+
+                $("#reports_tab").click(function(event) {
+                    //Get instance
+                    var ttools = TableTools.fnGetInstance( 'table' );
+                    if(ttools.fnResizeRequired())
                     {
-					    table = $('#table').DataTable();
-                        table.destroy();
-					}
-
-                    table = $('#table').dataTable( {
-                        "dom": 'T<"clear">lfrtip',
-                        "data": test.data,
-                        "scrollX": true,
-                        "columns": [
-                            { "data": "name" },
-                            { "data": "firstSurname" },
-                            { "data": "secondSurname" },
-                            { "data": "genero" },
-                            { "data": "birthday", "class": "center" },
-                            { "data": "Auto Confianza", "class": "center" },
-                            { "data": "Control Afrontamiento Negativo", "class": "center" },
-                            { "data": "Control Atencional", "class": "center" },
-                            { "data": "Control Visual Imaginativo", "class": "center" },
-                            { "data": "Nivel Motivación", "class": "center" },
-                            { "data": "Control Afrontamiento Positivo", "class": "center" },
-                            { "data": "Control Autoestima", "class": "center"}
-                        ]
-                    } );
-
-				    $('#table tbody').on('click', 'tr', function () {
-				        var name = $('td', this).eq(0).text();
-				        //alert( 'You clicked on '+name+'\'s row' );
-				    } );
-	            }
-	            );
-	    	});
+                        ttools.fnResizeButtons();   
+                    }
+                });
+            });
+	    });
+        
+        $("#btn_chart").click(function(event) 
+        {
+            var testName = $("#test").val();
+    		var startDate = $("#fechaInicial").val();
+    		var endDate = $("#fechaFinal").val();
+    		var sport = $("#sport").val();
+    		var gender = $("#gender").val();
+            
+            var link = "{{ url('results/chart'); }}";
+            
+            link += "?test=" + testName;
+            link += "&startDate=" + startDate;
+            link += "&endDate=" + endDate;
+            link += "&sport=" + sport;
+            link += "&gender=" + gender;
+            
+            popupCenter(link, "Gráfica", 950, 600);
+        });
 	});
+ 
+    function popupCenter(pageURL, title, w, h) 
+    {
+        var left = (screen.width / 2) -(w / 2);
+        var top = (screen.height / 2) -(h / 2);
+        var targetWin = window.open(pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+    }
 		
 	</script>
 @stop
