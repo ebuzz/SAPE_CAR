@@ -28,12 +28,9 @@ class ResultsController extends BaseController
 		$sportId   = Input::get("sport");
 		$genderId  = Input::get("gender");
         
-        $answeredTests = $this->getFilteredTests($testId, $startDate, $endDate, $sportId, $genderId);
-        $answeredTests->load('userAnswers.question.scale');
-        $answeredTests->load('userAnswers.testAnswer');
-        
-        $test = Test::find($testId);
-        $test->load('scales.ranges');
+        $filteredTests = $this->getFilteredTests($testId, $startDate, $endDate, $sportId, $genderId);
+        $test = $filteredTests['test'];
+        $answeredTests = $filteredTests['answeredTests'];
         
         $ranges = $test->scales[0]->ranges;
         $scales = $test->scales;
@@ -184,8 +181,9 @@ class ResultsController extends BaseController
     
     private function getFilteredTests($testId, $startDate, $endDate, $sportId, $genderId)
     {
+        $test = Test::where('idTest', '=', $testId)->with('scales.ranges')->first(); 
+        
         // Filtrado (Test)
-        $test = Test::where('idTest', '=', $testId)->first();   
         $query = UserAnsweredTest::whereHas('test', function($query) use($test)
         {          
             $query->where('idTest', '=', $test->idTest);
@@ -212,22 +210,27 @@ class ResultsController extends BaseController
             });
         }
         
-        $answeredTests = $query->get();
+        $answeredTests = $query->with
+        (
+            'profile', 
+            'user.gender', 
+            'test.scales.ranges', 
+            'userAnswers.question.scale', 
+            'userAnswers.testAnswer'
+        )->get();
         
-        return $answeredTests;
+        return array(
+            'test'          => $test,
+            'answeredTests' => $answeredTests
+        );
     }
 
 	private function getPreparedData($testId, $startDate, $endDate, $sportId, $genderId)
 	{
-        $answeredTests = $this->getFilteredTests($testId, $startDate, $endDate, $sportId, $genderId);
-        
-        $answeredTests->load('profile');
-        $answeredTests->load('user.gender');
-        $answeredTests->load('test.scales');
-        $answeredTests->load('test.scales.ranges');
-        $answeredTests->load('userAnswers.question.scale');
-        $answeredTests->load('userAnswers.testAnswer');
-        
+        $filteredTests = $this->getFilteredTests($testId, $startDate, $endDate, $sportId, $genderId);
+        $test = $filteredTests['test'];
+        $answeredTests = $filteredTests['answeredTests'];
+
         $data = array();
         $preparedData = array();
 
@@ -242,7 +245,7 @@ class ResultsController extends BaseController
                 );
 
         //Scales
-        $tempcol = Scale::where('idTest', '=', $testId)->get()->lists('description');
+        $tempcol = $test->scales->lists('description');
         $colIndex = COUNT($columns); //columns array index.
 
         for($i = 0; $i < COUNT($tempcol); $i++)
@@ -263,6 +266,8 @@ class ResultsController extends BaseController
             $preparedData[$id]['answeredTest'] = $answeredTest;
             $preparedData[$id]['resultsByScale'] = $this->getResultsByScale($scales, $userAnswers);
         }
+     
+        $today = new DateTime("now");
         
         foreach($preparedData as $row)
         {
@@ -275,8 +280,7 @@ class ResultsController extends BaseController
 			$temp['firstSurname']  = $user->firstSurname;
 			$temp['secondSurname'] = $user->secondSurname;
 
-            //Prepare age.
-            $today = new DateTime("now");
+            // Prepare age.
             $birthday = new DateTime($user->birthday);
             $age = $today->diff($birthday);
 
@@ -293,25 +297,27 @@ class ResultsController extends BaseController
 			
 			$data['data'][] = $temp;
         }
-
-		return json_encode($data);
+        
+        return json_encode($data);
 	}
+    
+    private $cachedArray = array();
     
     private function getResultsByScale($scales, $userAnswers)
     {
-        $temp = array();
+        unset($this->cachedArray);
         
         foreach($scales as $scale)
         {
-            $temp[$scale->idScale]['scale'] = $scale;
-            $temp[$scale->idScale]['result'] = 0;
+            $this->cachedArray[$scale->idScale]['scale'] = $scale;
+            $this->cachedArray[$scale->idScale]['result'] = 0;
         }
         
         foreach($userAnswers as $userAnswer)
         {
-           $temp[$userAnswer->question->scale->idScale]['result'] += $userAnswer->testAnswer->number;
+           $this->cachedArray[$userAnswer->question->scale->idScale]['result'] += $userAnswer->testAnswer->number;
         }
         
-        return $temp;
+        return $this->cachedArray;
     }
 }

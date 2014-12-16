@@ -2154,22 +2154,22 @@ class BURNOUTSeeder extends Seeder
         Range::create(array
         (
             'description' => 'Bajo',
-            'min' => '0.0',
-            'max' => '0.0'
+            'min' => '5.0',
+            'max' => '11.0'
         ));
 
         Range::create(array
         (
             'description' => 'Medio',
-            'min' => '0.0',
-            'max' => '0.0'
+            'min' => '12.0',
+            'max' => '18.0'
         ));
 
         Range::create(array
         (
             'description' => 'Alto',
-            'min' => '0.0',
-            'max' => '0.0'
+            'min' => '19.0',
+            'max' => '25.0'
         ));
         
         /******************************************************************************
