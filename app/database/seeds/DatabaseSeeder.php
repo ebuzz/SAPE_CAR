@@ -34,10 +34,12 @@ class DatabaseSeeder extends Seeder
 //        // Módulo de Tests
 //        $this->call('TestTypesTableSeeder');
 //        $this->call('IPRDSeeder');
-        $this->call('IPRDRangesSeeder');
-        $this->call("SCATSeeder");
-        $this->call("CSAI12Seeder");
-        $this->call("BURNOUTSeeder");
+//        $this->call('IPRDRangesSeeder');
+//        $this->call("SCATSeeder");
+//        $this->call("CSAI12Seeder");
+//        $this->call("BURNOUTSeeder");
+		
+		$this->call("BajaCaliforniaCitiesSeeder");
     }
 }
 
@@ -2462,6 +2464,183 @@ class BURNOUTSeeder extends Seeder
             'number'      => '15',
             'description' => 'Tengo sentimientos y pensamientos negativos hacia mi deporte.',
             'idGroup'     => $grupoBurnoutNormal
+        ));
+    }
+}
+
+class BajaCaliforniaCitiesSeeder extends Seeder
+{
+    public function run()
+    {
+		// Ciudades
+        City::create(array
+        (
+            'description' => 'Mexicali',
+            'idState'     => '1'
+        ));
+		
+		City::create(array
+        (
+            'description' => 'Ensenada',
+            'idState'     => '1'
+        ));
+		
+		//  ***** Deportes de Mexicali ******
+		
+		// Voleibol
+        SportCity::create(array
+        (
+            'idSport' => '1',
+            'idCity'  => '2'
+        ));
+        
+        // Clavados
+        SportCity::create(array
+        (
+            'idSport' => '2',
+            'idCity'  => '2'
+        ));
+        
+        // Ciclismo
+        SportCity::create(array
+        (
+            'idSport' => '3',
+            'idCity'  => '2'
+        ));
+        
+        // Tiro con arco
+        SportCity::create(array
+        (
+            'idSport' => '4',
+            'idCity'  => '2'
+        ));
+        
+        // Esgrima
+        SportCity::create(array
+        (
+            'idSport' => '5',
+            'idCity'  => '2'
+        ));
+        
+        // Canotaje
+        SportCity::create(array
+        (
+            'idSport' => '6',
+            'idCity'  => '2'
+        ));
+        
+        // Tiro Deportivo
+        SportCity::create(array
+        (
+            'idSport' => '7',
+            'idCity'  => '2'
+        ));
+        
+        // Bádminton
+        SportCity::create(array
+        (
+            'idSport' => '8',
+            'idCity'  => '2'
+        ));
+        
+        // Natación
+        SportCity::create(array
+        (
+            'idSport' => '9',
+            'idCity'  => '2'
+        ));
+        
+        // Tae Kwon Do
+        SportCity::create(array
+        (
+            'idSport' => '10',
+            'idCity'  => '2'
+        ));
+        
+        // Judo
+        SportCity::create(array
+        (
+            'idSport' => '11',
+            'idCity'  => '2'
+        ));
+		
+		//  ***** Deportes de Ensenada ******
+		
+		// Voleibol
+        SportCity::create(array
+        (
+            'idSport' => '1',
+            'idCity'  => '3'
+        ));
+        
+        // Clavados
+        SportCity::create(array
+        (
+            'idSport' => '2',
+            'idCity'  => '3'
+        ));
+        
+        // Ciclismo
+        SportCity::create(array
+        (
+            'idSport' => '3',
+            'idCity'  => '3'
+        ));
+        
+        // Tiro con arco
+        SportCity::create(array
+        (
+            'idSport' => '4',
+            'idCity'  => '3'
+        ));
+        
+        // Esgrima
+        SportCity::create(array
+        (
+            'idSport' => '5',
+            'idCity'  => '3'
+        ));
+        
+        // Canotaje
+        SportCity::create(array
+        (
+            'idSport' => '6',
+            'idCity'  => '3'
+        ));
+        
+        // Tiro Deportivo
+        SportCity::create(array
+        (
+            'idSport' => '7',
+            'idCity'  => '3'
+        ));
+        
+        // Bádminton
+        SportCity::create(array
+        (
+            'idSport' => '8',
+            'idCity'  => '3'
+        ));
+        
+        // Natación
+        SportCity::create(array
+        (
+            'idSport' => '9',
+            'idCity'  => '3'
+        ));
+        
+        // Tae Kwon Do
+        SportCity::create(array
+        (
+            'idSport' => '10',
+            'idCity'  => '3'
+        ));
+        
+        // Judo
+        SportCity::create(array
+        (
+            'idSport' => '11',
+            'idCity'  => '3'
         ));
     }
 }

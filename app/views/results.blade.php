@@ -21,6 +21,17 @@
                         </ul>
                         <div class="tabs-content" >
                             <div class="tab-panel" id="tab_results" style="display: block;">
+								<div class="tab-panel-group">
+                                    <div class="tab-group-content">
+                                    	<label>Seleccionar Municipio:</label>
+                                        <div class="input-control select">
+										    {{ Form::select('', $cities,  '',
+				                				array('id' => 'city')) }}
+										</div>
+
+                                    </div>
+                                    <div class="tab-group-caption">Seleccionar Municipio</div>
+                                </div>
                                 <div class="tab-panel-group">
                                     <div class="tab-group-content">
                                     	<label>Seleccionar Test:</label>
@@ -172,6 +183,7 @@
     	$("#search").click(function(event) 
         {
     		var filter = {};
+			filter.city = $("#city").val();
     		filter.testName = $("#test").val();
     		filter.startDate = $("#fechaInicial").val();
     		filter.endDate = $("#fechaFinal").val();
@@ -227,6 +239,7 @@
         
         $("#btn_chart").click(function(event) 
         {
+			var city = $("#city").val();
             var testName = $("#test").val();
     		var startDate = $("#fechaInicial").val();
     		var endDate = $("#fechaFinal").val();
@@ -235,7 +248,8 @@
             
             var link = "{{ url('results/chart'); }}";
             
-            link += "?test=" + testName;
+			link += "?city=" + city;
+            link += "&test=" + testName;
             link += "&startDate=" + startDate;
             link += "&endDate=" + endDate;
             link += "&sport=" + sport;

@@ -7,6 +7,7 @@ class ResultsController extends BaseController
         $data = array('title' => 'Resultados');
         $data['sports'] = Sport::all()->lists('description', 'idSport');
         $data['tests']  = Test::all()->lists('name', 'idTest');
+		$data['cities'] = City::all()->lists('description', 'idCity');
 
         return View::make('results', $data);
 	}
@@ -170,21 +171,28 @@ class ResultsController extends BaseController
     
     public function getResults()
     {
+		$city      = Input::get('city');
         $testName  = Input::get('testName');
 		$startDate = date('Y-m-d', strtotime(Input::get('startDate')));
 		$endDate   = date('Y-m-d', strtotime(Input::get('endDate') . ' + 1 days'));
 		$sportId   = Input::get("sport");
 		$genderId  = Input::get("gender");
         
-        return $this->getPreparedData($testName, $startDate, $endDate, $sportId, $genderId);
+        return $this->getPreparedData($city, $testName, $startDate, $endDate, $sportId, $genderId);
     }
     
-    private function getFilteredTests($testId, $startDate, $endDate, $sportId, $genderId)
+    private function getFilteredTests($city, $testId, $startDate, $endDate, $sportId, $genderId)
     {
         $test = Test::where('idTest', '=', $testId)->with('scales.ranges')->first(); 
         
+		// Filtrado (Ciudad)
+		$query = UserAnsweredTest::whereHas('profile', function($query) use($city)
+		{          
+			$query->where('idCity', '=', $city);
+		});
+		
         // Filtrado (Test)
-        $query = UserAnsweredTest::whereHas('test', function($query) use($test)
+        $query->whereHas('test', function($query) use($test)
         {          
             $query->where('idTest', '=', $test->idTest);
         });
@@ -212,7 +220,7 @@ class ResultsController extends BaseController
         
         $answeredTests = $query->with
         (
-            'profile', 
+            'profile.city', 
             'user.gender', 
             'test.scales.ranges', 
             'userAnswers.question.scale', 
@@ -225,9 +233,9 @@ class ResultsController extends BaseController
         );
     }
 
-	private function getPreparedData($testId, $startDate, $endDate, $sportId, $genderId)
+	private function getPreparedData($city, $testId, $startDate, $endDate, $sportId, $genderId)
 	{
-        $filteredTests = $this->getFilteredTests($testId, $startDate, $endDate, $sportId, $genderId);
+        $filteredTests = $this->getFilteredTests($city, $testId, $startDate, $endDate, $sportId, $genderId);
         $test = $filteredTests['test'];
         $answeredTests = $filteredTests['answeredTests'];
 
