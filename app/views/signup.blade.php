@@ -72,8 +72,8 @@
                             {{ Form::select('', $states, '', 
                                 array('id' => 'state', 'class' => 'input-control select')) }}
                             </div>
-                              <!-- Ciudad -->
-                            {{ Form::label('cityDiv','Ciudad') }}                        
+                              <!-- Municipio -->
+                            {{ Form::label('cityDiv','Municipio') }}                        
                             <div id="cityDiv" class="input-control select">
                                 {{ Form::select('', $cities, '', 
                                                 array('id' => 'city', 'class' => 'input-control select')) }}

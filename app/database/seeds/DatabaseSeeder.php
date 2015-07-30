@@ -16,24 +16,30 @@ class DatabaseSeeder extends Seeder
     
     private function fillDatabase()
     {
-        // Módulo de Perfiles
-        $this->call('StatesTableSeeder');
-        $this->call('CitiesTableSeeder');
-        $this->call('SportsTableSeeder');
-        $this->call('SportsCitiesTableSeeder');
-        $this->call('RolesTableSeeder');
-        $this->call('SportsFieldsTableSeeder');
-        $this->call('FieldValuesTableSeeder');
-        $this->call('FieldChildValuesTableSeeder');
-
-        // Módulo de Usuarios
-        $this->call('GendersTableSeeder');
-        $this->call('UserTypesTableSeeder');
-        $this->call('UsersTableSeeder');
-
-        // Módulo de Tests
-        $this->call('TestTypesTableSeeder');
-        $this->call('IPRDSeeder');
+//        // Módulo de Perfiles
+//        $this->call('StatesTableSeeder');
+//        $this->call('CitiesTableSeeder');
+//        $this->call('SportsTableSeeder');
+//        $this->call('SportsCitiesTableSeeder');
+//        $this->call('RolesTableSeeder');
+//        $this->call('SportsFieldsTableSeeder');
+//        $this->call('FieldValuesTableSeeder');
+//        $this->call('FieldChildValuesTableSeeder');
+//
+//        // Módulo de Usuarios
+//        $this->call('GendersTableSeeder');
+//        $this->call('UserTypesTableSeeder');
+//        $this->call('UsersTableSeeder');
+//
+//        // Módulo de Tests
+//        $this->call('TestTypesTableSeeder');
+//        $this->call('IPRDSeeder');
+//        $this->call('IPRDRangesSeeder');
+//        $this->call("SCATSeeder");
+//        $this->call("CSAI12Seeder");
+//        $this->call("BURNOUTSeeder");
+		
+		$this->call("BajaCaliforniaCitiesSeeder");
     }
 }
 
@@ -646,18 +652,159 @@ class IPRDSeeder extends Seeder
         ******************************************************************************/
         Range::create(array
         (
-            'description' => 'Bajo',
-            'min' => '0.0',
-            'max' => '0.0'
+            'description' => 'Necesita de su atención especial',
+            'min' => '6.0',
+            'max' => '19.0'
+        ));
+
+        Range::create(array
+        (
+            'description' => 'Tiempo para mejorar',
+            'min' => '20.0',
+            'max' => '25.0'
+        ));
+
+        Range::create(array
+        (
+            'description' => 'Habilidades excelentes',
+            'min' => '26.0',
+            'max' => '30.0'
         ));
         
         /******************************************************************************
         * --- Rangos por Escala ---
         ******************************************************************************/
+        // Auto Confianza
         ScaleRange::create(array
         (
             'idScale' => '1',
             'idRange' => '1'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '1',
+            'idRange' => '2'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '1',
+            'idRange' => '3'
+        ));
+        
+        // Control Afrontamiento Negativo
+        ScaleRange::create(array
+        (
+            'idScale' => '2',
+            'idRange' => '1'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '2',
+            'idRange' => '2'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '2',
+            'idRange' => '3'
+        ));
+        
+        // Control Atencional
+        ScaleRange::create(array
+        (
+            'idScale' => '3',
+            'idRange' => '1'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '3',
+            'idRange' => '2'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '3',
+            'idRange' => '3'
+        ));
+        
+        // Control Visual Imaginativo
+        ScaleRange::create(array
+        (
+            'idScale' => '4',
+            'idRange' => '1'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '4',
+            'idRange' => '2'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '4',
+            'idRange' => '3'
+        ));
+        
+        // Nivel Motivación
+        ScaleRange::create(array
+        (
+            'idScale' => '5',
+            'idRange' => '1'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '5',
+            'idRange' => '2'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '5',
+            'idRange' => '3'
+        ));
+        
+        // Control Afrontamiento Positivo
+        ScaleRange::create(array
+        (
+            'idScale' => '6',
+            'idRange' => '1'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '6',
+            'idRange' => '2'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '6',
+            'idRange' => '3'
+        ));
+        
+        // Control Autoestima
+        ScaleRange::create(array
+        (
+            'idScale' => '7',
+            'idRange' => '1'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '7',
+            'idRange' => '2'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '7',
+            'idRange' => '3'
         ));
         
         /******************************************************************************
@@ -748,12 +895,12 @@ class IPRDSeeder extends Seeder
         $iprd = '1';
         
         $autoConfianza                = '1';
-		$controlAfrontamientoNegativo = '2';
-		$controlAtencional            = '3';
-		$controlVisualImaginativo     = '4';	
-		$nivelMotivacion              = '5';
-		$controlAfrontamientoPositivo = '6';
-		$controlAutoestima            = '7';
+        $controlAfrontamientoNegativo = '2';
+        $controlAtencional            = '3';
+        $controlVisualImaginativo     = '4';    
+        $nivelMotivacion              = '5';
+        $controlAfrontamientoPositivo = '6';
+        $controlAutoestima            = '7';
         
         $grupoNormal  = '2';
         $grupoInverso = '1';
@@ -1134,6 +1281,1366 @@ class IPRDSeeder extends Seeder
             'number'      => '42',
             'description' => 'Yo puedo convertir una crisis en una oportunidad.',
             'idGroup'     => $grupoInverso
+        ));
+    }
+}
+
+class IPRDRangesSeeder extends Seeder
+{
+    public function run()
+    {
+        /******************************************************************************
+        * --- Rangos Posibles ---
+        ******************************************************************************/
+        
+        $range = Range::find(1);
+        $range->description = 'Necesita de su atención especial';
+        $range->min = '6.0';
+        $range->max = '19.0';
+        $range->save();
+
+        Range::create(array
+        (
+            'description' => 'Tiempo para mejorar',
+            'min' => '20.0',
+            'max' => '25.0'
+        ));
+
+        Range::create(array
+        (
+            'description' => 'Habilidades excelentes',
+            'min' => '26.0',
+            'max' => '30.0'
+        ));
+        
+        /******************************************************************************
+        * --- Rangos por Escala ---
+        ******************************************************************************/
+        
+        // Nota: Omitimos el (1, 1) por que ya se encuentra registrado en la BD a la fecha
+        // de creación de este Seeder
+
+        // Auto Confianza
+        ScaleRange::create(array
+        (
+            'idScale' => '1',
+            'idRange' => '2'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '1',
+            'idRange' => '3'
+        ));
+        
+        // Control Afrontamiento Negativo
+        ScaleRange::create(array
+        (
+            'idScale' => '2',
+            'idRange' => '1'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '2',
+            'idRange' => '2'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '2',
+            'idRange' => '3'
+        ));
+        
+        // Control Atencional
+        ScaleRange::create(array
+        (
+            'idScale' => '3',
+            'idRange' => '1'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '3',
+            'idRange' => '2'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '3',
+            'idRange' => '3'
+        ));
+        
+        // Control Visual Imaginativo
+        ScaleRange::create(array
+        (
+            'idScale' => '4',
+            'idRange' => '1'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '4',
+            'idRange' => '2'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '4',
+            'idRange' => '3'
+        ));
+        
+        // Nivel Motivación
+        ScaleRange::create(array
+        (
+            'idScale' => '5',
+            'idRange' => '1'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '5',
+            'idRange' => '2'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '5',
+            'idRange' => '3'
+        ));
+        
+        // Control Afrontamiento Positivo
+        ScaleRange::create(array
+        (
+            'idScale' => '6',
+            'idRange' => '1'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '6',
+            'idRange' => '2'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '6',
+            'idRange' => '3'
+        ));
+        
+        // Control Autoestima
+        ScaleRange::create(array
+        (
+            'idScale' => '7',
+            'idRange' => '1'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '7',
+            'idRange' => '2'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '7',
+            'idRange' => '3'
+        ));
+    }
+}
+
+/******************************************************************************
+* --- SCAT ---
+******************************************************************************/
+class SCATSeeder extends Seeder
+{
+    public function run()
+    {
+        /******************************************************************************
+        * --- Test ---
+        ******************************************************************************/
+        Test::create(array
+        (
+            'name'       => 'SCAT',
+            'idTestType' => '1'
+        ));
+        /******************************************************************************
+        * --- Escalas ---
+        ******************************************************************************/
+        Scale::create(array
+        (
+            'idTest'      => '2',
+            'description' => 'Puntaje Total '
+        ));
+        /******************************************************************************
+        * --- Rangos Posibles ---
+        ******************************************************************************/
+        Range::create(array
+        (
+            'description' => 'Nivel de Ansiedad Bajo',
+            'min' => '0.0',
+            'max' => '15.0'
+        ));
+
+        Range::create(array
+        (
+            'description' => 'Nivel de Ansiedad Medio',
+            'min' => '16.0',
+            'max' => '20.0'
+        ));
+
+        Range::create(array
+        (
+            'description' => 'Nivel de Ansiedad Alto',
+            'min' => '21.0',
+            'max' => '30.0'
+        ));
+        /******************************************************************************
+        * --- Rangos por Escala ---
+        ******************************************************************************/
+        ScaleRange::create(array
+        (
+            'idScale' => '8',
+            'idRange' => '4'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '8',
+            'idRange' => '5'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '8',
+            'idRange' => '6'
+        ));
+
+        /******************************************************************************
+        * --- Grupos ---
+        ******************************************************************************/
+        Group::create(array()); // SCAT (orden normal) Con id = 3
+
+        /******************************************************************************
+        * --- Posibles Respuestas ---
+        ******************************************************************************/ 
+        // --- SCAT ---
+        TestAnswer::create(array
+        (
+            'number'      => '0',
+            'description' => 'Rara vez',
+            'idGroup'     => '3'
+        ));
+
+        TestAnswer::create(array
+        (
+            'number'      => '1',
+            'description' => 'A veces',
+            'idGroup'     => '3'
+        ));
+
+        TestAnswer::create(array
+        (
+            'number'      => '2',
+            'description' => 'A menudo',
+            'idGroup'     => '3'
+        ));
+
+        /******************************************************************************
+        * --- Preguntas ---
+        ******************************************************************************/
+        $scat = '2';
+
+        $total = '8';
+        
+        $grupoNormal  = '3';
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '1',
+            'description' => 'Compitiendo contra otras personas o equipos es socialmente agradable.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '2',
+            'description' => 'Antes de competir me siento incómodo.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '3',
+            'description' => 'Antes de competir, me preocupa que no me desempeñe bien.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '4',
+            'description' => 'Yo soy un buen deportista cuando compito.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '5',
+            'description' => 'Cuando compito, me preocupa cometer errores.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '6',
+            'description' => 'Antes de competir, estoy tranquilo.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '7',
+            'description' => 'Establecer un objetivo es importante a la hora de competir.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '8',
+            'description' => 'Antes de competir, tengo la sensación de náuseas en el estómago.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '9',
+            'description' => 'Justo antes de la competencia, siento que mi corazón late más rápido de lo habitual.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '10',
+            'description' => 'Me gusta competir cuando existe una gran cantidad de energía física.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '11',
+            'description' => 'Antes de competir, me siento relajado.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '12',
+            'description' => 'Antes de competir,estoy nervioso.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '13',
+            'description' => 'Los deportes de equipo son más excitantes que los deportes individuales.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '14',
+            'description' => 'Me pongo nervioso al iniciar la competencia.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $scat,
+            'idScale'     => $total,
+            'number'      => '15',
+            'description' => 'Antes de competir, normalmente me tenso.',
+            'idGroup'     => $grupoNormal
+        ));
+    }
+}
+
+/******************************************************************************
+* --- CSAI-12 ---
+******************************************************************************/
+class CSAI12Seeder extends Seeder
+{
+    public function run()
+    {
+        /******************************************************************************
+        * --- Test ---
+        ******************************************************************************/
+        Test::create(array
+        (
+            'name'       => 'CSAI-12',
+            'idTestType' => '1'
+        ));
+
+        /******************************************************************************
+        * --- Escalas ---
+        ******************************************************************************/
+        Scale::create(array
+        (
+            'idTest'      => '3',
+            'description' => 'Ansiedad Cognitiva'
+        ));
+
+        Scale::create(array
+        (
+            'idTest'      => '3',
+            'description' => 'Ansiedad Somática'
+        ));
+
+        Scale::create(array
+        (
+            'idTest'      => '3',
+            'description' => 'Autoconfianza'
+        ));
+
+        /******************************************************************************
+        * --- Rangos Posibles ---
+        ******************************************************************************/
+        Range::create(array
+        (
+            'description' => 'Nivel de Ansiedad Bajo',
+            'min' => '0.0',
+            'max' => '18.0'
+        ));
+
+        Range::create(array
+        (
+            'description' => 'Nivel de Ansiedad Medio',
+            'min' => '19.0',
+            'max' => '32.0'
+        ));
+
+        Range::create(array
+        (
+            'description' => 'Nivel de Ansiedad Alto',
+            'min' => '33.0',
+            'max' => '45.0'
+        ));
+
+        /******************************************************************************
+        * --- Rangos por Escala ---
+        ******************************************************************************/
+        // Ansiedad Cognitiva
+        ScaleRange::create(array
+        (
+            'idScale' => '9',
+            'idRange' => '7'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '9',
+            'idRange' => '8'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '9',
+            'idRange' => '9'
+        ));
+        // Ansiedad Somatica
+        ScaleRange::create(array
+        (
+            'idScale' => '10',
+            'idRange' => '7'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '10',
+            'idRange' => '8'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '10',
+            'idRange' => '9'
+        ));
+        // Autoconfianza
+        ScaleRange::create(array
+        (
+            'idScale' => '11',
+            'idRange' => '7'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '11',
+            'idRange' => '8'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '11',
+            'idRange' => '9'
+        ));
+        /******************************************************************************
+        * --- Grupos ---
+        ******************************************************************************/
+        Group::create(array()); // CSAI-2 (orden normal) Con id = 4
+
+        /******************************************************************************
+        * --- Posibles Respuestas ---
+        ******************************************************************************/ 
+         // --- CSAI-12 (orden normal) ---
+        TestAnswer::create(array
+        (
+            'number'      => '1',
+            'description' => 'Nunca',
+            'idGroup'     => '4'
+        ));
+
+        TestAnswer::create(array
+        (
+            'number'      => '2',
+            'description' => 'Casi nunca',
+            'idGroup'     => '4'
+        ));
+
+        TestAnswer::create(array
+        (
+            'number'      => '3',
+            'description' => 'A veces',
+            'idGroup'     => '4'
+        ));
+
+        TestAnswer::create(array
+        (
+            'number'      => '4',
+            'description' => 'Casi siempre',
+            'idGroup'     => '4'
+        ));
+
+        TestAnswer::create(array
+        (
+            'number'      => '5',
+            'description' => 'Siempre',
+            'idGroup'     => '4'
+        ));
+
+        /******************************************************************************
+        * --- Preguntas ---
+        ******************************************************************************/
+        $csai_12 = '3';
+
+        // CSAI-12
+        $ansiedadCognitiva = '9';
+        $ansiedadSomatica  = '10';
+        $autoConfianza_CS  = '11';
+
+        $grupoNormal  = '4';
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadCognitiva,
+            'number'      => '1',
+            'description' => 'Estoy concentrado en la competición.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadSomatica,
+            'number'      => '2',
+            'description' => 'Estoy inquieto.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $autoConfianza_CS,
+            'number'      => '3',
+            'description' => 'Me encuentro a gusto.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadCognitiva,
+            'number'      => '4',
+            'description' => 'Dudo de mis capacidades.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadSomatica,
+            'number'      => '5',
+            'description' => 'Estoy nervioso.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $autoConfianza_CS,
+            'number'      => '6',
+            'description' => 'Me encuentro cómodo.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadCognitiva,
+            'number'      => '7',
+            'description' => 'Me preocupa que no pueda hacerlo tan bien como podría.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadSomatica,
+            'number'      => '8',
+            'description' => 'Mi cuerpo está tenso.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $autoConfianza_CS,
+            'number'      => '9',
+            'description' => 'Confío en mí.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadCognitiva,
+            'number'      => '10',
+            'description' => 'Soy consciente de la posibilidad de perder.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadSomatica,
+            'number'      => '11',
+            'description' => 'Antes de competir siento molestias en el estomago.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $autoConfianza_CS,
+            'number'      => '12',
+            'description' => 'Me siento seguro.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadCognitiva,
+            'number'      => '13',
+            'description' => 'Soy consciente de las situaciones de presion.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadSomatica,
+            'number'      => '14',
+            'description' => 'Mi cuerpo está relajado.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $autoConfianza_CS,
+            'number'      => '15',
+            'description' => 'Tengo confianza en mi mismo.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadCognitiva,
+            'number'      => '16',
+            'description' => 'Confio en mi buena preparación física.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadSomatica,
+            'number'      => '17',
+            'description' => 'Antes de competir mi corazón late más rápido de lo habitual.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $autoConfianza_CS,
+            'number'      => '18',
+            'description' => 'Confio en mi rendimiento.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadCognitiva,
+            'number'      => '19',
+            'description' => 'Me preocupo por alcanzar mi meta.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadSomatica,
+            'number'      => '20',
+            'description' => 'Tengo el estómago revuelto.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $autoConfianza_CS,
+            'number'      => '21',
+            'description' => 'Estoy mentalmente relajado.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadCognitiva,
+            'number'      => '22',
+            'description' => 'Me preocupa que los demás queden desilusionados con mi rendimiento.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadSomatica,
+            'number'      => '23',
+            'description' => 'Me sudan las manos.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $autoConfianza_CS,
+            'number'      => '24',
+            'description' => 'Estoy confiado porque me veo alcanzando más metas.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadCognitiva,
+            'number'      => '25',
+            'description' => 'Me preocupa no sentirme capacitado para concentrarme.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $ansiedadSomatica,
+            'number'      => '26',
+            'description' => 'Mi cuerpo está rígido.',
+            'idGroup'     => $grupoNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $csai_12,
+            'idScale'     => $autoConfianza_CS,
+            'number'      => '27',
+            'description' => 'Confío lograrlo todo aún bajo presión.',
+            'idGroup'     => $grupoNormal
+        ));
+    }
+
+}
+
+/******************************************************************************
+* --- BURNOUT ---
+******************************************************************************/
+
+class BURNOUTSeeder extends Seeder
+{
+    public function run()
+    {
+        /******************************************************************************
+        * --- Test ---
+        ******************************************************************************/
+        Test::create(array
+        (
+            'name'       => 'BURNOUT',
+            'idTestType' => '2'
+        ));
+
+        /******************************************************************************
+        * --- Escalas ---
+        ******************************************************************************/
+        Scale::create(array
+        (
+            'idTest'      => '4',
+            'description' => 'Reducida Sensación'
+        ));
+
+        Scale::create(array
+        (
+            'idTest'      => '4',
+            'description' => 'Agotamiento'
+        ));
+
+        Scale::create(array
+        (
+            'idTest'      => '4',
+            'description' => 'Devaluación'
+        ));
+
+        /******************************************************************************
+        * --- Rangos Posibles ---
+        ******************************************************************************/
+        Range::create(array
+        (
+            'description' => 'Bajo',
+            'min' => '5.0',
+            'max' => '11.0'
+        ));
+
+        Range::create(array
+        (
+            'description' => 'Medio',
+            'min' => '12.0',
+            'max' => '18.0'
+        ));
+
+        Range::create(array
+        (
+            'description' => 'Alto',
+            'min' => '19.0',
+            'max' => '25.0'
+        ));
+        
+        /******************************************************************************
+        * --- Rangos por Escala ---
+        ******************************************************************************/
+        
+        // Reducida Sensación
+        ScaleRange::create(array
+        (
+            'idScale' => '12',
+            'idRange' => '10'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '12',
+            'idRange' => '11'
+        ));
+        
+        ScaleRange::create(array
+        (
+            'idScale' => '12',
+            'idRange' => '12'
+        ));
+        
+        // Agotamiento
+        ScaleRange::create(array
+        (
+            'idScale' => '13',
+            'idRange' => '10'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '13',
+            'idRange' => '11'
+        ));
+        
+        ScaleRange::create(array
+        (
+            'idScale' => '13',
+            'idRange' => '12'
+        ));
+        
+        // Devaluación
+        ScaleRange::create(array
+        (
+            'idScale' => '14',
+            'idRange' => '10'
+        ));
+
+        ScaleRange::create(array
+        (
+            'idScale' => '14',
+            'idRange' => '11'
+        ));
+        
+        ScaleRange::create(array
+        (
+            'idScale' => '14',
+            'idRange' => '12'
+        ));
+        
+        /******************************************************************************
+        * --- Grupos ---
+        ******************************************************************************/
+        Group::create(array()); // Burnout (orden normal) Con id = 5
+        Group::create(array()); // Burnout (orden inverso) Con id = 6
+
+        /******************************************************************************
+        * --- Posibles Respuestas ---
+        ******************************************************************************/ 
+         // --- BURNOUT (orden normal) ---
+        TestAnswer::create(array
+        (
+            'number'      => '1',
+            'description' => 'Casi nunca',
+            'idGroup'     => '5'
+        ));
+        
+        TestAnswer::create(array
+        (
+            'number'      => '2',
+            'description' => 'Pocas veces',
+            'idGroup'     => '5'
+
+        ));
+        
+        TestAnswer::create(array
+        (
+            'number'      => '3',
+            'description' => 'Algunas veces',
+            'idGroup'     => '5'
+        ));
+        
+        TestAnswer::create(array
+        (
+            'number'      => '4',
+            'description' => 'A menudo',
+            'idGroup'     => '5'
+        ));
+        
+        TestAnswer::create(array
+        (
+            'number'      => '5',
+            'description' => 'Casi siempre',
+            'idGroup'     => '5'
+        ));
+
+         // --- BURNOUT (orden inverso) ---
+
+         TestAnswer::create(array
+        (
+            'number'      => '5',
+            'description' => 'Casi nunca',
+            'idGroup'     => '6'
+        ));
+        
+        TestAnswer::create(array
+        (
+            'number'      => '4',
+            'description' => 'Pocas veces',
+            'idGroup'     => '6'
+
+        ));
+        
+        TestAnswer::create(array
+        (
+            'number'      => '3',
+            'description' => 'Algunas veces',
+            'idGroup'     => '6'
+        ));
+        
+        TestAnswer::create(array
+        (
+            'number'      => '2',
+            'description' => 'A menudo',
+            'idGroup'     => '6'
+        ));
+        
+        TestAnswer::create(array
+        (
+            'number'      => '1',
+            'description' => 'Casi siempre',
+            'idGroup'     => '6'
+        ));
+
+        /******************************************************************************
+        * --- Preguntas ---
+        ******************************************************************************/
+        $burnout = '4';
+        
+        $reducidaSensacion      = '12';
+        $agotamiento            = '13';
+        $devaluacion            = '14';
+
+        $grupoBurnoutNormal = '5';
+        $grupoBurnoutInverso = '6';
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $reducidaSensacion,
+            'number'      => '1',
+            'description' => 'Siento que estoy logrando muchas cosas que valen la pena en mi deporte.',
+            'idGroup'     => $grupoBurnoutInverso
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $agotamiento,
+            'number'      => '2',
+            'description' => 'Me siento tan cansado de mis entrenamientos que tengo problemas al encontrar energía para hacer otras cosas.',
+            'idGroup'     => $grupoBurnoutNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $devaluacion,
+            'number'      => '3',
+            'description' => 'El esfuerzo y tiempo que dedico a mi deporte estaría mejor invertido realizando otras actividades más productivas.',
+            'idGroup'     => $grupoBurnoutNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $agotamiento,
+            'number'      => '4',
+            'description' => 'Me siento demasiado cansado debido a mis actividades en mi deporte.',
+            'idGroup'     => $grupoBurnoutNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $reducidaSensacion,
+            'number'      => '5',
+            'description' => 'No estoy consiguiendo logros importantes en mi deporte.',
+            'idGroup'     => $grupoBurnoutNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $devaluacion,
+            'number'      => '6',
+            'description' => 'No me importa tanto mi rendimiento en mi deporte como antes.',
+            'idGroup'     => $grupoBurnoutNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $reducidaSensacion,
+            'number'      => '7',
+            'description' => 'No estoy rindiendo de acuerdo a mi verdadera capacidad en mi deporte.',
+            'idGroup'     => $grupoBurnoutNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $agotamiento,
+            'number'      => '8',
+            'description' => 'Me siento "desgastado" física y emocionalmente por debido a mi deporte.',
+            'idGroup'     => $grupoBurnoutNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $devaluacion,
+            'number'      => '9',
+            'description' => 'No estoy tan interesado en mi deporte como acostumbraba hacerlo antes.',
+            'idGroup'     => $grupoBurnoutNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $agotamiento,
+            'number'      => '10',
+            'description' => 'Me siento físicamente agotado por debido a mi deporte.',
+            'idGroup'     => $grupoBurnoutNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $devaluacion,
+            'number'      => '11',
+            'description' => 'Me siento menos preocupado por tener éxito en mi deporte de lo que solía hacerlo.',
+            'idGroup'     => $grupoBurnoutNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $agotamiento,
+            'number'      => '12',
+            'description' => 'Estoy agotado por las exigencias físicas y mentales de mi deporte.',
+            'idGroup'     => $grupoBurnoutNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $reducidaSensacion,
+            'number'      => '13',
+            'description' => 'Parece que no importa lo que haga, no logro rendir tan bien como podría hacerlo.',
+            'idGroup'     => $grupoBurnoutNormal
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $reducidaSensacion,
+            'number'      => '14',
+            'description' => 'Me siento exitoso en mi deporte.',
+            'idGroup'     => $grupoBurnoutInverso
+        ));
+
+        Question::create(array
+        (
+            'idTest'      => $burnout,
+            'idScale'     => $devaluacion,
+            'number'      => '15',
+            'description' => 'Tengo sentimientos y pensamientos negativos hacia mi deporte.',
+            'idGroup'     => $grupoBurnoutNormal
+        ));
+    }
+}
+
+class BajaCaliforniaCitiesSeeder extends Seeder
+{
+    public function run()
+    {
+		// Ciudades
+        City::create(array
+        (
+            'description' => 'Mexicali',
+            'idState'     => '1'
+        ));
+		
+		City::create(array
+        (
+            'description' => 'Ensenada',
+            'idState'     => '1'
+        ));
+		
+		//  ***** Deportes de Mexicali ******
+		
+		// Voleibol
+        SportCity::create(array
+        (
+            'idSport' => '1',
+            'idCity'  => '2'
+        ));
+        
+        // Clavados
+        SportCity::create(array
+        (
+            'idSport' => '2',
+            'idCity'  => '2'
+        ));
+        
+        // Ciclismo
+        SportCity::create(array
+        (
+            'idSport' => '3',
+            'idCity'  => '2'
+        ));
+        
+        // Tiro con arco
+        SportCity::create(array
+        (
+            'idSport' => '4',
+            'idCity'  => '2'
+        ));
+        
+        // Esgrima
+        SportCity::create(array
+        (
+            'idSport' => '5',
+            'idCity'  => '2'
+        ));
+        
+        // Canotaje
+        SportCity::create(array
+        (
+            'idSport' => '6',
+            'idCity'  => '2'
+        ));
+        
+        // Tiro Deportivo
+        SportCity::create(array
+        (
+            'idSport' => '7',
+            'idCity'  => '2'
+        ));
+        
+        // Bádminton
+        SportCity::create(array
+        (
+            'idSport' => '8',
+            'idCity'  => '2'
+        ));
+        
+        // Natación
+        SportCity::create(array
+        (
+            'idSport' => '9',
+            'idCity'  => '2'
+        ));
+        
+        // Tae Kwon Do
+        SportCity::create(array
+        (
+            'idSport' => '10',
+            'idCity'  => '2'
+        ));
+        
+        // Judo
+        SportCity::create(array
+        (
+            'idSport' => '11',
+            'idCity'  => '2'
+        ));
+		
+		//  ***** Deportes de Ensenada ******
+		
+		// Voleibol
+        SportCity::create(array
+        (
+            'idSport' => '1',
+            'idCity'  => '3'
+        ));
+        
+        // Clavados
+        SportCity::create(array
+        (
+            'idSport' => '2',
+            'idCity'  => '3'
+        ));
+        
+        // Ciclismo
+        SportCity::create(array
+        (
+            'idSport' => '3',
+            'idCity'  => '3'
+        ));
+        
+        // Tiro con arco
+        SportCity::create(array
+        (
+            'idSport' => '4',
+            'idCity'  => '3'
+        ));
+        
+        // Esgrima
+        SportCity::create(array
+        (
+            'idSport' => '5',
+            'idCity'  => '3'
+        ));
+        
+        // Canotaje
+        SportCity::create(array
+        (
+            'idSport' => '6',
+            'idCity'  => '3'
+        ));
+        
+        // Tiro Deportivo
+        SportCity::create(array
+        (
+            'idSport' => '7',
+            'idCity'  => '3'
+        ));
+        
+        // Bádminton
+        SportCity::create(array
+        (
+            'idSport' => '8',
+            'idCity'  => '3'
+        ));
+        
+        // Natación
+        SportCity::create(array
+        (
+            'idSport' => '9',
+            'idCity'  => '3'
+        ));
+        
+        // Tae Kwon Do
+        SportCity::create(array
+        (
+            'idSport' => '10',
+            'idCity'  => '3'
+        ));
+        
+        // Judo
+        SportCity::create(array
+        (
+            'idSport' => '11',
+            'idCity'  => '3'
         ));
     }
 }
